@@ -1625,10 +1625,6 @@ html[data-dir="back"]::view-transition-new(page) {
   background: #000;
 }
 
-.tile-parking  { --t1: #3b6fd6; --t2: #1e3a7a; }
-.tile-stocks   { --t1: #4a7c59; --t2: #24402d; }
-.tile-dotnet   { --t1: #7c4dff; --t2: #512bd4; }
-.tile-grpc     { --t1: #2b8a8a; --t2: #164a4f; }
 
 .tile-name {
   font-family: var(--font-display);

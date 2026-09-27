@@ -19,9 +19,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=2" />
+    <link rel="stylesheet" href="style.css?v=3" />
     <link rel="expect" href="#page-end" blocking="render" />
-    <script src="script.js?v=2"></script>
+    <script src="content.js?v=3"></script>
+    <script src="script.js?v=3"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -54,7 +55,7 @@
               Hi! - I'm Magnus.<br />I build bridges between <span class="accent">code</span> and people.
             </h1>
             <p class="lead reveal" style="--delay: 0.1s">
-              3rd-semester Software Engineering student on VIA University
+              <span data-semester="ordinal">3rd</span>-semester Software Engineering student on VIA University
               College's flexible trainee programme. I enjoy full-stack
               development and software architecture — but most of all, turning
               what people actually need into software that works.
@@ -86,8 +87,8 @@
           <ul class="stats">
             <li class="reveal">
               <a class="card stat spotlight" href="resume.html#now-studying">
-                <span class="stat-value">Semester 3</span>
-                <span class="stat-label">C# &amp; .NET, building a CPU in DigiSim, and algorithms &amp; complexity</span>
+                <span class="stat-value">Semester <span data-semester="number">3</span></span>
+                <span class="stat-label" data-studying="short">C# &amp; .NET, building a CPU in DigiSim, and algorithms &amp; complexity</span>
               </a>
             </li>
             <li class="reveal" style="--delay: 0.05s">
@@ -136,9 +137,10 @@
                 languages and frameworks fast.
               </p>
               <p id="about-semester">
-                I'm on my 3rd semester now, learning C# and .NET, building a CPU
-                from logic gates in DigiSim, and digging into algorithms and time
-                complexity.
+                I'm on my <span data-semester="ordinal">3rd</span> semester now,
+                <span data-studying="long">learning C# and .NET, building a CPU from
+                logic gates in DigiSim, and digging into algorithms and time
+                complexity</span>.
               </p>
               <p id="about-projects">
                 Alongside my studies I love taking on freelance and side projects.
@@ -200,43 +202,7 @@
             </a>
           </div>
 
-          <div class="project-grid">
-            <a class="card project spotlight reveal" data-tags="personal app web" href="https://www.tackly.dk/" target="_blank" rel="noopener">
-              <div class="project-media logo-tile tile-tackly"><img src="assets/tackly.png" alt="Tackly logo" width="320" height="320" loading="lazy" decoding="async" /><span class="tile-name">Tackly</span></div>
-              <div class="project-body">
-                <p class="project-badge">Coming soon to Google Play</p>
-                <h3>Tackly</h3>
-                <p>A Danish peer-to-peer marketplace for equestrian equipment. I'm building it together with a friend: a mobile app in Expo / React Native on Supabase, plus a separate React admin panel for moderation, support and role-based access. It will be published on Google Play under our developer name, NorthFrame.</p>
-                <div class="project-foot">
-                  <ul class="chips"><li class="chip">React Native</li><li class="chip">TypeScript</li><li class="chip">Supabase</li></ul>
-                  <span class="project-link">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg></span>
-                </div>
-              </div>
-            </a>
-            <a class="card project spotlight reveal" data-tags="personal web" style="--delay: 0.05s" href="https://www.hosqilej.dk/" target="_blank" rel="noopener">
-              <div class="project-media logo-tile tile-qilej"><img src="assets/hosqilej.png" alt="Hos Qilej logo" width="320" height="320" loading="lazy" decoding="async" /></div>
-              <div class="project-body">
-                <h3>Hos Qilej</h3>
-                <p>Website for a barbershop in Roskilde — services, prices, opening hours and integrated online booking.</p>
-                <div class="project-foot">
-                  <ul class="chips"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">Freelance</li></ul>
-                  <span class="project-link">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg></span>
-                </div>
-              </div>
-            </a>
-            <a class="card project spotlight reveal" style="--delay: 0.1s" data-tags="school java web" href="https://github.com/mforbeskr/SEP2-Project-LearnHub" target="_blank" rel="noopener">
-              <div class="project-media code-tile tile-learnhub" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg><span class="tile-name">LearnHub</span><span class="tile-sub">2nd semester project</span></div>
-              <div class="project-body">
-                <p class="project-badge">Product Owner</p>
-                <h3>LearnHub</h3>
-                <p>A learning platform with courses, modules, lessons and enrollments — a Spring Boot REST API on PostgreSQL with a React frontend, covered by unit and integration tests. Built in a team of four, with me as Product Owner.</p>
-                <div class="project-foot">
-                  <ul class="chips"><li class="chip">Spring Boot</li><li class="chip">React</li><li class="chip">PostgreSQL</li></ul>
-                  <span class="project-link">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg></span>
-                </div>
-              </div>
-            </a>
-          </div>
+          <div class="project-grid" data-projects="featured"></div>
         </section>
       </main>
 
@@ -253,6 +219,7 @@
           </ul>
         </div>
       </footer>
+      <script src="render.js?v=3"></script>
       <span id="page-end"></span>
     </div>
   </body>

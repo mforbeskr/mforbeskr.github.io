@@ -19,9 +19,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=2" />
+    <link rel="stylesheet" href="style.css?v=3" />
     <link rel="expect" href="#page-end" blocking="render" />
-    <script src="script.js?v=2"></script>
+    <script src="content.js?v=3"></script>
+    <script src="script.js?v=3"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -180,7 +181,7 @@
                   <span class="when">2025 – present</span>
                   <ul class="check-list" style="margin-top: 0.8rem">
                     <li>Focus: full-stack development, object-oriented programming, databases, software architecture and agile methods.</li>
-                    <li id="now-studying">Currently on 3rd semester: C# and .NET, digital systems (building a CPU in DigiSim), and algorithms and time complexity.</li>
+                    <li id="now-studying">Currently on <span data-semester="ordinal">3rd</span> semester: <span data-studying="short">C# &amp; .NET, building a CPU in DigiSim, and algorithms &amp; complexity</span>.</li>
                     <li>Product Owner on the 2nd-semester project LearnHub — responsible for overview, requirements and progress, with great feedback from fellow students and teachers.</li>
                     <li>Flexible online teaching makes it possible to take an active part in a company's daily operations and tech stack throughout the degree.</li>
                   </ul>
@@ -242,6 +243,7 @@
           </ul>
         </div>
       </footer>
+      <script src="render.js?v=3"></script>
       <span id="page-end"></span>
     </div>
   </body>
