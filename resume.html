@@ -1,212 +1,248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Magnus Forbes Kjær-Rasmussen</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap"
-      rel="stylesheet"
+    <title>Resume · Magnus Forbes Kjær-Rasmussen</title>
+    <meta
+      name="description"
+      content="Resume of Magnus Forbes Kjær-Rasmussen — Software Engineering trainee at VIA University College. Skills, education and experience."
     />
+    <meta name="theme-color" content="#0b0910" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233a1470'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='28' fill='white'%3EMF%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="expect" href="#page-end" blocking="render" />
+    <script src="script.js"></script>
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="index.html">Introduction</a></li>
-        <li><a href="#">Resume</a></li>
-        <li id="nameTag">Magnus Forbes Kjær-Rasmussen</li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="hobbies.html">Hobbies</a></li>
-      </ul>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="wrapper">
-      <header class="headerSection">
-        <h1></h1>
-      </header>
+    <header class="site-nav">
+      <nav class="container nav-inner" aria-label="Main">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">MF</span>
+          <span>Magnus <span class="brand-mid">Forbes </span>Kjær-Rasmussen</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="resume.html" aria-current="page">Resume</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="hobbies.html">Hobbies</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+        </button>
+      </nav>
+    </header>
 
-      <div class="left-side">
-        <a target="_blank">
-          <img
-            src="https://i.ibb.co/SXbLSw55/1000008802.jpg"
-            alt="Profilbillede"
-        /></a>
-        <h3></h3>
-        <p><strong>Date of Birth:</strong> 02/02/1998</p>
-        <p><strong>Nationality:</strong> Danish</p>
-        <p><strong>Country:</strong> Denmark</p>
-        <p>
-          <strong>Address:</strong><br />
-          Cikoriegade, 2640 Hedehusene
-        </p>
-        <p>
-          <strong>Email:</strong><br />
-          <a href="mailto:mforbeskr@outlook.dk">mforbeskr@outlook.dk</a>
-        </p>
-        <p>
-          <strong>Phone:</strong><br />
-          <a href="tel:+4525467650">+45 25 46 76 50</a>
-        </p>
-
-        <h3>Languages</h3>
-        <p>Danish - Native</p>
-        <p>English - Fluent</p>
-        <p>Spanish - Proficient</p>
-        <p>Norwegian - Proficient</p>
-        <p>German - Intermediate</p>
-
-        <h3>Certifications & Capabilities</h3>
-        <p>Driving License (B, C1, C)</p>
-        <p>Forklift Certificate</p>
-        <p>Strong IT & programming skills</p>
-        <p>Fire Safety Course (2019)</p>
-        <p>Rescue Specialist (2024)</p>
-        <p>AMU Certificate 44530 - Occupational Safety</p>
-      </div>
-
-      <main class="mainSection">
-        <section class="introduction">
-          <h2>Software Engineering Student</h2>
-          <p>
-            I am a Software Engineering student with a strong interest in cloud
-            engineering, automation, and scalable systems. I am motivated by
-            problem-solving and enjoy working at the intersection of technology,
-            structure, and continuous learning.
+    <div class="page">
+      <main id="main">
+        <header class="container page-header">
+          <p class="eyebrow reveal">Resume</p>
+          <h1 class="reveal" style="--delay: 0.05s">Software Engineering Trainee</h1>
+          <p class="lead reveal" style="--delay: 0.1s">
+            Dedicated software engineering student on VIA University College's
+            flexible engineering trainee programme — thriving where code,
+            problem-solving and collaboration meet.
           </p>
+        </header>
 
-          <p>
-            My academic background includes hands-on experience with
-            <strong>Java, JavaScript, HTML, CSS & Python</strong> and I have
-            recently begun exploring cloud computing and data analysis. Although
-            I am still early in my studies, I am a fast learner, highly
-            dedicated, and eager to apply my skills in real-world environments.
-          </p>
+        <div class="container resume-layout">
+          <aside class="card profile-card reveal" aria-label="Personal details">
+            <img src="https://i.ibb.co/SXbLSw55/1000008802.jpg" alt="Portrait of Magnus Forbes Kjær-Rasmussen" width="96" height="96" />
+            <h2>Magnus Forbes Kjær-Rasmussen</h2>
+            <p class="role">Software Engineering · VIA UC</p>
 
-          <p>
-            I am particularly interested in cloud engineering because it
-            combines automation, optimization, and reliability — areas where I
-            thrive. I am seeking a relevant student position where I can
-            contribute, learn from experienced professionals, and grow into a
-            future career within cloud and software engineering.
-          </p>
+            <dl class="details">
+              <div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                <dt>Address</dt>
+                <dd>Hedehusene, Denmark</dd>
+              </div>
+              <div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+                <dt>Email</dt>
+                <dd><a href="mailto:mforbeskr@outlook.dk">mforbeskr@outlook.dk</a></dd>
+              </div>
+              <div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
+                <dt>Phone</dt>
+                <dd><a href="tel:+4525467650">+45 25 46 76 50</a></dd>
+              </div>
+              <div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.3 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.7 16 2.5a13.4 13.4 0 0 0-7 0C6.3.7 5.1 1 5.1 1A5 5 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.7c0 5.4 3.3 6.6 6.4 7a3.4 3.4 0 0 0-.9 2.6V22" /></svg>
+                <dt>GitHub</dt>
+                <dd><a href="https://github.com/mforbeskr" target="_blank" rel="noopener">github.com/mforbeskr</a></dd>
+              </div>
+            </dl>
 
-          <p>
-            Alongside my studies, I bring a strong work ethic developed through
-            healthcare, emergency services, and technical roles. These
-            experiences have strengthened my sense of responsibility,
-            collaboration, and ability to perform in structured and
-            high-pressure environments.
-          </p>
+            <h3>Languages</h3>
+            <ul class="lang-list">
+              <li>Danish <span class="dots" role="img" aria-label="Native"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></li>
+              <li>English <span class="dots" role="img" aria-label="Fluent, written and spoken"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></li>
+              <li>Spanish <span class="dots" role="img" aria-label="Good"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+              <li>Norwegian <span class="dots" role="img" aria-label="Good"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+              <li>German <span class="dots" role="img" aria-label="Basic understanding"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></li>
+            </ul>
 
-          <p class="introduction-note">
-            Currently based in Hedehusene, Denmark.
-          </p>
+            <h3>Certificates</h3>
+            <ul class="cert-list">
+              <li>Driving licence (B, C1, C)</li>
+              <li>Forklift certificate</li>
+              <li>Rescue Specialist (2024)</li>
+              <li>Fire Safety Course (2019)</li>
+              <li>AMU 44530 – Occupational Safety</li>
+            </ul>
+          </aside>
 
-          <h3>Technical Skills</h3>
-          <ul>
-            <li>Java</li>
-            <li>JavaScript</li>
-            <li>HTML & CSS</li>
-            <li>Basic Python</li>
-            <li>Git & GitHub</li>
-          </ul>
+          <div class="resume-main">
+            <section class="reveal" aria-labelledby="profile-heading">
+              <h2 id="profile-heading">Profile</h2>
+              <p>
+                I'm a software engineering student on VIA University College's
+                flexible engineering trainee programme. I combine my
+                online-based engineering degree with hands-on work in industry,
+                which means I can work around <strong>two days a week</strong>
+                in your company and write my semester and bachelor projects
+                directly in your technologies.
+              </p>
+              <p>
+                I pick up software architecture, databases and full-stack
+                development quickly and naturally — but my biggest strength is
+                bridging the gap between the technology and the end user. With
+                experience as a technical customer service agent at PayPal and
+                as Product Owner on a semester project, I thrive in the space between code,
+                problem-solving and collaboration.
+              </p>
+              <p>
+                Being Product Owner on LearnHub made me realise how much I enjoy
+                that role, and it's a direction I'd like to grow in — connecting
+                development with customers, their needs and their wishes.
+              </p>
+            </section>
 
-          <h3>Personal Strengths</h3>
-          <ul>
-            <li>Structured and responsible</li>
-            <li>Fast learner, highly motivated</li>
-            <li>Strong collaboration and communication skills</li>
-            <li>Comfortable in structured and high-pressure environments</li>
-          </ul>
+            <section class="reveal" aria-labelledby="skills-heading">
+              <h2 id="skills-heading">Technical skills</h2>
+              <div class="skill-groups">
+                <div class="card">
+                  <h3>Languages</h3>
+                  <ul class="chips"><li class="chip">Java</li><li class="chip">C#</li><li class="chip">Python</li><li class="chip">JavaScript</li><li class="chip">TypeScript</li><li class="chip">PowerShell</li></ul>
+                </div>
+                <div class="card">
+                  <h3>Web &amp; frameworks</h3>
+                  <ul class="chips"><li class="chip">React</li><li class="chip">React Native</li><li class="chip">Spring Boot</li><li class="chip">.NET</li><li class="chip">JavaFX</li><li class="chip">Node.js</li><li class="chip">Vite</li><li class="chip">HTML5</li><li class="chip">CSS3</li></ul>
+                </div>
+                <div class="card">
+                  <h3>Databases &amp; tools</h3>
+                  <ul class="chips"><li class="chip">SQL</li><li class="chip">PostgreSQL</li><li class="chip">Supabase</li><li class="chip">REST APIs</li><li class="chip">gRPC</li><li class="chip">Git</li><li class="chip">DataGrip</li></ul>
+                </div>
+                <div class="card">
+                  <h3>Methods &amp; roles</h3>
+                  <ul class="chips"><li class="chip">Agile methods</li><li class="chip">Product Owner</li><li class="chip">IT communication</li><li class="chip">Support</li></ul>
+                </div>
+              </div>
+            </section>
 
-          <h3>Education</h3>
-          <p>
-            <strong>Software Engineering</strong> - VIA University College<br />
-            <em>August 2025 - February 2029</em>
-          </p>
-          <p>
-            <strong>Humanistic-Technological Bachelor</strong> - Roskilde
-            University<br />
-            <em>August 2024 - December 2024</em>
-          </p>
+            <section class="reveal" aria-labelledby="strengths-heading">
+              <h2 id="strengths-heading">Personal strengths</h2>
+              <div class="skill-groups">
+                <div class="card">
+                  <h3>Fast learner</h3>
+                  <p class="muted" style="margin: 0">I always dig into the fundamentals to understand <em>why</em> systems work and what value they bring. That's what helps me pick up new languages and frameworks.</p>
+                </div>
+                <div class="card">
+                  <h3>Communicator</h3>
+                  <p class="muted" style="margin: 0">I can translate complex technical problems into a language every stakeholder understands.</p>
+                </div>
+                <div class="card">
+                  <h3>Responsible &amp; calm</h3>
+                  <p class="muted" style="margin: 0">Used to taking ownership and keeping a cool head — whether it's a bug, deadline pressure or customer contact.</p>
+                </div>
+              </div>
+            </section>
 
-          <h3>Selected Work Experience</h3>
-          <p>
-            <strong>Firefighter / Rescue Specialist</strong> - Danish Emergency
-            Management Agency<br />
-            <em>Feb 2024 - Oct 2024</em>
-          </p>
-          <p>
-            <strong>Data Registration Assistant</strong> - Roskilde Hospital
-            (Hematology)<br />
-            <em>Aug 2023 - Feb 2024</em>
-          </p>
-          <p>
-            <strong>Customer Support Agent</strong> - PayPal / Concentrix<br />
-            <em>Nov 2019 - Feb 2020</em>
-          </p>
+            <section class="reveal" aria-labelledby="education-heading">
+              <h2 id="education-heading">Education</h2>
+              <ol class="timeline">
+                <li>
+                  <h3>Professional Bachelor in Software Engineering (Engineering Trainee)</h3>
+                  <p class="org">VIA University College · online / flexible model</p>
+                  <span class="when">2025 – present</span>
+                  <ul class="check-list" style="margin-top: 0.8rem">
+                    <li>Focus: full-stack development, object-oriented programming, databases, software architecture and agile methods.</li>
+                    <li id="now-studying">Currently on 3rd semester: C# and .NET, digital systems (building a CPU in DigiSim), and algorithms and time complexity.</li>
+                    <li>Product Owner on the 2nd-semester project LearnHub — responsible for overview, requirements and progress, with great feedback from fellow students and teachers.</li>
+                    <li>Flexible online teaching makes it possible to take an active part in a company's daily operations and tech stack throughout the degree.</li>
+                  </ul>
+                </li>
+                <li>
+                  <h3>Humanistic-Technological Bachelor</h3>
+                  <p class="org">Roskilde University</p>
+                  <span class="when">Aug 2024 – Dec 2024</span>
+                </li>
+              </ol>
+            </section>
 
-          <h3>Languages</h3>
-          <ul>
-            <li>Danish - Native</li>
-            <li>English - Fluent</li>
-            <li>Spanish - Proficient</li>
-            <li>Norwegian - Proficient</li>
-            <li>German - Basic</li>
-          </ul>
-        </section>
+            <section class="reveal" aria-labelledby="experience-heading">
+              <h2 id="experience-heading">Relevant experience</h2>
+              <ol class="timeline">
+                <li>
+                  <h3>Firefighter &amp; Rescue Specialist (national service)</h3>
+                  <p class="org">Danish Emergency Management Agency</p>
+                  <span class="when">Feb 2024 – Oct 2024</span>
+                  <ul class="check-list" style="margin-top: 0.8rem">
+                    <li>Trained in disciplined teamwork, safety procedures and fast problem-solving in unpredictable, critical situations.</li>
+                    <li>Completed the extended rescue specialist training with a high degree of responsibility.</li>
+                  </ul>
+                </li>
+                <li>
+                  <h3>Healthcare, service sector &amp; logistics</h3>
+                  <p class="org">Roskilde Municipality, Roskilde Hospital and others</p>
+                  <span class="when">2021 – 2025</span>
+                  <ul class="check-list" style="margin-top: 0.8rem">
+                    <li>Broad experience with people, communication and care from the healthcare sector — including data registration in complex IT systems at the Department of Hematology.</li>
+                    <li>Built a strong work ethic and the ability to communicate calmly and empathetically with people from very different backgrounds.</li>
+                  </ul>
+                </li>
+                <li>
+                  <h3>Technical Customer Service Agent</h3>
+                  <p class="org">PayPal (Concentrix) · Belfast</p>
+                  <span class="when">Nov 2019 – Feb 2020</span>
+                  <ul class="check-list" style="margin-top: 0.8rem">
+                    <li>Provided technical and user-facing support to international customers on complex systems and transactions.</li>
+                    <li>Developed patience and the ability to keep the overview and stay calm in technically challenging, time-pressured situations.</li>
+                  </ul>
+                </li>
+              </ol>
+            </section>
+          </div>
+        </div>
       </main>
 
-      <div class="right-side">
-        <h3><em>explore my work</em></h3>
-
-        <p>
-          <a href="https://mforbeskr.github.io/Kl-verlySite/"
-            ><img
-              src="https://i.ibb.co/4gFJVHp1/KLOIN.png"
-              alt="Kløverly Website"
-            />Kløverly Website</a
-          >
-        </p>
-        <p>
-          <a href="https://github.com/mforbeskr/Semester1Application"
-            ><img
-              src="https://i.ibb.co/JwMp3TbK/Sk-rmbillede-2025-12-17-121902.png"
-              alt="Whack A Jan browser game preview"
-            />
-            Kløverly Application - Java & JavaFX</a
-          >
-        </p>
-
-        <p>
-          <a href="https://mforbeskr.github.io/Browsergame-WhackAJan/"
-            ><img
-              src="https://i.ibb.co/RpL7VmxK/g5-WU5-Ydi-400x400-removebg-preview.webp"
-              alt="Whack A Jan browser game preview"
-            />Whack-A-Jan: Browser Game JavaScript</a
-          >
-        </p>
-
-        <p>
-          <a href="https://mforbeskr.github.io/Monster-Match/"
-            ><img
-              src="https://i.ibb.co/zTHB9qn4/monstermatch5.png"
-              alt="Whack A Jan browser game preview"
-            />Monster Match: Dating Site</a
-          >
-        </p>
-
-        <p>
-          <a href="https://mforbeskr.github.io/MinSideTest/"
-            >First Website: Minor School Task (Playground)</a
-          >
-        </p>
-      </div>
-
-      <footer class="footerSection">
-        Software Engineer Trainee <br />Zealand, Denmark<br />
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <div>
+            <strong>Magnus Forbes Kjær-Rasmussen</strong>
+            Software Engineering Trainee at VIA University College · Hedehusene, Denmark · © <span data-year>2026</span>
+          </div>
+          <ul class="footer-links">
+            <li><a href="mailto:mforbeskr@outlook.dk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>Email</a></li>
+            <li><a href="tel:+4525467650"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>Call</a></li>
+            <li><a href="https://github.com/mforbeskr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.3 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.7 16 2.5a13.4 13.4 0 0 0-7 0C6.3.7 5.1 1 5.1 1A5 5 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.7c0 5.4 3.3 6.6 6.4 7a3.4 3.4 0 0 0-.9 2.6V22" /></svg>GitHub</a></li>
+          </ul>
+        </div>
       </footer>
+      <span id="page-end"></span>
     </div>
   </body>
 </html>

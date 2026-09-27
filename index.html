@@ -1,158 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Magnus Forbes Kjær-Rasmussen</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap"
-      rel="stylesheet"
+    <title>Magnus Forbes Kjær-Rasmussen · Software Engineering Trainee</title>
+    <meta
+      name="description"
+      content="Magnus Forbes Kjær-Rasmussen — Software Engineering trainee at VIA University College, based in Hedehusene, Denmark. Full-stack, Java and web development."
     />
+    <meta name="theme-color" content="#0b0910" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233a1470'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='28' fill='white'%3EMF%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="expect" href="#page-end" blocking="render" />
+    <script src="script.js"></script>
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="#">Introduction</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li id="nameTag">Magnus Forbes Kjær-Rasmussen</li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="hobbies.html">Hobbies</a></li>
-      </ul>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="wrapper">
-      <header class="headerSection">
-        <h1></h1>
-      </header>
+    <header class="site-nav">
+      <nav class="container nav-inner" aria-label="Main">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">MF</span>
+          <span>Magnus <span class="brand-mid">Forbes </span>Kjær-Rasmussen</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html" aria-current="page">Introduction</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="hobbies.html">Hobbies</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+        </button>
+      </nav>
+    </header>
 
-      <div class="left-side">
-        <img
-          src="https://i.ibb.co/SXbLSw55/1000008802.jpg"
-          alt="Profilbillede"
-        />
-        <p>
-          I am 27-year-old and based in Hedehusene, Denmark. I live with my
-          lovely partner Alexandra and our 7-month-old son, who keeps everyday
-          life both busy and meaningful.
-        </p>
+    <div class="page">
+      <main id="main">
+        <section class="container hero">
+          <div>
+            <p class="status reveal"><span class="status-dot" aria-hidden="true"></span>Open to trainee positions · ~2 days a week</p>
+            <h1 class="reveal" style="--delay: 0.05s">
+              Hi! - I'm Magnus.<br />I build bridges between <span class="accent">code</span> and people.
+            </h1>
+            <p class="lead reveal" style="--delay: 0.1s">
+              3rd-semester Software Engineering student on VIA University
+              College's flexible trainee programme. I enjoy full-stack
+              development and software architecture — but most of all, turning
+              what people actually need into software that works.
+            </p>
+            <div class="btn-row reveal" style="--delay: 0.15s">
+              <a class="btn btn-primary" href="portfolio.html">
+                See my work
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </a>
+              <a class="btn btn-ghost" href="resume.html">Read my resume</a>
+            </div>
+          </div>
 
-        <p>
-          Outside of my studies and work, I enjoy gaming, hygging, and staying
-          active. I play video games, enjoy playing basketball, and have a
-          strong interest in music — both listening to and creating it in my
-          spare time.
-        </p>
+          <figure class="portrait reveal" style="margin: 0">
+            <img
+              src="https://i.ibb.co/SXbLSw55/1000008802.jpg"
+              alt="Portrait of Magnus Forbes Kjær-Rasmussen"
+              width="360"
+              height="450"
+              fetchpriority="high"
+            />
+            <figcaption class="portrait-badge">
+              <span><strong>VIA University College</strong><span>Software Engineering</span></span>
+            </figcaption>
+          </figure>
+        </section>
 
-        <p>
-          I value spending time with my family and friends and consider balance
-          between professional ambition and personal life an important part of
-          long-term success.
-        </p>
-      </div>
-      <main class="mainSection">
-        <section class="introduction">
-          <h2>About Me</h2>
-          <p>
-            I have started the Software Engineering Trainee program at VIA
-            University College. Alongside my studies, I am seeking a relevant
-            trainee position where I can develop my technical skills through
-            close collaboration with an organization over an extended period of
-            time.
-          </p>
+        <section class="container" aria-label="Quick facts">
+          <ul class="stats">
+            <li class="reveal">
+              <a class="card stat spotlight" href="resume.html#now-studying">
+                <span class="stat-value">Semester 3</span>
+                <span class="stat-label">C# &amp; .NET, building a CPU in DigiSim, and algorithms &amp; complexity</span>
+              </a>
+            </li>
+            <li class="reveal" style="--delay: 0.05s">
+              <a class="card stat spotlight" href="#about-po">
+                <span class="stat-value">PO</span>
+                <span class="stat-label">loved being Product Owner on LearnHub — a role I want to explore more</span>
+              </a>
+            </li>
+            <li class="reveal" style="--delay: 0.1s">
+              <a class="card stat spotlight" href="portfolio.html?filter=personal#projects">
+                <span class="stat-value">Freelance</span>
+                <span class="stat-label">a website for a real client, and Tackly — my own app, soon on Google Play</span>
+              </a>
+            </li>
+            <li class="reveal" style="--delay: 0.15s">
+              <a class="card stat spotlight" href="#about-personal">
+                <span class="stat-value">Balance</span>
+                <span class="stat-label">family life in Hedehusene, gaming, basketball and playing the piano at home</span>
+              </a>
+            </li>
+          </ul>
+        </section>
 
-          <p>
-            I would describe myself as a hands-on and curious IT enthusiast with
-            a genuine interest in computer systems, programming, electronics,
-            and digital infrastructure. In my free time, I enjoy both gaming and
-            programming, with a particular focus on Java and webdevelopment.
-            Gaming, sometimes as a leader, has strengthened my analytical
-            thinking, teamwork, and problem-solving abilities, while programming
-            allows me to explore structured thinking and continuous improvement
-            in a practical way.
-          </p>
+        <section class="container section">
+          <div class="split">
+            <div class="split-aside reveal">
+              <p class="eyebrow">About me</p>
+              <h2 class="section-title">Curious, hands-on and calm under pressure.</h2>
+            </div>
 
-          <p>
-            Through my previous professional experience, I have developed strong
-            skills in responsibility, communication, and documentation. At
-            Roskilde Hospital's Department of Hematology, I worked with data
-            registration and documentation in complex IT systems, including
-            national healthcare platforms and quality reporting tools.
-            Additionally, during my service in the Danish Emergency Management
-            Agency, I was entrusted with communication responsibilities, further
-            strengthening my ability to convey information clearly and reliably
-            in critical situations.
-          </p>
+            <div class="prose reveal">
+              <p>
+                I study Software Engineering on VIA University College's
+                flexible engineering trainee programme. The teaching is online,
+                which means I can work around two days a week in a company and
+                write my semester and bachelor projects directly in its
+                technologies — creating long-term value for both the company
+                and myself.
+              </p>
+              <p>
+                I pick up software architecture, databases and full-stack
+                development quickly, but my biggest strength is bridging the gap
+                between the technology and the end user. I always dig into the
+                fundamentals to understand <em>why</em> systems work and what
+                value they bring — which is also what helps me learn new
+                languages and frameworks fast.
+              </p>
+              <p id="about-semester">
+                I'm on my 3rd semester now, learning C# and .NET, building a CPU
+                from logic gates in DigiSim, and digging into algorithms and time
+                complexity.
+              </p>
+              <p id="about-projects">
+                Alongside my studies I love taking on freelance and side projects.
+                I built the website for
+                <a href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>,
+                a barbershop in Roskilde, and together with a friend I'm building
+                <a href="https://www.tackly.dk/" target="_blank" rel="noopener">Tackly</a>
+                — a marketplace app for equestrian equipment that's coming to
+                Google Play soon. If you need a website or a small app built, feel
+                free to reach out.
+              </p>
+              <p id="about-po">
+                On our 2nd-semester project, LearnHub, I was Product Owner — keeping
+                the overview, the requirements and the progress on track, with great
+                feedback from fellow students and teachers. I've come to really enjoy
+                the role, and I'd like to grow in that direction: I thrive in the
+                space between code and development on one side, and customers, their
+                needs and wishes on the other.
+              </p>
+              <p>
+                Before my studies I worked as a technical customer service agent
+                for PayPal in Belfast, served as a firefighter and rescue
+                specialist with the Danish Emergency Management Agency, and
+                spent several years in healthcare and the service sector —
+                including data registration at Roskilde Hospital's Department of
+                Hematology. That taught me to stay calm, take ownership and
+                explain complex things in a language everyone understands.
+              </p>
+              <p>
+                I'm fluent in Danish and English, speak Spanish and Norwegian
+                well, understand some German, and would welcome an international or English-speaking
+                work environment.
+              </p>
 
-          <p>
-            I am a fast learner and adapt quickly to new systems and
-            technologies. I am fluent in Danish, Norwegian, and English, have
-            strong proficiency in Spanish, and a basic understanding of German.
-            I enjoy working in English and would welcome an international or
-            English-speaking work environment.
-          </p>
+              <aside class="card personal-note" id="about-personal">
+                <h3>A little more personal</h3>
+                <p>
+                  I live in Hedehusene with my long-time partner and our young
+                  son, who keeps everyday life both busy and meaningful. Outside
+                  of studies and work I enjoy gaming, basketball, and music —
+                  both listening to it and making it. I value balance between
+                  professional ambition and personal life, and see it as an
+                  important part of long-term success.
+                </p>
+              </aside>
+            </div>
+          </div>
+        </section>
 
-          <p class="introduction-note">
-            On a personal level, I am a dedicated and structured individual who
-            values stability, growth, and long-term commitment. I live in
-            Hedehusene with my partner and our young son, and I am highly
-            motivated to build a meaningful and sustainable career within
-            software and cloud engineering. The trainee model at VIA University
-            College represents an ideal opportunity for me to combine academic
-            learning with hands-on industry experience, creating long-term value
-            for both the company and myself.
-          </p>
+        <section class="container section">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">Selected work</p>
+              <h2 class="section-title">Things I've built</h2>
+            </div>
+            <a class="btn btn-ghost" href="portfolio.html">
+              All projects
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+
+          <div class="project-grid">
+            <a class="card project spotlight reveal" data-tags="personal app web" href="https://www.tackly.dk/" target="_blank" rel="noopener">
+              <div class="project-media logo-tile tile-tackly"><img src="assets/tackly.png" alt="Tackly logo" width="320" height="320" loading="lazy" decoding="async" /><span class="tile-name">Tackly</span></div>
+              <div class="project-body">
+                <p class="project-badge">Coming soon to Google Play</p>
+                <h3>Tackly</h3>
+                <p>A Danish peer-to-peer marketplace for equestrian equipment. I'm building it together with a friend: a mobile app in Expo / React Native on Supabase, plus a separate React admin panel for moderation, support and role-based access. It will be published on Google Play under our developer name, NorthFrame.</p>
+                <div class="project-foot">
+                  <ul class="chips"><li class="chip">React Native</li><li class="chip">TypeScript</li><li class="chip">Supabase</li></ul>
+                  <span class="project-link">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg></span>
+                </div>
+              </div>
+            </a>
+            <a class="card project spotlight reveal" data-tags="personal web" style="--delay: 0.05s" href="https://www.hosqilej.dk/" target="_blank" rel="noopener">
+              <div class="project-media logo-tile tile-qilej"><img src="assets/hosqilej.png" alt="Hos Qilej logo" width="320" height="320" loading="lazy" decoding="async" /></div>
+              <div class="project-body">
+                <h3>Hos Qilej</h3>
+                <p>Website for a barbershop in Roskilde — services, prices, opening hours and integrated online booking.</p>
+                <div class="project-foot">
+                  <ul class="chips"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">Freelance</li></ul>
+                  <span class="project-link">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg></span>
+                </div>
+              </div>
+            </a>
+            <a class="card project spotlight reveal" style="--delay: 0.1s" data-tags="school java web" href="https://github.com/mforbeskr/SEP2-Project-LearnHub" target="_blank" rel="noopener">
+              <div class="project-media code-tile tile-learnhub" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg><span class="tile-name">LearnHub</span><span class="tile-sub">2nd semester project</span></div>
+              <div class="project-body">
+                <p class="project-badge">Product Owner</p>
+                <h3>LearnHub</h3>
+                <p>A learning platform with courses, modules, lessons and enrollments — a Spring Boot REST API on PostgreSQL with a React frontend, covered by unit and integration tests. Built in a team of four, with me as Product Owner.</p>
+                <div class="project-foot">
+                  <ul class="chips"><li class="chip">Spring Boot</li><li class="chip">React</li><li class="chip">PostgreSQL</li></ul>
+                  <span class="project-link">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg></span>
+                </div>
+              </div>
+            </a>
+          </div>
         </section>
       </main>
 
-      <div class="right-side">
-        <h3><em>explore my work</em></h3>
-
-        <p>
-          <a href="https://mforbeskr.github.io/Kl-verlySite/"
-            ><img
-              src="https://i.ibb.co/4gFJVHp1/KLOIN.png"
-              alt="Kløverly Website"
-            />Kløverly Website</a
-          >
-        </p>
-        <p>
-          <a href="https://github.com/mforbeskr/Semester1Application"
-            ><img
-              src="https://i.ibb.co/JwMp3TbK/Sk-rmbillede-2025-12-17-121902.png"
-              alt="Whack A Jan browser game preview"
-            />
-            Kløverly Application - Java & JavaFX</a
-          >
-        </p>
-
-        <p>
-          <a href="https://mforbeskr.github.io/Browsergame-WhackAJan/"
-            ><img
-              src="https://i.ibb.co/RpL7VmxK/g5-WU5-Ydi-400x400-removebg-preview.webp"
-              alt="Whack A Jan browser game preview"
-            />Whack-A-Jan: Browser Game JavaScript</a
-          >
-        </p>
-
-        <p>
-          <a href="https://mforbeskr.github.io/Monster-Match/"
-            ><img
-              src="https://i.ibb.co/zTHB9qn4/monstermatch5.png"
-              alt="Whack A Jan browser game preview"
-            />Monster Match: Dating Site</a
-          >
-        </p>
-
-        <p>
-          <a href="https://mforbeskr.github.io/MinSideTest/"
-            >First Website: Minor School Task (Playground)</a
-          >
-        </p>
-      </div>
-      <footer class="footerSection">
-        Software Engineer Trainee <br />Zealand, Denmark<br />
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <div>
+            <strong>Magnus Forbes Kjær-Rasmussen</strong>
+            Software Engineering Trainee at VIA University College · Hedehusene, Denmark · © <span data-year>2026</span>
+          </div>
+          <ul class="footer-links">
+            <li><a href="mailto:mforbeskr@outlook.dk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>Email</a></li>
+            <li><a href="tel:+4525467650"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>Call</a></li>
+            <li><a href="https://github.com/mforbeskr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.3 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.7 16 2.5a13.4 13.4 0 0 0-7 0C6.3.7 5.1 1 5.1 1A5 5 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.7c0 5.4 3.3 6.6 6.4 7a3.4 3.4 0 0 0-.9 2.6V22" /></svg>GitHub</a></li>
+          </ul>
+        </div>
       </footer>
+      <span id="page-end"></span>
     </div>
   </body>
 </html>
