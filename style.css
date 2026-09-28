@@ -324,6 +324,10 @@ main {
   padding-top: 0;
 }
 
+[data-github-section][hidden] + .section {
+  padding-top: clamp(2.5rem, 5.5vw, 4.25rem);
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -905,8 +909,10 @@ main {
   overflow: hidden;
   padding: clamp(2rem, 5vw, 3.5rem);
   border-radius: 28px;
-  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
-  color: var(--on-accent);
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--neon) 35%, var(--border));
+  box-shadow: var(--shadow-lg), 0 0 40px -18px color-mix(in srgb, var(--neon) 70%, transparent);
+  color: var(--text);
   text-align: center;
 }
 
@@ -915,21 +921,23 @@ main {
   content: "";
   position: absolute;
   border-radius: 50%;
-  background: rgb(255 255 255 / 0.08);
+  pointer-events: none;
 }
 
 .cta::before {
-  width: 320px;
-  height: 320px;
-  top: -140px;
-  right: -80px;
+  width: 420px;
+  height: 420px;
+  top: -220px;
+  right: -140px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--neon) 22%, transparent), transparent 70%);
 }
 
 .cta::after {
-  width: 220px;
-  height: 220px;
-  bottom: -120px;
-  left: -60px;
+  width: 320px;
+  height: 320px;
+  bottom: -180px;
+  left: -100px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--neon) 14%, transparent), transparent 70%);
 }
 
 .cta > * {
@@ -938,7 +946,6 @@ main {
 }
 
 .cta h2 {
-  color: inherit;
   font-size: clamp(1.45rem, 3vw, 1.9rem);
 }
 
@@ -946,26 +953,11 @@ main {
   max-width: 56ch;
   margin-inline: auto;
   margin-bottom: 1.75rem;
-  opacity: 0.9;
+  color: var(--muted);
 }
 
 .cta .btn-row {
   justify-content: center;
-}
-
-.cta .btn-primary {
-  background: var(--on-accent);
-  color: var(--accent-strong);
-}
-
-.cta .btn-ghost {
-  background: transparent;
-  color: var(--on-accent);
-  border-color: color-mix(in srgb, var(--on-accent) 45%, transparent);
-}
-
-.cta .btn-ghost:hover {
-  border-color: var(--on-accent);
 }
 
 /* ---------- Page header (inner pages) ---------- */
@@ -1821,4 +1813,8 @@ html[data-dir="back"]::view-transition-new(page) {
 
 .skill-groups .chip {
   cursor: default;
+}
+
+[data-github-section].is-filtered-out {
+  display: none;
 }

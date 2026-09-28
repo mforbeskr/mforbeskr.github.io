@@ -15,10 +15,16 @@
  *     { type: "logo", src, alt, name, className }          logo on a plain tile
  *     { type: "tile", name, sub, icon, colors: [a, b] }    gradient tile with text
  *     { type: "placeholder" }                              simple </> tile
+ *
+ * GitHub: public repos with the topic below are added automatically under
+ * "More on GitHub" on the portfolio page (unless they're already listed here).
+ * Extra topics "school", "personal" or "app" on a repo make the filters work.
  */
 window.SITE = {
   studyStart: "2025-08-01",
   semesters: 7,
+
+  github: { user: "mforbeskr", topic: "portfolio" },
 
   studying: {
     3: {

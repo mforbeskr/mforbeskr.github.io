@@ -119,25 +119,35 @@
       root.classList.add("reveal-ready");
     }
 
-    document.querySelectorAll(".spotlight").forEach(function (card) {
-      card.addEventListener("pointermove", function (e) {
-        var r = card.getBoundingClientRect();
-        card.style.setProperty("--mx", e.clientX - r.left + "px");
-        card.style.setProperty("--my", e.clientY - r.top + "px");
-      });
+    document.addEventListener("pointermove", function (e) {
+      var card = e.target.closest && e.target.closest(".spotlight");
+      if (!card) return;
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", e.clientX - r.left + "px");
+      card.style.setProperty("--my", e.clientY - r.top + "px");
     });
 
     var filters = document.querySelectorAll(".filter");
-    var projects = document.querySelectorAll(".project[data-tags]");
+    function allProjects() {
+      return document.querySelectorAll(".project[data-tags]");
+    }
     function applyFilter(btn) {
       var tag = btn.dataset.filter;
       filters.forEach(function (b) {
         b.setAttribute("aria-pressed", String(b === btn));
       });
-      projects.forEach(function (p) {
+      allProjects().forEach(function (p) {
         p.hidden = tag !== "all" && p.dataset.tags.split(" ").indexOf(tag) === -1;
       });
+      document.querySelectorAll("[data-github-section]").forEach(function (section) {
+        section.classList.toggle("is-filtered-out", !section.querySelector(".project:not([hidden])"));
+      });
     }
+
+    document.addEventListener("projects:added", function () {
+      var pressed = document.querySelector('.filter[aria-pressed="true"]');
+      if (pressed) applyFilter(pressed);
+    });
 
     var initialFilter = new URLSearchParams(location.search).get("filter");
     filters.forEach(function (btn) {
@@ -154,6 +164,7 @@
           applyFilter(btn);
         };
         if (!document.startViewTransition || reduceMotion) return apply();
+        var projects = allProjects();
         projects.forEach(function (p, i) {
           p.style.viewTransitionName = "project-" + i;
         });
