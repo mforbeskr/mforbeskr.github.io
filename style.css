@@ -176,24 +176,6 @@ p {
   margin-right: auto;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, #7c3aed, #230a47);
-  color: #fff;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  box-shadow: var(--shadow);
-  transition: transform 0.4s var(--ease-out);
-}
-
-.brand:hover .brand-mark {
-  transform: rotate(-8deg) scale(1.06);
-}
-
 .nav-links {
   display: flex;
   gap: 0.25rem;
@@ -1156,16 +1138,17 @@ main {
 }
 
 .check-list li {
-  display: flex;
-  gap: 0.6rem;
+  position: relative;
+  padding-left: 1rem;
 }
 
 .check-list li::before {
   content: "";
-  flex-shrink: 0;
+  position: absolute;
+  left: 0;
+  top: 0.6em;
   width: 6px;
   height: 6px;
-  margin-top: 0.55em;
   border-radius: 50%;
   background: var(--accent);
 }
@@ -1817,4 +1800,59 @@ html[data-dir="back"]::view-transition-new(page) {
 
 [data-github-section].is-filtered-out {
   display: none;
+}
+
+.callout {
+  background: none;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.prose a {
+  text-decoration: none;
+}
+
+.prose a:hover {
+  text-decoration: underline;
+}
+
+.brand-word {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: -0.05em;
+  color: var(--text);
+}
+
+.brand-qilej {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.55em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.brand-tackly {
+  font-family: "Manrope", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.45em;
+  letter-spacing: -0.03em;
+}
+
+.bubble {
+  display: inline-block;
+  padding: 0 0.6em;
+  border: 1px solid color-mix(in srgb, var(--chip-border) 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--neon) 8%, transparent);
+  color: var(--text);
+  font-size: 0.92em;
+  font-weight: 500;
+  line-height: 1.6;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--ease-out);
+}
+
+.bubble:hover {
+  border-color: color-mix(in srgb, var(--neon) 85%, transparent);
+  box-shadow: 0 0 12px -2px color-mix(in srgb, var(--neon) 70%, transparent);
+  transform: translateY(-1px);
 }
