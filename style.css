@@ -543,19 +543,29 @@ main {
   width: min(100%, 310px);
 }
 
-.portrait::before {
-  content: "";
+.portrait-mark {
   position: absolute;
-  inset: -14px 14px 14px -14px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, var(--neon), var(--accent));
-  opacity: 0.55;
-  transform: rotate(-4deg);
-  transition: transform 0.6s var(--ease-out);
+  top: 6%;
+  left: 7%;
+  width: 30%;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 0 5px rgb(168 85 247 / 0.9)) drop-shadow(0 0 14px rgb(168 85 247 / 0.5));
 }
 
-.portrait:hover::before {
-  transform: rotate(-7deg) scale(1.02);
+.portrait-mark path {
+  fill: none;
+  stroke: #c9b2ff;
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s var(--ease-out);
+}
+
+.portrait:hover .portrait-mark path {
+  stroke-dashoffset: 0;
 }
 
 .portrait img {
@@ -1586,16 +1596,6 @@ html[data-dir="back"]::view-transition-new(page) {
   object-fit: contain !important;
 }
 
-.tile-tackly {
-  flex-direction: row;
-  gap: 1rem;
-  background: #eef3f5;
-}
-
-.tile-tackly .tile-name {
-  color: #4a3426;
-}
-
 .tile-qilej {
   background: #000;
 }
@@ -1619,14 +1619,6 @@ html[data-dir="back"]::view-transition-new(page) {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   opacity: 0.8;
-}
-
-.tile-tackly {
-  background: #f2f6f6;
-}
-
-.tile-tackly .tile-name {
-  font-size: clamp(1.9rem, 3.5vw, 2.5rem);
 }
 
 .tile-qilej img {
@@ -1769,11 +1761,6 @@ html[data-dir="back"]::view-transition-new(page) {
     justify-self: end;
   }
 
-  .portrait::before {
-    inset: -6px 6px 6px -6px;
-    border-radius: 20px;
-  }
-
   .portrait img {
     border-radius: 18px;
   }
@@ -1838,21 +1825,20 @@ html[data-dir="back"]::view-transition-new(page) {
   letter-spacing: -0.03em;
 }
 
-.bubble {
-  display: inline-block;
-  padding: 0 0.6em;
-  border: 1px solid color-mix(in srgb, var(--chip-border) 45%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--neon) 8%, transparent);
-  color: var(--text);
-  font-size: 0.92em;
-  font-weight: 500;
-  line-height: 1.6;
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--ease-out);
+.footer-mark-item {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
 }
 
-.bubble:hover {
-  border-color: color-mix(in srgb, var(--neon) 85%, transparent);
-  box-shadow: 0 0 12px -2px color-mix(in srgb, var(--neon) 70%, transparent);
-  transform: translateY(-1px);
+.footer-mark {
+  width: auto;
+  height: 46px;
+  opacity: 0.85;
 }
+
+.footer-mark:hover {
+  opacity: 1;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--neon) 70%, transparent));
+}
+

@@ -49,7 +49,7 @@ window.SITE = {
       desc: "A Danish peer-to-peer marketplace for equestrian equipment. I'm building it together with a friend: a mobile app in Expo / React Native on Supabase, plus a separate React admin panel for moderation, support and role-based access. It's about to launch on Google Play under our developer name, NorthFrame — with the App Store as the next step.",
       chips: ["React Native", "TypeScript", "Supabase"],
       link: "Visit",
-      media: { type: "logo", src: "assets/tackly.png", alt: "Tackly logo", name: "Tackly", className: "tile-tackly" },
+      media: { type: "image", src: "assets/tackly-feature.jpg", alt: "Tackly — Giv dit rideudstyr nye eventyr", width: 1024, height: 500 },
     },
     {
       title: "Hos Qilej",
@@ -189,7 +189,7 @@ window.SITE = {
       title: "My First Website",
       url: "https://mforbeskr.github.io/MinSideTest/",
       tags: ["personal", "web"],
-      desc: "Where it all started — a small school task that became my first web playground.",
+      desc: "My first proper website — a small school task that became my web playground.",
       chips: ["HTML", "Playground"],
       link: "Visit",
       media: { type: "placeholder" },

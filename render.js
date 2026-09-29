@@ -30,7 +30,7 @@
     if (m.type === "image") {
       return (
         '<div class="project-media"><img' + (m.contain ? ' class="contain"' : "") +
-        ' src="' + esc(m.src) + '" alt="' + esc(m.alt) + '" width="640" height="400" loading="lazy" decoding="async" /></div>'
+        ' src="' + esc(m.src) + '" alt="' + esc(m.alt) + '" width="' + (m.width || 640) + '" height="' + (m.height || 400) + '" loading="lazy" decoding="async" /></div>'
       );
     }
     if (m.type === "logo") {
