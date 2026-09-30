@@ -7,6 +7,7 @@
   --muted: #625d55;
   --border: #e8e3d8;
   --accent: #3a1470;
+  --accent-deep: #3a1470;
   --accent-strong: #230a47;
   --accent-soft: #f1ecfa;
   --chip-border: #3a1470;
@@ -39,6 +40,7 @@
   --muted: #a8a0ba;
   --border: #2a2436;
   --accent: #b890ff;
+  --accent-deep: #7c3aed;
   --accent-strong: #e4d3ff;
   --accent-soft: #211a30;
   --chip-border: #8a63e6;
@@ -207,7 +209,7 @@ p {
   bottom: 0.1rem;
   height: 3px;
   border-radius: 3px;
-  background: var(--accent);
+  background: var(--accent-deep);
   box-shadow: 0 0 12px color-mix(in srgb, var(--neon) 70%, transparent);
   view-transition-name: nav-indicator;
 }
@@ -523,7 +525,7 @@ main {
 
 .hero h1 .accent {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-deep);
 }
 
 .hero .lead {
@@ -600,7 +602,7 @@ main {
 }
 
 .portrait-badge span span {
-  color: var(--accent);
+  color: var(--accent-deep);
   font-weight: 500;
 }
 
@@ -680,7 +682,7 @@ main {
   font-size: 3.1em;
   line-height: 0.85;
   padding: 0.08em 0.12em 0 0;
-  color: var(--accent);
+  color: var(--accent-deep);
   font-weight: 700;
 }
 
