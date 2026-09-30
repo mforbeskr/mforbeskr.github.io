@@ -1,7 +1,6 @@
 /* ---------- Tokens ---------- */
 :root {
   --bg: #fbfaf6;
-  --bg-tint: #f3eee4;
   --surface: #ffffff;
   --surface-2: #f5f2eb;
   --text: #1c1a17;
@@ -33,8 +32,7 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #0b0910;
-  --bg-tint: #0b0910;
+  --bg: #050407;
   --surface: #14111b;
   --surface-2: #1b1724;
   --text: #f0eaff;
@@ -69,12 +67,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(1200px 600px at 85% -10%, var(--bg-tint), transparent 70%),
-    radial-gradient(900px 500px at -10% 20%, var(--bg-tint), transparent 70%),
-    radial-gradient(800px 500px at 50% 110%, color-mix(in srgb, var(--neon) 10%, transparent), transparent 70%),
-    var(--bg);
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1rem;
@@ -633,7 +626,18 @@ main {
 }
 
 .stat {
+  display: block;
+  height: 100%;
   padding: 1.35rem 1.4rem;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.3s var(--ease-out), border-color 0.25s, box-shadow 0.3s;
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--neon) 45%, var(--border));
+  box-shadow: var(--shadow-lg), 0 0 28px -10px color-mix(in srgb, var(--neon) 60%, transparent);
 }
 
 .stat-value {
@@ -670,7 +674,7 @@ main {
   max-width: 68ch;
 }
 
-.prose p:first-child::first-letter {
+.prose > p:first-child::first-letter {
   float: left;
   font-family: var(--font-display);
   font-size: 3.1em;
@@ -1250,26 +1254,46 @@ main {
   box-shadow: var(--shadow-lg);
 }
 
-.hobby-icon {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  margin-bottom: 1.2rem;
-  color: #fff;
-  background: linear-gradient(135deg, var(--c1), var(--c2));
-  box-shadow: 0 10px 20px -8px var(--c2);
-  transition: transform 0.5s var(--ease-out);
+.hobby-art {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  width: 84px;
+  height: 84px;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.hobby:hover .hobby-icon {
-  transform: rotate(-8deg) scale(1.08);
+.hobby-art circle,
+.hobby-art path {
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.hobby-icon svg {
-  width: 28px;
-  height: 28px;
+.art-base * {
+  stroke: color-mix(in srgb, var(--text) 13%, transparent);
+}
+
+.art-glow {
+  filter: drop-shadow(0 0 4px var(--glow)) drop-shadow(0 0 12px var(--glow));
+}
+
+.art-glow * {
+  stroke: var(--glow);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s var(--ease-out);
+}
+
+.hobby:hover .art-glow * {
+  stroke-dashoffset: 0;
+}
+
+.hobby h2,
+.hobby .tagline {
+  padding-right: 96px;
 }
 
 .hobby h2 {
@@ -1290,11 +1314,11 @@ main {
   margin-bottom: 0;
 }
 
-.hobby-gaming { --c1: #a855f7; --c2: #6d28d9; }
-.hobby-code { --c1: #5b8f68; --c2: #35593f; }
-.hobby-ball { --c1: #ff8a3d; --c2: #d45a12; }
-.hobby-music { --c1: #ff5f8f; --c2: #c42f63; }
-.hobby-family { --c1: #3aa6d8; --c2: #1f6f98; }
+.hobby-gaming { --glow: #b388ff; }
+.hobby-code { --glow: #5eeaa5; }
+.hobby-ball { --glow: #ff9142; }
+.hobby-music { --glow: #5fb3ff; }
+.hobby-family { --glow: #ff5c8a; }
 
 /* ---------- Footer ---------- */
 .site-footer {
@@ -1663,26 +1687,7 @@ html[data-dir="back"]::view-transition-new(page) {
 }
 
 :root[data-theme="dark"] body {
-  background:
-    radial-gradient(440px circle at 88% 6%, rgb(157 92 255 / 0.16), transparent 70%),
-    radial-gradient(360px circle at 4% 40%, rgb(181 102 255 / 0.10), transparent 70%),
-    radial-gradient(500px circle at 72% 82%, rgb(124 58 237 / 0.10), transparent 70%),
-    var(--bg);
-  background-attachment: fixed;
-}
-
-.stat {
-  display: block;
-  height: 100%;
-  color: inherit;
-  text-decoration: none;
-  transition: transform 0.3s var(--ease-out), border-color 0.25s, box-shadow 0.3s;
-}
-
-.stat:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--neon) 45%, var(--border));
-  box-shadow: var(--shadow-lg), 0 0 28px -10px color-mix(in srgb, var(--neon) 60%, transparent);
+  background: var(--bg);
 }
 
 [id] {
@@ -1819,10 +1824,60 @@ html[data-dir="back"]::view-transition-new(page) {
 }
 
 .brand-tackly {
-  font-family: "Manrope", system-ui, sans-serif;
-  font-weight: 800;
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-weight: 600;
   font-size: 1.45em;
-  letter-spacing: -0.03em;
+}
+
+.brand-learnhub {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3em;
+  background: linear-gradient(90deg, rgb(42 125 155), rgb(87 199 133), rgb(237 229 83));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+:root[data-theme="light"] .brand-learnhub {
+  background-image: linear-gradient(90deg, #1f6f8b, #2f9e63, #a8950f);
+}
+
+.pull-quote {
+  position: relative;
+  margin: 2.5rem 0 2.5rem;
+  padding-left: 2.6rem;
+}
+
+.pull-quote::before {
+  content: "“";
+  position: absolute;
+  left: -0.2rem;
+  top: -1.1rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.pull-quote p {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  line-height: 1.25;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.reach-out {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.3em;
+  line-height: 1;
 }
 
 .footer-mark-item {
@@ -1842,3 +1897,72 @@ html[data-dir="back"]::view-transition-new(page) {
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--neon) 70%, transparent));
 }
 
+
+:root[data-theme="dark"] .status {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #000;
+  background-image:
+    radial-gradient(circle at 30% 40%, rgb(178 107 255 / 0.35) 0 0.9px, transparent 1.6px),
+    radial-gradient(circle at 70% 65%, rgb(139 61 255 / 0.3) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 50% 50%, rgb(192 132 252 / 0.3) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 20% 80%, rgb(109 40 217 / 0.4) 0 0.7px, transparent 1.3px);
+  background-size: 41px 23px, 59px 19px, 83px 29px, 37px 17px;
+  border-color: #2a1454;
+  animation:
+    night-sky 40s linear infinite,
+    star-dance 3.4s ease-in-out infinite alternate;
+}
+
+:root[data-theme="dark"] .status::before,
+:root[data-theme="dark"] .status::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+:root[data-theme="dark"] .status::before {
+  background-image:
+    radial-gradient(circle at 40% 30%, rgb(216 180 254 / 0.8) 0 1.2px, transparent 2.2px),
+    radial-gradient(circle at 80% 70%, rgb(168 85 247 / 0.8) 0 1px, transparent 2px);
+  background-size: 71px 29px, 97px 31px;
+  animation: star-blink 1.9s ease-in-out infinite;
+}
+
+:root[data-theme="dark"] .status::after {
+  background-image:
+    radial-gradient(circle at 60% 20%, rgb(233 213 255 / 0.8) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 15% 60%, rgb(192 132 252 / 0.8) 0 1.3px, transparent 2.3px);
+  background-size: 113px 27px, 67px 33px;
+  animation: star-blink 2.6s ease-in-out 1.1s infinite;
+}
+
+@keyframes star-blink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  45%,
+  55% {
+    opacity: 1;
+  }
+}
+
+@keyframes night-sky {
+  to {
+    background-position: 41px 23px, -59px 19px, 83px -29px, -37px 17px;
+  }
+}
+
+@keyframes star-dance {
+  to {
+    background-size: 41px 23px, 57px 18px, 85px 30px, 37px 17px;
+  }
+}
+
+.prose a.brand-learnhub:hover {
+  text-decoration-color: rgb(87 199 133);
+}

@@ -8,7 +8,7 @@
       name="description"
       content="Magnus Forbes Kjær-Rasmussen — Software Engineering trainee at VIA University College, based in Hedehusene, Denmark. Full-stack, Java and web development."
     />
-    <meta name="theme-color" content="#0b0910" />
+    <meta name="theme-color" content="#050407" />
     <link
       rel="icon"
       type="image/svg+xml"
@@ -18,15 +18,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Instrument+Serif:ital@1&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@800&text=HOSQILEJTackly&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Fredoka:wght@600&family=Fraunces:ital,wght@1,600&text=HOSQILEJTacklyreachout&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=11" />
+    <link rel="stylesheet" href="style.css?v=20" />
     <link rel="expect" href="#page-end" blocking="render" />
-    <script src="content.js?v=7"></script>
+    <script src="content.js?v=8"></script>
     <script src="script.js?v=4"></script>
   </head>
   <body>
@@ -53,7 +53,7 @@
     <div class="page">
       <main id="main">
         <section class="container hero">
-          <div>
+          <div class="hero-text">
             <p class="status reveal"><span class="status-dot" aria-hidden="true"></span>Open to trainee positions · ~2 days a week</p>
             <h1 class="reveal" style="--delay: 0.05s">
               Hi I'm Magnus.<br />I build bridges between <span class="accent">code</span> and people.
@@ -91,25 +91,25 @@
         <section class="container" aria-label="Quick facts">
           <ul class="stats">
             <li class="reveal">
-              <a class="card stat spotlight" href="resume.html#now-studying">
+              <a class="card stat" href="resume.html#now-studying">
                 <span class="stat-value">Semester <span data-semester="number">3</span></span>
                 <span class="stat-label" data-studying="short">C# &amp; .NET, building a CPU in DigiSim, and algorithms &amp; complexity</span>
               </a>
             </li>
             <li class="reveal" style="--delay: 0.05s">
-              <a class="card stat spotlight" href="#about-po">
+              <a class="card stat" href="#about-po">
                 <span class="stat-value">PO</span>
                 <span class="stat-label">loved being Product Owner on LearnHub — a role I want to explore more</span>
               </a>
             </li>
             <li class="reveal" style="--delay: 0.1s">
-              <a class="card stat spotlight" href="portfolio.html?filter=personal#projects">
+              <a class="card stat" href="portfolio.html?filter=personal#projects">
                 <span class="stat-value">Freelance</span>
                 <span class="stat-label">a website for a real client, and Tackly — soon on Google Play, then the App Store</span>
               </a>
             </li>
             <li class="reveal" style="--delay: 0.15s">
-              <a class="card stat spotlight" href="#about-personal">
+              <a class="card stat" href="#about-personal">
                 <span class="stat-value">Balance</span>
                 <span class="stat-label">family life in Hedehusene, gaming, basketball and playing the piano at home</span>
               </a>
@@ -158,16 +158,20 @@
                 I are about to launch on Google Play, with the App Store up next.
                 Websites, apps and everything in between — I love the variety.
                 <mark class="callout">Need a website or a small app built? Feel free
-                to <a href="mailto:mforbeskr@outlook.dk">reach out</a>.</mark>
+                to <a class="reach-out" href="mailto:mforbeskr@outlook.dk">reach out</a>.</mark>
               </p>
               <p id="about-po">
-                On our 2nd-semester project, LearnHub, I was Product Owner — keeping
-                the overview, the requirements and the progress on track, with great
-                feedback from fellow students and teachers. I quickly came to really enjoy
-                the role, and I'd like to grow in that direction: I thrive in the
-                space between code and development on one side, and customers, their
-                needs and wishes on the other.
+                On our 2nd-semester project,
+                <a class="brand-word brand-learnhub" href="https://github.com/mforbeskr/SEP2-Project-LearnHub" target="_blank" rel="noopener">LearnHub</a>, I was Product
+                Owner — keeping the overview, the requirements and the progress on
+                track, with great feedback from fellow students and teachers. I
+                quickly came to really enjoy the role, and I'd like to grow in that
+                direction: I thrive in the space between code and development on one
+                side, and customers, their needs and wishes on the other.
               </p>
+              <blockquote class="pull-quote">
+                <p>I thrive in the space between the code and the people it's built for.</p>
+              </blockquote>
               <p>
                 Before my studies I worked as a technical customer service agent
                 for PayPal in Belfast, served as a firefighter and rescue
@@ -228,7 +232,7 @@
           </ul>
         </div>
       </footer>
-      <script src="render.js?v=5"></script>
+      <script src="render.js?v=6"></script>
       <span id="page-end"></span>
     </div>
   </body>
