@@ -25,12 +25,13 @@
 
   var here = pageIndex(location.href);
 
+  // A saved choice wins; first-time visitors get their device's mode.
   var savedTheme = store("localStorage", "colorTheme");
   if (savedTheme === "light" || savedTheme === "dark") root.dataset.theme = savedTheme;
+  else root.dataset.theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 
   function currentTheme() {
-    if (root.dataset.theme) return root.dataset.theme;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return root.dataset.theme;
   }
 
   function directionFrom(from) {
