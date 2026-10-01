@@ -56,6 +56,7 @@ window.SITE = {
       url: "https://www.hosqilej.dk/",
       tags: ["personal", "web"],
       featured: true,
+      badge: "Barbershop · Roskilde",
       desc: "Website for a barbershop in Roskilde — services, prices, opening hours and integrated online booking.",
       chips: ["HTML", "CSS", "Freelance"],
       link: "Visit",
