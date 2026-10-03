@@ -95,8 +95,7 @@
     CSS: ["#6d4ad6", "#2f1f73"],
   };
   var DEFAULT_COLORS = ["#4b5563", "#1f2937"];
-  var CACHE_KEY = "githubRepos";
-  var CACHE_MINUTES = 10;
+  var CACHE_KEY = "githubReposFallback";
 
   function normalizeUrl(url) {
     return String(url || "").toLowerCase().replace(/\/+$/, "");
@@ -137,21 +136,27 @@
     };
   }
 
+  // Always ask GitHub for the current list, so newly tagged repos show up right away.
+  // The last good list is kept only as a fallback for when GitHub can't be reached or rate-limits us.
   function loadRepos(user) {
-    try {
-      var cached = JSON.parse(sessionStorage.getItem(CACHE_KEY));
-      if (cached && Date.now() - cached.time < CACHE_MINUTES * 60000) return Promise.resolve(cached.repos);
-    } catch (e) {}
     return fetch("https://api.github.com/users/" + encodeURIComponent(user) + "/repos?per_page=100&sort=pushed")
       .then(function (res) {
-        if (!res.ok) throw new Error("GitHub " + res.status);
+        if (!res.ok) throw new Error("GitHub responded " + res.status);
         return res.json();
       })
       .then(function (repos) {
         try {
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ time: Date.now(), repos: repos }));
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(repos));
         } catch (e) {}
         return repos;
+      })
+      .catch(function (err) {
+        var cached = null;
+        try {
+          cached = JSON.parse(sessionStorage.getItem(CACHE_KEY));
+        } catch (e) {}
+        if (Array.isArray(cached)) return cached;
+        throw err;
       });
   }
 
@@ -176,7 +181,9 @@
         githubSection.hidden = false;
         document.dispatchEvent(new CustomEvent("projects:added"));
       })
-      .catch(function () {});
+      .catch(function (err) {
+        console.warn("Couldn't load GitHub repos for \"More on GitHub\":", err);
+      });
   }
 
   var semester = currentSemester();
