@@ -110,7 +110,7 @@ window.SITE = {
       },
     },
     {
-      title: "DNP Forum",
+      title: ".NET Forum",
       url: "https://github.com/mforbeskr/DNPproject",
       tags: ["school", "csharp"],
       badge: "In progress",
@@ -119,14 +119,14 @@ window.SITE = {
       link: "GitHub",
       media: {
         type: "tile",
-        name: "Forum",
+        name: ".NET Forum",
         sub: "C# · .NET",
         colors: ["#7c4dff", "#512bd4"],
         icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
       },
     },
     {
-      title: "Traceability Service",
+      title: "Distributed Systems - Slaughterhouse",
       url: "https://github.com/mforbeskr/DSY_Project",
       tags: ["school", "java"],
       badge: "In progress",
@@ -135,7 +135,7 @@ window.SITE = {
       link: "GitHub",
       media: {
         type: "tile",
-        name: "Traceability",
+        name: "Distributed Systems",
         sub: "gRPC service",
         colors: ["#2b8a8a", "#164a4f"],
         icon: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5 10.8 16M16 7.5 13.2 16M8.5 6h7"/>',
