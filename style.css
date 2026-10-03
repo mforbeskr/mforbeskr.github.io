@@ -274,14 +274,15 @@ p {
     scrollbar-width: none;
   }
 
+  /* Shrinks on narrow phones so all four links fit without a sideways scroll */
   .nav-links a {
-    padding: 0.5rem 0.6rem;
-    font-size: 0.9rem;
+    padding: 0.5rem clamp(0.35rem, 1.8vw, 0.6rem);
+    font-size: clamp(0.8rem, 3.7vw, 0.9rem);
   }
 
   .nav-links a[aria-current="page"]::after {
-    left: 0.6rem;
-    right: 0.6rem;
+    left: clamp(0.35rem, 1.8vw, 0.6rem);
+    right: clamp(0.35rem, 1.8vw, 0.6rem);
   }
 }
 
@@ -502,6 +503,11 @@ main {
 
 .card.spotlight:hover::before {
   opacity: 1;
+}
+
+/* Light mode: project cards get no cursor spotlight */
+:root[data-theme="light"] .card.project.spotlight:hover::before {
+  opacity: 0;
 }
 
 /* ---------- Home: hero ---------- */
@@ -855,11 +861,36 @@ main {
 }
 
 .reach-out {
-  font-family: "Fraunces", Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 1.3em;
+  display: inline-block;
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-weight: 700;
+  font-size: 1.55em;
   line-height: 1;
+  white-space: nowrap;
+  transform-origin: left 70%;
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.8, 0.5, 1),
+    background-position 0.5s var(--ease-out);
+}
+
+/* Hover: the word grows and tilts with a springy wobble instead of underlining */
+.prose a.reach-out:hover {
+  text-decoration: none;
+  transform: rotate(-4deg) scale(1.12);
+}
+
+/* Dark: the letters themselves fade from a dark ember to bright orange
+   (pure black would vanish on the dark background) */
+:root[data-theme="dark"] .prose a.reach-out {
+  /* Twice as wide as the word: the first half is the resting look, the second half the brighter hover look */
+  background: linear-gradient(100deg, #8a2c0c 0%, #c2410c 20%, #fb923c 50%, #fdba74 75%, #fb923c 100%) 0 0 / 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+:root[data-theme="dark"] .prose a.reach-out:hover {
+  background-position: 100% 0;
 }
 
 .prose a.brand-learnhub:hover {
@@ -1566,8 +1597,10 @@ main {
     grid-template-columns: 1fr;
   }
 
+  /* Relative, not static: the light-mode blackboard frame is positioned against the card */
   .profile-card {
-    position: static;
+    position: relative;
+    top: auto;
   }
 }
 
@@ -1794,6 +1827,15 @@ main {
     --margin-x: 1.7rem;
     padding: 2rem 1.3rem 1.6rem 2.6rem;
   }
+
+  /* Tuck the tape in so it doesn't poke past the screen edge */
+  .paper::before {
+    left: -10px;
+  }
+
+  .paper::after {
+    right: -10px;
+  }
 }
 
 @media print {
@@ -1838,12 +1880,12 @@ main {
   pointer-events: none;
 }
 
-/* A stick of chalk resting on the frame */
+/* A stick of chalk resting on the bottom of the frame */
 :root[data-theme="light"] .blackboard::after {
   content: "";
   position: absolute;
   right: 22px;
-  bottom: -8px;
+  bottom: 1px;
   width: 34px;
   height: 6px;
   border-radius: 3px;
@@ -2015,10 +2057,9 @@ main {
 }
 
 .footer-inner {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem 2rem;
 }
 
@@ -2063,10 +2104,12 @@ main {
   color: var(--accent);
 }
 
+/* The signature shares the pills' line, pushed out to the far right */
 .footer-mark-item {
+  position: relative;
+  justify-self: end;
   display: flex;
-  align-items: center;
-  margin-left: 0.5rem;
+  margin-left: clamp(1rem, 4vw, 3rem);
 }
 
 .footer-mark {
@@ -2075,15 +2118,49 @@ main {
   opacity: 0.85;
 }
 
-.footer-mark:hover {
-  opacity: 1;
+.footer-mark-item:hover {
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--neon) 70%, transparent));
+}
+
+.footer-mark-item:hover .footer-mark {
+  opacity: 1;
+}
+
+/* Dark: footer icons and signature use the profile card's deep violet.
+   The signature's colour lives inside the SVG file, so it is repainted through a mask. */
+:root[data-theme="dark"] .footer-links svg {
+  color: var(--accent-deep);
+}
+
+:root[data-theme="dark"] .footer-mark-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-deep);
+  -webkit-mask: url("assets/signature.svg") center / contain no-repeat;
+  mask: url("assets/signature.svg") center / contain no-repeat;
+  opacity: 0.85;
+}
+
+:root[data-theme="dark"] .footer-mark-item:hover::before {
+  opacity: 1;
+}
+
+:root[data-theme="dark"] .footer-mark {
+  visibility: hidden;
 }
 
 @media (max-width: 600px) {
   .footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr auto;
+  }
+
+  .footer-inner > div {
+    grid-column: 1 / -1;
+  }
+
+  .footer-mark-item {
+    margin-left: 0;
   }
 }
 
