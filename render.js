@@ -179,7 +179,6 @@
           return card(repoToProject(repo), i, false).replace(" reveal", "");
         }).join("");
         githubSection.hidden = false;
-        document.dispatchEvent(new CustomEvent("projects:added"));
       })
       .catch(function (err) {
         console.warn("Couldn't load GitHub repos for \"More on GitHub\":", err);

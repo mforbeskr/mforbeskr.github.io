@@ -1075,10 +1075,6 @@ main {
   margin-bottom: 0;
 }
 
-[data-github-section].is-filtered-out {
-  display: none;
-}
-
 /* Featured projects and code/logo tiles */
 @media (min-width: 700px) {
   .project-featured {

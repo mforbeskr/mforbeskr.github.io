@@ -199,10 +199,10 @@
       });
     });
 
-    // Portfolio filters
+    // Portfolio filters: they sort the main project grid only; "More on GitHub" always shows everything
     var filters = document.querySelectorAll(".filter");
     function allProjects() {
-      return document.querySelectorAll(".project[data-tags]");
+      return document.querySelectorAll("[data-projects] .project[data-tags]");
     }
     function applyFilter(btn) {
       var tag = btn.dataset.filter;
@@ -212,15 +212,7 @@
       allProjects().forEach(function (p) {
         p.hidden = tag !== "all" && p.dataset.tags.split(" ").indexOf(tag) === -1;
       });
-      document.querySelectorAll("[data-github-section]").forEach(function (section) {
-        section.classList.toggle("is-filtered-out", !section.querySelector(".project:not([hidden])"));
-      });
     }
-
-    document.addEventListener("projects:added", function () {
-      var pressed = document.querySelector('.filter[aria-pressed="true"]');
-      if (pressed) applyFilter(pressed);
-    });
 
     var initialFilter = new URLSearchParams(location.search).get("filter");
     filters.forEach(function (btn) {
