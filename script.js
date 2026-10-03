@@ -88,18 +88,38 @@
     });
   }
 
+  // A word as a row of letter spans, each knowing its position from the left (--n) and right (--r).
+  function fillWord(word) {
+    var wrap = document.createElement("span");
+    wrap.className = "fill-word";
+    word.split("").forEach(function (ch, i) {
+      var span = document.createElement("span");
+      span.className = "letter";
+      span.textContent = ch;
+      span.style.setProperty("--n", i);
+      span.style.setProperty("--r", word.length - 1 - i);
+      wrap.appendChild(span);
+    });
+    return wrap;
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    // Theme toggle
     var toggle = document.querySelector(".theme-toggle");
     if (toggle) {
+      var labelToggle = function () {
+        toggle.setAttribute("aria-label", "Switch to " + (currentTheme() === "dark" ? "light" : "dark") + " mode");
+      };
       toggle.addEventListener("click", function () {
         var next = currentTheme() === "dark" ? "light" : "dark";
         root.dataset.theme = next;
         store("localStorage", "colorTheme", next);
-        toggle.setAttribute("aria-label", "Switch to " + (next === "dark" ? "light" : "dark") + " mode");
+        labelToggle();
       });
-      toggle.setAttribute("aria-label", "Switch to " + (currentTheme() === "dark" ? "light" : "dark") + " mode");
+      labelToggle();
     }
 
+    // Scroll reveal
     var reveals = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window && !reduceMotion) {
       var io = new IntersectionObserver(
@@ -120,6 +140,7 @@
       root.classList.add("reveal-ready");
     }
 
+    // Cursor spotlight on cards
     document.addEventListener("pointermove", function (e) {
       var card = e.target.closest && e.target.closest(".spotlight");
       if (!card) return;
@@ -128,44 +149,14 @@
       card.style.setProperty("--my", e.clientY - r.top + "px");
     });
 
-    // Split skill words (and the words in the strengths text) into letters so hover can fill
-    // them one at a time, left to right. Screen readers get the original text; the letters are hidden.
-    function fillWord(word) {
-      var wrap = document.createElement("span");
-      wrap.className = "fill-word";
-      word.split("").forEach(function (ch, i) {
-        var span = document.createElement("span");
-        span.className = "letter";
-        span.textContent = ch;
-        span.style.setProperty("--n", i);
-        span.style.setProperty("--r", word.length - 1 - i);
-        wrap.appendChild(span);
-      });
-      return wrap;
-    }
-
-    function splitWords(node) {
-      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-        if (child.nodeType === 1) return splitWords(child);
-        if (child.nodeType !== 3) return;
-        var frag = document.createDocumentFragment();
-        child.textContent.split(/(\s+)/).forEach(function (part) {
-          if (!part) return;
-          frag.appendChild(/\s/.test(part) ? document.createTextNode(part) : fillWord(part));
-        });
-        node.replaceChild(frag, child);
-      });
-    }
-
-    document.querySelectorAll(".skill-words li, .paper p").forEach(function (el) {
+    // Resume: split the card headings into letters so the dark-mode hover can fill them one at a
+    // time. Screen readers get the original heading; the letters are hidden from them.
+    document.querySelectorAll(".paper h3").forEach(function (el) {
       var label = document.createElement("span");
       label.className = "sr-only";
-      label.innerHTML = el.innerHTML;
-      var visual = document.createElement("span");
+      label.textContent = el.textContent;
+      var visual = fillWord(el.textContent);
       visual.setAttribute("aria-hidden", "true");
-      visual.innerHTML = el.innerHTML;
-      if (el.tagName === "LI") visual.replaceChildren(fillWord(el.textContent));
-      else splitWords(visual);
       el.replaceChildren(label, visual);
     });
 
@@ -208,6 +199,7 @@
       });
     });
 
+    // Portfolio filters
     var filters = document.querySelectorAll(".filter");
     function allProjects() {
       return document.querySelectorAll(".project[data-tags]");
@@ -233,9 +225,6 @@
     var initialFilter = new URLSearchParams(location.search).get("filter");
     filters.forEach(function (btn) {
       if (btn.dataset.filter === initialFilter) applyFilter(btn);
-    });
-
-    filters.forEach(function (btn) {
       btn.addEventListener("click", function () {
         var url = new URL(location.href);
         if (btn.dataset.filter === "all") url.searchParams.delete("filter");
@@ -257,6 +246,7 @@
       });
     });
 
+    // Footer year
     document.querySelectorAll("[data-year]").forEach(function (el) {
       el.textContent = new Date().getFullYear();
     });
