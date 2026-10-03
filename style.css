@@ -1285,8 +1285,9 @@ main {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--accent);
-  background: var(--accent-soft);
-  padding: 0.15rem 0.6rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  padding: 0.1rem 0.6rem;
   border-radius: 999px;
 }
 
@@ -1958,4 +1959,348 @@ html[data-dir="back"]::view-transition-new(page) {
 
 .prose a.brand-learnhub:hover {
   text-decoration-color: rgb(87 199 133);
+}
+
+/* ---------- Resume: skills on sheets of paper ---------- */
+.paper-desk {
+  padding-top: 0.8rem;
+}
+
+.paper {
+  --tilt: -0.6deg;
+  --paper: #fffdf8;
+  --ink: #1f2530;
+  --ink-soft: #3f4550;
+  --rule: rgb(70 110 170 / 0.16);
+  --margin-rule: rgb(58 20 112 / 0.32);
+  --tape: rgb(222 212 188 / 0.8);
+  --paper-shadow: 0 1px 1px rgb(40 30 15 / 0.08), 0 14px 24px -16px rgb(40 30 15 / 0.45);
+  --paper-shadow-lift: 0 2px 3px rgb(40 30 15 / 0.08), 0 28px 38px -20px rgb(40 30 15 / 0.5);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 1.6rem 2.2rem;
+  padding: 2.2rem 2rem 2rem;
+  border-radius: 3px;
+  background-color: var(--paper);
+  color: var(--ink-soft);
+  box-shadow: var(--paper-shadow);
+  transform: rotate(var(--tilt));
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.paper:hover {
+  transform: translateY(-4px) rotate(0deg);
+  box-shadow: var(--paper-shadow-lift);
+}
+
+.paper h3 {
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+}
+
+.paper p {
+  --word-ink: var(--ink-soft);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* Skills written straight onto the sheet; in dark mode, hovering one fills it with neon, letter by letter like water */
+.skill-words {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-words li {
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 2rem;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .paper .letter {
+  color: transparent;
+  background-image: linear-gradient(to top, var(--fill) 0 46%, var(--fill-surface) 46% 54%, var(--word-ink, var(--ink)) 54% 100%);
+  background-size: 100% 220%;
+  background-position: 0 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-position 0.16s ease-out;
+  transition-delay: calc(var(--r, 0) * 14ms);
+}
+
+:root[data-theme="dark"] .skill-words li:hover .letter,
+:root[data-theme="dark"] .paper p .fill-word:hover .letter {
+  background-position: 0 100%;
+  transition-delay: calc(var(--n, 0) * 28ms);
+}
+
+.paper .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Notebook page: blue rules with a red margin line */
+.paper-index {
+  padding-left: 3.4rem;
+  padding-top: 2rem;
+  row-gap: 2rem;
+  background-position: 0 0, 0 -0.4rem;
+  background-image:
+    linear-gradient(90deg, transparent 2.3rem, var(--margin-rule) 2.3rem, var(--margin-rule) calc(2.3rem + 1px), transparent calc(2.3rem + 1px)),
+    repeating-linear-gradient(to bottom, transparent 0 calc(2rem - 1px), var(--rule) calc(2rem - 1px) 2rem);
+}
+
+.paper-index h3 {
+  line-height: 2rem;
+  margin-bottom: 0;
+}
+
+/* Strengths: one entry under the other */
+.paper-stack {
+  grid-template-columns: 1fr;
+}
+
+.paper-index p {
+  line-height: 2rem;
+}
+
+/* Masking tape on the notebook page's top corners */
+.paper-index::before,
+.paper-index::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 90px;
+  height: 24px;
+  background: var(--tape);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+}
+
+.paper-index::before {
+  left: -18px;
+  rotate: -35deg;
+  top: 6px;
+}
+
+.paper-index::after {
+  right: -18px;
+  rotate: 35deg;
+  top: 6px;
+}
+
+.paper.is-dragging {
+  cursor: grabbing;
+  z-index: 5;
+  box-shadow: var(--paper-shadow-lift), 0 40px 50px -28px rgb(0 0 0 / 0.45);
+  transition: box-shadow 0.3s var(--ease-out);
+}
+
+.paper.is-returning {
+  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s var(--ease-out);
+}
+
+/* The sheet drops onto the desk when its section scrolls in */
+.reveal-ready .reveal.in .paper {
+  animation: paper-drop 0.75s var(--ease-out) 0.12s backwards;
+}
+
+@keyframes paper-drop {
+  from {
+    opacity: 0;
+    transform: translate(-24px, -40px) rotate(calc(var(--tilt) * 6)) scale(1.03);
+  }
+  60% {
+    opacity: 1;
+  }
+}
+
+:root[data-theme="dark"] .paper {
+  --ink: #f6f3fb;
+  --ink-soft: #ddd7e8;
+  --fill: #8b3dff;
+  --fill-surface: #b47dff;
+  padding: 2rem;
+  row-gap: 2rem;
+  border: 1px solid rgb(225 215 255 / 0.24);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(118deg, rgb(255 255 255 / 0.085) 0%, rgb(255 255 255 / 0.035) 42%, transparent 42.4%),
+    linear-gradient(180deg, #0d0a13 0%, #050308 60%, #020103 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.32),
+    inset 0 -1px 0 rgb(255 255 255 / 0.1),
+    inset 0 0 0 3px rgb(0 0 0 / 0.55),
+    inset 0 0 0 4px rgb(220 205 255 / 0.07),
+    0 18px 40px -20px rgb(0 0 0 / 0.9);
+  transform: none;
+  user-select: auto;
+  -webkit-user-select: auto;
+  animation: none;
+}
+
+:root[data-theme="dark"] .paper,
+:root[data-theme="dark"] .paper * {
+  cursor: default;
+}
+
+:root[data-theme="dark"] .paper:hover {
+  transform: none;
+}
+
+:root[data-theme="dark"] .paper::before,
+:root[data-theme="dark"] .paper::after {
+  display: none;
+}
+
+/* Engraved lettering: dark lip above, faint light catch below */
+/* Card headings use the same small caps label style as the profile card's headings, engraved */
+:root[data-theme="dark"] .paper h3 {
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 0.95), 0 1px 0 rgb(255 255 255 / 0.16);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+:root[data-theme="dark"] .paper .fill-word {
+  filter: drop-shadow(0 -1px 0 rgb(0 0 0 / 0.95)) drop-shadow(0 1px 0 rgb(255 255 255 / 0.16));
+}
+
+@media (max-width: 560px) {
+  .paper {
+    padding: 2rem 1.3rem 1.6rem;
+  }
+
+  .paper-index {
+    padding-left: 2.6rem;
+    background-image:
+      linear-gradient(90deg, transparent 1.7rem, var(--margin-rule) 1.7rem, var(--margin-rule) calc(1.7rem + 1px), transparent calc(1.7rem + 1px)),
+      repeating-linear-gradient(to bottom, transparent 0 calc(2rem - 1px), var(--rule) calc(2rem - 1px) 2rem);
+  }
+}
+
+@media print {
+  .paper {
+    transform: none;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .paper::before,
+  .paper::after {
+    display: none;
+  }
+}
+
+/* ---------- Resume: profile card as a blackboard (light mode) ---------- */
+:root[data-theme="light"] .card.blackboard {
+  --chalk: #f0efe6;
+  --chalk-soft: rgb(240 239 230 / 0.72);
+  --chalk-faint: rgb(240 239 230 / 0.22);
+  color: var(--chalk);
+  background:
+    radial-gradient(ellipse 60% 22% at 30% 18%, rgb(255 255 255 / 0.06), transparent 70%),
+    radial-gradient(ellipse 55% 18% at 72% 62%, rgb(255 255 255 / 0.045), transparent 70%),
+    radial-gradient(ellipse 90% 14% at 45% 92%, rgb(255 255 255 / 0.04), transparent 70%),
+    linear-gradient(165deg, #2a3a32, #1d2924 55%, #18221e);
+  border-color: #4e3118;
+  border-radius: 0;
+  box-shadow: 0 16px 30px -16px rgb(0 0 0 / 0.6);
+}
+
+/* The wooden frame is painted over the card's edge instead of being a real border,
+   so the card keeps exactly the same size as in dark mode */
+:root[data-theme="light"] .blackboard::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border: 8px solid #6b4628;
+  border-image: linear-gradient(135deg, #8a5b33, #5c3b1f 35%, #7c5330 60%, #4e3118) 1;
+  box-shadow: inset 0 3px 12px rgb(0 0 0 / 0.55);
+  pointer-events: none;
+}
+
+/* A stick of chalk resting on the frame */
+:root[data-theme="light"] .blackboard::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: -8px;
+  width: 34px;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(#ffffff, #d9d8cf);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
+}
+
+:root[data-theme="light"] .blackboard h2,
+:root[data-theme="light"] .blackboard h3 {
+  font-family: "Caveat", "Segoe Print", cursive;
+  color: var(--chalk);
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.4);
+}
+
+:root[data-theme="light"] .blackboard h2 {
+  font-size: 1.85rem;
+  line-height: calc(1.3rem * 1.15);
+}
+
+:root[data-theme="light"] .blackboard h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: calc(0.75rem * 1.15);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:root[data-theme="light"] .blackboard .role {
+  color: var(--chalk-soft);
+}
+
+:root[data-theme="light"] .blackboard .details svg {
+  color: var(--chalk-soft);
+}
+
+:root[data-theme="light"] .blackboard .details a {
+  color: var(--chalk);
+}
+
+:root[data-theme="light"] .blackboard .details a:hover {
+  color: #ffffff;
+}
+
+:root[data-theme="light"] .blackboard .dots i {
+  background: var(--chalk-faint);
+}
+
+:root[data-theme="light"] .blackboard .dots i.on {
+  background: var(--chalk);
+}
+
+:root[data-theme="light"] .blackboard .cert-list li::before {
+  color: #a8dcb4;
 }
