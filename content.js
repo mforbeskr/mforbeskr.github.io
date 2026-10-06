@@ -6,8 +6,9 @@
  * If a semester has no entry yet, a neutral fallback is shown.
  *
  * Projects: add a new object to the list. Order here = order on the site.
- *   featured: true      -> also shown under "Selected work" on the front page
- *   wide: true          -> takes two columns on the portfolio page
+ *   featured: true      -> shown before "Show all" in the Portfolio section (five fill the grid
+ *                          neatly, since Tackly is wide)
+ *   wide: true          -> takes two columns
  *   tags                -> used by the filters: personal, school, web, java, csharp, app
  *   link                -> text next to the arrow, e.g. "Visit", "GitHub", "Play"
  *   media, one of:
@@ -17,7 +18,7 @@
  *     { type: "placeholder" }                              simple </> tile
  *
  * GitHub: public repos with the topic below are added automatically under
- * "More on GitHub" on the portfolio page (unless they're already listed here).
+ * "More on GitHub" in the Portfolio section (unless they're already listed here).
  * Extra topics "school", "personal" or "app" on a repo make the filters work.
  */
 window.SITE = {
@@ -83,6 +84,7 @@ window.SITE = {
       title: "Smart Parking Lot",
       url: "https://github.com/mforbeskr/NEC_Exam_2026_Project",
       tags: ["school", "java"],
+      featured: true,
       desc: "Exam project on networking and concurrency, built with a classmate. A socket server exchanges JSON messages with JavaFX sensor, light and display clients, using producer–consumer and heartbeats.",
       chips: ["Java", "Sockets", "Concurrency"],
       link: "GitHub",
@@ -98,6 +100,7 @@ window.SITE = {
       title: "Stock Trading Game",
       url: "https://github.com/mforbeskr/StockTradingGame",
       tags: ["school", "java"],
+      featured: true,
       desc: "A stock market simulator in JavaFX. Stock behaviour is driven by the State pattern, trading fees by the Strategy pattern, and data is saved to files with a Unit of Work.",
       chips: ["Java", "JavaFX", "Design patterns"],
       link: "GitHub",

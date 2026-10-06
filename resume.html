@@ -20,10 +20,12 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=40"/>
+    <link rel="stylesheet" href="style.css?v=50"/>
     <link rel="expect" href="#page-end" blocking="render"/>
-    <script src="content.js?v=11"></script>
-    <script src="script.js?v=13"></script>
+    <script src="content.js?v=12"></script>
+    <script src="script.js?v=17"></script>
+    <script src="rail.js?v=2" defer></script>
+    <script src="story.js?v=3" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -36,8 +38,8 @@
         <ul class="nav-links">
             <li><a href="index.html">Introduction</a></li>
             <li><a href="resume.html" aria-current="page">Resume</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="index.html#work">Portfolio</a></li>
+            <li><a href="index.html#hobbies">Hobbies</a></li>
         </ul>
         <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -55,9 +57,9 @@
 
 <div class="page">
     <main id="main">
-        <header class="container page-header">
+        <header class="container page-header resume-header">
             <p class="eyebrow reveal">Resume</p>
-            <h1 class="reveal" style="--delay: 0.05s">Software Engineering Trainee</h1>
+            <h1 class="reveal" style="--delay: 0.05s" data-split>Software Engineering Trainee</h1>
             <p class="lead reveal" style="--delay: 0.1s">
                 Studying Software Engineering at VIA University College — and already
                 shipping a marketplace app, client websites and team projects on the side.
@@ -123,7 +125,7 @@
             </aside>
 
             <div class="resume-main">
-                <section class="reveal" aria-labelledby="profile-heading">
+                <section class="reveal" id="profile" data-rail="Profile" aria-labelledby="profile-heading">
                     <h2 id="profile-heading">Profile</h2>
                     <p>
                         Full-stack developer and co-founder of Tackly, a marketplace app
@@ -139,7 +141,7 @@
                     </p>
                 </section>
 
-                <section class="reveal" aria-labelledby="skills-heading">
+                <section class="reveal" id="skills" data-rail="Skills" aria-labelledby="skills-heading">
                     <h2 id="skills-heading">Technical skills</h2>
                     <div class="paper-desk">
                         <div class="paper">
@@ -194,7 +196,7 @@
                     </div>
                 </section>
 
-                <section class="reveal" aria-labelledby="strengths-heading">
+                <section class="reveal" id="strengths" data-rail="Strengths" aria-labelledby="strengths-heading">
                     <h2 id="strengths-heading">Personal strengths</h2>
                     <div class="paper-desk">
                         <div class="paper paper-stack">
@@ -228,7 +230,7 @@
                     </div>
                 </section>
 
-                <section class="reveal" aria-labelledby="experience-heading">
+                <section class="reveal" id="experience" data-rail="Experience" aria-labelledby="experience-heading">
                     <h2 id="experience-heading">Experience</h2>
                     <ol class="timeline">
                         <li>
@@ -271,7 +273,7 @@
                     </ol>
                 </section>
 
-                <section class="reveal" aria-labelledby="education-heading">
+                <section class="reveal" id="education" data-rail="Education" aria-labelledby="education-heading">
                     <h2 id="education-heading">Education</h2>
                     <ol class="timeline">
                         <li>
@@ -293,7 +295,7 @@
                     </ol>
                 </section>
 
-                <section class="reveal" aria-labelledby="before-heading">
+                <section class="reveal" id="before" data-rail="Before tech" aria-labelledby="before-heading">
                     <h2 id="before-heading">Before tech</h2>
                     <ol class="timeline">
                         <li>
@@ -343,7 +345,7 @@
                                                 height="44"/></span>
         </div>
     </footer>
-    <script src="render.js?v=8"></script>
+    <script src="render.js?v=11"></script>
     <span id="page-end"></span>
 </div>
 </body>
