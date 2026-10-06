@@ -2,7 +2,7 @@
   "use strict";
 
   var root = document.documentElement;
-  var PAGES = ["index", "resume", "portfolio", "hobbies"];
+  var PAGES = ["index", "resume"];
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var nativeTransitions = "onpagereveal" in window;
 
@@ -50,6 +50,8 @@
       store("sessionStorage", "fromPage", null);
       var dir = directionFrom(raw === null ? -1 : Number(raw));
       if (!dir) {
+        // Skipping rejects the transition's "ready" promise; that's expected, so don't report it.
+        e.viewTransition.ready.catch(function () {});
         e.viewTransition.skipTransition();
         return;
       }
@@ -138,6 +140,20 @@
         else io.observe(el);
       });
       root.classList.add("reveal-ready");
+
+      // Safety net: anything in view or already scrolled past is shown, even if the observer
+      // missed it (fast scrolls, nav jumps, a tab that was in the background).
+      var sweep = function () {
+        reveals.forEach(function (el) {
+          if (!el.classList.contains("in") && el.getBoundingClientRect().top < window.innerHeight) {
+            el.classList.add("in");
+            io.unobserve(el);
+          }
+        });
+      };
+      window.addEventListener("scroll", sweep, { passive: true });
+      window.addEventListener("hashchange", sweep);
+      window.addEventListener("load", sweep);
     }
 
     // Cursor spotlight on cards
@@ -201,8 +217,20 @@
 
     // Portfolio filters: they sort the main project grid only; "More on GitHub" always shows everything
     var filters = document.querySelectorAll(".filter");
+    var grid = document.querySelector("[data-projects].is-collapsed");
+    var showAll = document.querySelector("[data-show-all]");
+    var expanded = false;
     function allProjects() {
       return document.querySelectorAll("[data-projects] .project[data-tags]");
+    }
+    // The grid starts with the featured projects; a filter or "Show all" opens it up.
+    function setCollapsed(filtering) {
+      if (!grid || !showAll) return;
+      var more = grid.children.length - grid.querySelectorAll("[data-featured]").length;
+      grid.classList.toggle("is-collapsed", !expanded && !filtering && more > 0);
+      showAll.parentElement.hidden = filtering || more === 0;
+      showAll.setAttribute("aria-expanded", String(expanded));
+      showAll.textContent = expanded ? "Show fewer" : "Show all " + grid.children.length + " projects";
     }
     function applyFilter(btn) {
       var tag = btn.dataset.filter;
@@ -212,7 +240,22 @@
       allProjects().forEach(function (p) {
         p.hidden = tag !== "all" && p.dataset.tags.split(" ").indexOf(tag) === -1;
       });
+      setCollapsed(tag !== "all");
     }
+    setCollapsed(false);
+    if (showAll) {
+      showAll.addEventListener("click", function () {
+        expanded = !expanded;
+        setCollapsed(false);
+      });
+    }
+    // Links elsewhere on the page (like the quick-facts cards) can jump to the portfolio pre-filtered.
+    document.querySelectorAll("[data-filter-link]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        var btn = document.querySelector('.filter[data-filter="' + link.dataset.filterLink + '"]');
+        if (btn) btn.click();
+      });
+    });
 
     var initialFilter = new URLSearchParams(location.search).get("filter");
     filters.forEach(function (btn) {

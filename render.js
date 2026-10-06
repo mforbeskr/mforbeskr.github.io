@@ -61,7 +61,7 @@
       return '<li class="chip">' + esc(c) + "</li>";
     }).join("");
     return (
-      '<a class="' + classes + '" data-tags="' + esc(p.tags.join(" ")) + '"' + delay +
+      '<a class="' + classes + '" data-tags="' + esc(p.tags.join(" ")) + '"' + (p.featured ? " data-featured" : "") + delay +
       ' href="' + esc(p.url) + '" target="_blank" rel="noopener">' +
       media(p.media) +
       '<div class="project-body">' +
@@ -75,12 +75,8 @@
   }
 
   document.querySelectorAll("[data-projects]").forEach(function (grid) {
-    var featuredOnly = grid.dataset.projects === "featured";
-    var list = site.projects.filter(function (p) {
-      return !featuredOnly || p.featured;
-    });
-    grid.innerHTML = list.map(function (p, i) {
-      return card(p, i, !featuredOnly);
+    grid.innerHTML = site.projects.map(function (p, i) {
+      return card(p, i, true);
     }).join("");
   });
 

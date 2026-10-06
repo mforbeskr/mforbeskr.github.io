@@ -8,13 +8,13 @@
   --text: #1c1a17;
   --muted: #625d55;
   --border: #e8e3d8;
-  --accent: #3a1470;
-  --accent-deep: #3a1470;
-  --accent-strong: #230a47;
-  --accent-soft: #f1ecfa;
-  --chip-border: #3a1470;
-  --chip-text: #4b3570;
-  --neon: #a855f7;
+  --accent: #c2410c;
+  --accent-deep: #c2410c;
+  --accent-strong: #7c2d12;
+  --accent-soft: #fff1e6;
+  --chip-border: #c2410c;
+  --chip-text: #9a3412;
+  --neon: #ff6a1a;
   --plant: #4a7c59;
   --plant-soft: #e8f1ea;
   --on-accent: #ffffff;
@@ -573,6 +573,14 @@ main {
   stroke-dashoffset: 0;
 }
 
+:root[data-theme="light"] .portrait-mark {
+  filter: drop-shadow(0 0 5px rgb(255 106 26 / 0.9)) drop-shadow(0 0 14px rgb(255 106 26 / 0.5));
+}
+
+:root[data-theme="light"] .portrait-mark path {
+  stroke: #ffc49a;
+}
+
 .portrait img {
   position: relative;
   width: 100%;
@@ -680,6 +688,134 @@ main {
 @media (max-width: 600px) {
   .portrait-badge {
     right: -8px;
+  }
+}
+
+/* ---------- Home: scenery (scene.js, art from tools/gen-scene.mjs) ---------- */
+/* The stage tucks up under the see-through nav so the sky runs to the top edge.
+   No isolation here: the pinned scene's z-index -1 must place it behind the whole page, not just
+   behind the hero (an isolated stage would be painted over every plain section after it). */
+.hero-stage {
+  position: relative;
+  margin-top: -62px;
+  padding-top: 62px;
+  min-height: max(100svh, 620px);
+}
+
+.hero-stage .hero {
+  padding-bottom: max(clamp(2rem, 4.5vw, 3.5rem), 28svh);
+}
+
+/* The scene is pinned behind the whole page */
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  animation: scene-in 1.4s var(--ease-out) both;
+}
+
+@keyframes scene-in {
+  from { opacity: 0; }
+}
+
+/* A soft wash behind the hero text; scene.js fades it out (--scrim) as you scroll away */
+.scene::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  opacity: var(--scrim, 1);
+  background: radial-gradient(55% 50% at 27% 42%, color-mix(in srgb, var(--bg) 42%, transparent), transparent 75%);
+}
+
+:root[data-theme="light"] .scene::before {
+  background: radial-gradient(55% 55% at 27% 42%, color-mix(in srgb, var(--bg) 78%, transparent), transparent 78%);
+}
+
+/* A veil in the page colour; scene.js raises it (--dim) whenever text is on screen */
+.scene-dim {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: var(--bg);
+  opacity: calc(var(--dim, 0) * 0.66);
+}
+
+:root[data-theme="light"] .scene-dim {
+  opacity: calc(var(--dim, 0) * 0.74);
+}
+
+.scene-fx {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Three scenes are stacked; a later one fades in over the previous as its part of the page arrives,
+   settling from a slight zoom so the handover feels like a slow camera move rather than a cut. */
+.scene-chapter {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.6s ease, visibility 0s;
+}
+
+.scene-chapter.is-shown {
+  opacity: 1;
+}
+
+/* Once fully covered, a scene stops being painted */
+.scene-chapter.is-covered {
+  visibility: hidden;
+  transition: opacity 1.6s ease, visibility 0s 1.6s;
+}
+
+/* Each scene has a night and a day version; the theme picks one */
+.scene-set {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.05);
+  transition: opacity 0.9s ease, visibility 0.9s, transform 2.4s var(--ease-out);
+}
+
+.scene-chapter.is-shown > .scene-set {
+  transform: none;
+}
+
+:root[data-theme="light"] .scene-night,
+:root[data-theme="dark"] .scene-day {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Layers are a little wider than the screen so the pointer drift never shows an edge */
+.scene-layer {
+  position: absolute;
+  inset: 0 -32px;
+  transform-origin: 50% 66%;
+  will-change: transform;
+}
+
+.scene-layer svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Gaps between parts of the page where the new landscape has the screen to itself */
+.scene-break {
+  min-height: 30svh;
+}
+
+@media (max-width: 600px) {
+  .scene-break {
+    min-height: 22svh;
   }
 }
 
@@ -913,6 +1049,85 @@ main {
   }
 }
 
+/* ---------- Home: storytelling ---------- */
+/* The quick-facts cards rise out of the bottom of the landscape */
+.facts {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(-1 * clamp(3rem, 9vw, 7rem));
+}
+
+.stat-num {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.stat-num::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--neon) 60%, transparent), transparent);
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.stat:hover .stat-num::after {
+  transform: scaleX(1);
+}
+
+.eyebrow-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  margin-right: 0.35rem;
+}
+
+/* Headlines rise in word by word when their block scrolls into view */
+.word {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.word > span {
+  display: inline-block;
+}
+
+.reveal-ready .reveal .word > span {
+  opacity: 0.4;
+  transform: translateY(0.3em);
+  transition: opacity 0.7s ease calc(0.1s + var(--i) * 0.05s), transform 0.8s var(--ease-out) calc(0.1s + var(--i) * 0.05s);
+}
+
+.reveal-ready .reveal.in .word > span {
+  opacity: 1;
+  transform: none;
+}
+
+/* The pull quote lights up word by word as it scrolls past */
+.pull-quote p {
+  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+}
+
+.story-ready .qw > span {
+  opacity: 0.45;
+  transition: opacity 0.35s ease, text-shadow 0.35s ease;
+}
+
+.story-ready .qw.is-lit > span {
+  opacity: 1;
+}
+
+:root[data-theme="dark"].story-ready .qw.is-lit > span {
+  text-shadow: 0 0 18px color-mix(in srgb, var(--neon) 45%, transparent);
+}
+
 /* ---------- Projects ---------- */
 .section-head {
   display: flex;
@@ -1023,6 +1238,15 @@ main {
   white-space: nowrap;
 }
 
+:root[data-theme="light"] .project-link {
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+:root[data-theme="light"] .project:hover .project-link {
+  color: var(--text);
+}
+
 .project-link svg {
   width: 16px;
   height: 16px;
@@ -1046,6 +1270,25 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+/* The portfolio opens with the featured projects; "Show all" or a filter reveals the rest */
+.work-lead {
+  margin-bottom: 1.5rem;
+}
+
+#work .filters {
+  margin-bottom: 1.75rem;
+}
+
+.project-grid.is-collapsed > .project:not([data-featured]) {
+  display: none;
+}
+
+.show-all {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .filter {
@@ -1236,8 +1479,8 @@ main {
   padding: clamp(2rem, 5vw, 3.25rem) clamp(1.5rem, 5vw, 3.5rem);
   border-radius: 28px;
   background:
-    radial-gradient(110% 150% at 100% 0%, rgb(168 85 247 / 0.4), transparent 55%),
-    linear-gradient(135deg, #230a47 0%, #3a1470 60%, #4b1d8f 100%);
+    radial-gradient(110% 150% at 100% 0%, rgb(255 122 38 / 0.5), transparent 55%),
+    linear-gradient(135deg, #431407 0%, #7c2d12 55%, #b8420a 100%);
   color: #fff;
   box-shadow: var(--shadow-lg);
 }
@@ -1296,16 +1539,20 @@ main {
   justify-content: center;
 }
 
+:root[data-theme="light"] .cta {
+  --cta-ink: #431407;
+}
+
 :root .cta .btn-primary {
   background: #fff;
   border-color: #fff;
-  color: #230a47;
+  color: var(--cta-ink, #230a47);
   box-shadow: none;
 }
 
 :root .cta .btn-primary:hover {
   background: #fff;
-  color: #230a47;
+  color: var(--cta-ink, #230a47);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px -10px rgb(0 0 0 / 0.6);
 }
@@ -2312,6 +2559,215 @@ html[data-dir="back"]::view-transition-new(page) {
 /* The resume's profile card uses the same violet as the intro page badge */
 :root[data-theme="dark"] .card.profile-card {
   --accent: var(--accent-deep);
+}
+
+/* ---------- Resume: reading effects (story.js) ---------- */
+/* A soft glow drifts behind the header */
+.resume-header {
+  position: relative;
+  isolation: isolate;
+}
+
+.resume-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -30% -10% -10% -20%;
+  background: radial-gradient(40% 50% at 30% 50%, color-mix(in srgb, var(--neon) 14%, transparent), transparent 70%);
+  animation: header-glow 16s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes header-glow {
+  to {
+    transform: translate(12%, 6%) scale(1.1);
+  }
+}
+
+/* Numbered section headings whose divider line draws in */
+.resume-main {
+  counter-reset: resume-section;
+}
+
+.resume-main > section {
+  counter-increment: resume-section;
+}
+
+.resume-main h2::before {
+  content: counter(resume-section, decimal-leading-zero);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.resume-main h2::after {
+  transform-origin: left;
+  transition: transform 1.1s var(--ease-out) 0.2s;
+}
+
+.reveal-ready .resume-main > section:not(.in) h2::after {
+  transform: scaleX(0);
+}
+
+/* Skills and bullet points arrive one after another; language dots fill in turn */
+.skill-words li,
+.check-list li {
+  transition: opacity 0.45s ease, transform 0.55s var(--ease-out);
+  transition-delay: calc(0.15s + var(--i, 0) * 40ms);
+}
+
+.reveal-ready .reveal:not(.in) .skill-words li,
+.reveal-ready .reveal:not(.in) .check-list li {
+  opacity: 0.4;
+  transform: translateY(4px);
+}
+
+.dots i {
+  transition: opacity 0.35s ease calc(0.3s + var(--i, 0) * 90ms);
+}
+
+.reveal-ready .reveal:not(.in) .dots i.on {
+  opacity: 0.2;
+}
+
+/* Timelines fill with light down to where you are reading, and each dot lights up as you pass it */
+.story-ready .timeline::before {
+  background: var(--border);
+}
+
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  width: 2px;
+  height: calc((100% - 16px) * var(--fill, 0));
+  border-radius: 2px;
+  z-index: 0;
+  background: linear-gradient(var(--neon), var(--accent));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--neon) 70%, transparent);
+}
+
+:root:not(.story-ready) .timeline::after {
+  display: none;
+}
+
+/* Dots sit above the fill line */
+.timeline > li::before {
+  z-index: 1;
+  transition: background-color 0.35s, box-shadow 0.35s;
+}
+
+.story-ready .timeline > li.is-passed::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--neon) 18%, transparent), 0 0 12px color-mix(in srgb, var(--neon) 55%, transparent);
+}
+
+/* ---------- Section rail (right edge) ---------- */
+.rail {
+  position: fixed;
+  z-index: 40;
+  right: clamp(10px, 1.6vw, 26px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.rail ol {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rail a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 7px 0 7px 12px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.rail-text {
+  display: flex;
+  gap: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.3s, transform 0.4s var(--ease-out);
+}
+
+.rail-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.rail-tick {
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.5;
+  transition: width 0.45s var(--ease-out), opacity 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.rail a:hover .rail-tick,
+.rail a:focus-visible .rail-tick {
+  width: 22px;
+  opacity: 1;
+}
+
+.rail a:hover .rail-text,
+.rail a:focus-visible .rail-text {
+  opacity: 1;
+  transform: none;
+}
+
+.rail a[aria-current] {
+  color: var(--text);
+}
+
+.rail a[aria-current] .rail-tick {
+  width: 36px;
+  opacity: 1;
+  background: var(--neon);
+  box-shadow: 0 0 10px var(--neon);
+}
+
+/* There is only room for the current section's name beside wide layouts */
+@media (min-width: 1380px) {
+  .rail a[aria-current] .rail-text {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The rail lives in the page margin, so it only shows when there is margin to spare */
+@media (max-width: 1199px) {
+  .rail {
+    display: none;
+  }
+}
+
+/* ---------- Cloth images (cloth.js) ---------- */
+.cloth-canvas {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 22px rgb(20 10 30 / 0.28));
+}
+
+img.cloth-hidden {
+  opacity: 0;
 }
 
 /* ---------- Reduced motion ---------- */
