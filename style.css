@@ -480,6 +480,12 @@ main {
   isolation: isolate;
 }
 
+/* Light mode: a firmer edge and deeper shadow so white cards lift off the cream page */
+:where(:root[data-theme="light"]) .card {
+  border-color: #dcd5c6;
+  box-shadow: 0 1px 3px rgb(40 30 15 / 0.08), 0 10px 28px -10px rgb(40 30 15 / 0.22);
+}
+
 .card.spotlight {
   --mx: 50%;
   --my: 50%;
