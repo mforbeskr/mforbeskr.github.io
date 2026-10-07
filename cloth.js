@@ -25,7 +25,7 @@
     "  vec2 d = uv - u_poke.xy;",
     "  d.x *= u_aspect;",
     "  float r = length(d);",
-    "  z += u_poke.z * exp(-r * r * 14.0) * sin(r * 24.0 - t * 6.0) * 1.4;",
+    "  z += u_poke.z * exp(-r * r * 14.0) * sin(r * 24.0 - t * 6.0) * 0.85;", // the ripple under the cursor
     "  return z * pinned(uv) * u_amp;",
     "}",
     "void main() {",
