@@ -1586,58 +1586,186 @@ main {
   }
 }
 
-/* ---------- Page header (inner pages) ---------- */
-.page-header {
-  padding-block: clamp(2.5rem, 5.5vw, 3.75rem) clamp(1.25rem, 3vw, 2rem);
+/* ---------- Resume: one CV sheet ---------- */
+/* Sidebar (photo, contact, languages, certificates) on the left, content on the right, on a single
+   sheet that sits on the page like a printed CV. Prints as one clean document (see Print). */
+.cv-wrap {
+  padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 6vw, 4.5rem);
 }
 
-.page-header h1 {
-  font-size: clamp(1.85rem, 3.8vw, 2.6rem);
-  font-weight: 800;
-}
-
-/* ---------- Resume ---------- */
-.resume-layout {
+.cv {
+  --side: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: start;
+  grid-template-columns: 290px minmax(0, 1fr);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-lg);
+  overflow: clip;
 }
 
-.profile-card {
+:root[data-theme="dark"] .cv {
+  --side: rgb(255 255 255 / 0.025);
+  background: linear-gradient(180deg, #0d0a13 0%, #07050b 100%);
+  border-color: rgb(225 215 255 / 0.14);
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(0 0 0 / 0.6), 0 0 40px -20px color-mix(in srgb, var(--neon) 40%, transparent);
+}
+
+/* Dark: the sidebar (icons, language dots) and the section numbers use the deep neon violet */
+:root[data-theme="dark"] .cv-side,
+:root[data-theme="dark"] .resume-main h2::before {
+  --accent: var(--accent-deep);
+}
+
+.cv-side {
+  background: var(--side);
+  border-right: 1px solid var(--border);
+  padding: 2.25rem 1.75rem;
+}
+
+/* The sidebar's content stays in view while the main column scrolls past */
+.cv-side-inner {
   position: sticky;
-  top: 96px;
-  padding: 1.5rem;
+  top: 90px;
 }
 
-.profile-card img {
-  width: 96px;
-  height: 96px;
+.cv-side img {
+  width: 112px;
+  height: 112px;
   object-fit: cover;
-  border-radius: 24px;
-  margin-bottom: 1rem;
+  border-radius: 26px;
+  margin-bottom: 1.1rem;
   box-shadow: var(--shadow);
 }
 
-.profile-card h2 {
+.cv-side h2 {
   font-size: 1.3rem;
   margin-bottom: 0.2rem;
 }
 
-.profile-card .role {
+.cv-side .role {
   font-size: 0.9rem;
   color: var(--muted);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.4rem;
 }
 
-.profile-card h3 {
+.cv-side h3 {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 1.75rem 0 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.cv-main {
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 4.5vw, 3.5rem);
+}
+
+.cv-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-header > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.cv-header h1 {
+  font-size: clamp(1.85rem, 3.6vw, 2.5rem);
+  font-weight: 800;
+}
+
+.cv-header .lead {
+  margin-bottom: 0;
+}
+
+.cv-print {
+  flex-shrink: 0;
+}
+
+.cv-print svg {
+  width: 17px;
+  height: 17px;
+}
+
+.resume-main > section {
+  margin-bottom: 2.75rem;
+}
+
+.resume-main > section:last-child {
+  margin-bottom: 0;
+}
+
+.resume-main h2 {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.resume-main h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Skills: four groups side by side */
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.skill-group h3,
+.strength h3 {
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.skill-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-words li {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.9;
+  white-space: nowrap;
+}
+
+/* Strengths: a 2 x 2 grid */
+.strengths {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1.75rem 2.25rem;
+}
+
+.strength p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--muted);
-  margin: 1.5rem 0 0.75rem;
 }
 
 .details {
@@ -1738,24 +1866,6 @@ main {
   font-weight: 700;
 }
 
-.resume-main > section {
-  margin-bottom: 3rem;
-}
-
-.resume-main h2 {
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.resume-main h2::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
 .check-list {
   margin: 0.8rem 0 0;
   padding: 0;
@@ -1845,353 +1955,37 @@ main {
   border-radius: 999px;
 }
 
-@media (max-width: 900px) {
-  .resume-layout {
+/* Narrow screens: one column, with the title first, then the sidebar, then the sections
+   (screen only: an A4 page is narrower than 900px but should keep both columns) */
+@media screen and (max-width: 900px) {
+  .cv {
     grid-template-columns: 1fr;
   }
 
-  /* Relative, not static: the light-mode blackboard frame is positioned against the card */
-  .profile-card {
-    position: relative;
-    top: auto;
-  }
-}
-
-/* ---------- Resume: skills on sheets of paper ---------- */
-/* Light mode: tilted, draggable notebook pages. Dark mode: fixed black glass cards. */
-.paper-desk {
-  padding-top: 0.8rem;
-}
-
-.paper {
-  --tilt: -0.6deg;
-  --margin-x: 2.3rem;
-  --paper: #fffdf8;
-  --ink: #1f2530;
-  --ink-soft: #3f4550;
-  --rule: rgb(70 110 170 / 0.16);
-  --margin-rule: rgb(58 20 112 / 0.32);
-  --tape: rgb(222 212 188 / 0.8);
-  --paper-shadow: 0 1px 1px rgb(40 30 15 / 0.08), 0 14px 24px -16px rgb(40 30 15 / 0.45);
-  --paper-shadow-lift: 0 2px 3px rgb(40 30 15 / 0.08), 0 28px 38px -20px rgb(40 30 15 / 0.5);
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: 2rem 2.2rem;
-  padding: 2rem 2rem 2rem 3.4rem;
-  border-radius: 3px;
-  background-color: var(--paper);
-  /* A purple margin line and blue rules 2rem apart, so the text sits on them */
-  background-image:
-    linear-gradient(90deg, transparent var(--margin-x), var(--margin-rule) var(--margin-x), var(--margin-rule) calc(var(--margin-x) + 1px), transparent calc(var(--margin-x) + 1px)),
-    repeating-linear-gradient(to bottom, transparent 0 calc(2rem - 1px), var(--rule) calc(2rem - 1px) 2rem);
-  background-position: 0 0, 0 -0.4rem;
-  color: var(--ink-soft);
-  box-shadow: var(--paper-shadow);
-  transform: rotate(var(--tilt));
-  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
-  cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.paper:hover {
-  transform: translateY(-4px) rotate(0deg);
-  box-shadow: var(--paper-shadow-lift);
-}
-
-.paper h3 {
-  font-family: "Caveat", "Segoe Print", cursive;
-  font-size: 1.65rem;
-  font-weight: 700;
-  line-height: 2rem;
-  margin-bottom: 0;
-  color: var(--ink);
-}
-
-.paper p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 2rem;
-  color: var(--ink-soft);
-}
-
-/* Strengths: one entry under the other */
-.paper-stack {
-  grid-template-columns: 1fr;
-}
-
-.skill-words {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.skill-words li {
-  font-size: 0.98rem;
-  font-weight: 500;
-  line-height: 2rem;
-  white-space: nowrap;
-  color: var(--ink);
-}
-
-.paper .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* Masking tape on the top corners */
-.paper::before,
-.paper::after {
-  content: "";
-  position: absolute;
-  top: 6px;
-  width: 90px;
-  height: 24px;
-  background: var(--tape);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
-}
-
-.paper::before {
-  left: -18px;
-  rotate: -35deg;
-}
-
-.paper::after {
-  right: -18px;
-  rotate: 35deg;
-}
-
-.paper.is-dragging {
-  cursor: grabbing;
-  z-index: 5;
-  box-shadow: var(--paper-shadow-lift), 0 40px 50px -28px rgb(0 0 0 / 0.45);
-  transition: box-shadow 0.3s var(--ease-out);
-}
-
-.paper.is-returning {
-  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s var(--ease-out);
-}
-
-/* In light mode the sheet drops onto the desk when its section scrolls in */
-.reveal-ready[data-theme="light"] .reveal.in .paper {
-  animation: paper-drop 0.75s var(--ease-out) 0.12s backwards;
-}
-
-@keyframes paper-drop {
-  from {
-    opacity: 0;
-    transform: translate(-24px, -40px) rotate(calc(var(--tilt) * 6)) scale(1.03);
-  }
-  60% {
-    opacity: 1;
-  }
-}
-
-/* Dark mode: black glass with engraved lettering */
-:root[data-theme="dark"] .paper {
-  --ink: #f6f3fb;
-  --ink-soft: #ddd7e8;
-  --fill: #8b3dff;
-  --fill-surface: #b47dff;
-  padding: 2rem;
-  border: 1px solid rgb(225 215 255 / 0.24);
-  border-radius: var(--radius);
-  background:
-    linear-gradient(118deg, rgb(255 255 255 / 0.085) 0%, rgb(255 255 255 / 0.035) 42%, transparent 42.4%),
-    linear-gradient(180deg, #0d0a13 0%, #050308 60%, #020103 100%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.32),
-    inset 0 -1px 0 rgb(255 255 255 / 0.1),
-    inset 0 0 0 3px rgb(0 0 0 / 0.55),
-    inset 0 0 0 4px rgb(220 205 255 / 0.07),
-    0 18px 40px -20px rgb(0 0 0 / 0.9);
-  transform: none;
-  user-select: auto;
-  -webkit-user-select: auto;
-}
-
-:root[data-theme="dark"] .paper,
-:root[data-theme="dark"] .paper * {
-  cursor: default;
-}
-
-:root[data-theme="dark"] .paper::before,
-:root[data-theme="dark"] .paper::after {
-  display: none;
-}
-
-/* Headings match the profile card's small caps labels */
-:root[data-theme="dark"] .paper h3 {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.75rem;
-}
-
-/* The strengths text uses the same type as the skill words */
-:root[data-theme="dark"] .paper p {
-  font-size: 0.98rem;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-/* Engraved lettering: a dark lip above and a faint light catch below. The headings' letters are
-   transparent (see below), so they take the shadow as a filter instead of a text-shadow. */
-:root[data-theme="dark"] .skill-words li,
-:root[data-theme="dark"] .paper p {
-  text-shadow: 0 -1px 0 rgb(0 0 0 / 0.95), 0 1px 0 rgb(255 255 255 / 0.16);
-}
-
-:root[data-theme="dark"] .paper .fill-word {
-  filter: drop-shadow(0 -1px 0 rgb(0 0 0 / 0.95)) drop-shadow(0 1px 0 rgb(255 255 255 / 0.16));
-}
-
-/* Hovering a heading fills it with violet, one letter at a time from left to right, like water rising */
-:root[data-theme="dark"] .paper .letter {
-  color: transparent;
-  background-image: linear-gradient(to top, var(--fill) 0 46%, var(--fill-surface) 46% 54%, var(--muted) 54% 100%);
-  background-size: 100% 220%;
-  background-position: 0 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  transition: background-position 0.16s ease-out;
-  transition-delay: calc(var(--r, 0) * 14ms);
-}
-
-:root[data-theme="dark"] .paper h3:hover .letter {
-  background-position: 0 100%;
-  transition-delay: calc(var(--n, 0) * 28ms);
-}
-
-@media (max-width: 560px) {
-  .paper {
-    --margin-x: 1.7rem;
-    padding: 2rem 1.3rem 1.6rem 2.6rem;
+  .cv-main {
+    display: contents;
   }
 
-  /* Tuck the tape in so it doesn't poke past the screen edge */
-  .paper::before {
-    left: -10px;
+  .cv-header {
+    order: -1;
+    flex-direction: column;
+    margin: 0;
+    padding: 1.75rem 1.5rem;
   }
 
-  .paper::after {
-    right: -10px;
-  }
-}
-
-@media print {
-  .paper {
-    transform: none;
-    box-shadow: none;
-    border: 1px solid #ccc;
+  .resume-main {
+    padding: 2rem 1.5rem;
   }
 
-  .paper::before,
-  .paper::after {
-    display: none;
+  .cv-side {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 1.75rem 1.5rem;
   }
-}
 
-/* ---------- Resume: profile card as a blackboard (light mode) ---------- */
-:root[data-theme="light"] .card.blackboard {
-  --chalk: #f0efe6;
-  --chalk-soft: rgb(240 239 230 / 0.72);
-  --chalk-faint: rgb(240 239 230 / 0.22);
-  color: var(--chalk);
-  background:
-    radial-gradient(ellipse 60% 22% at 30% 18%, rgb(255 255 255 / 0.06), transparent 70%),
-    radial-gradient(ellipse 55% 18% at 72% 62%, rgb(255 255 255 / 0.045), transparent 70%),
-    radial-gradient(ellipse 90% 14% at 45% 92%, rgb(255 255 255 / 0.04), transparent 70%),
-    linear-gradient(165deg, #2a3a32, #1d2924 55%, #18221e);
-  border-color: #4e3118;
-  border-radius: 0;
-  box-shadow: 0 16px 30px -16px rgb(0 0 0 / 0.6);
-}
-
-/* The wooden frame is painted over the card's edge instead of being a real border,
-   so the card keeps exactly the same size as in dark mode */
-:root[data-theme="light"] .blackboard::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  z-index: -1;
-  border: 8px solid #6b4628;
-  border-image: linear-gradient(135deg, #8a5b33, #5c3b1f 35%, #7c5330 60%, #4e3118) 1;
-  box-shadow: inset 0 3px 12px rgb(0 0 0 / 0.55);
-  pointer-events: none;
-}
-
-/* A stick of chalk resting on the bottom of the frame */
-:root[data-theme="light"] .blackboard::after {
-  content: "";
-  position: absolute;
-  right: 22px;
-  bottom: 1px;
-  width: 34px;
-  height: 6px;
-  border-radius: 3px;
-  background: linear-gradient(#ffffff, #d9d8cf);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
-}
-
-:root[data-theme="light"] .blackboard h2,
-:root[data-theme="light"] .blackboard h3 {
-  font-family: "Caveat", "Segoe Print", cursive;
-  color: var(--chalk);
-  text-shadow: 0 0 1px rgb(255 255 255 / 0.4);
-}
-
-:root[data-theme="light"] .blackboard h2 {
-  font-size: 1.85rem;
-  line-height: calc(1.3rem * 1.15);
-}
-
-:root[data-theme="light"] .blackboard h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: calc(0.75rem * 1.15);
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-:root[data-theme="light"] .blackboard .role {
-  color: var(--chalk-soft);
-}
-
-:root[data-theme="light"] .blackboard .details svg {
-  color: var(--chalk-soft);
-}
-
-:root[data-theme="light"] .blackboard .details a {
-  color: var(--chalk);
-}
-
-:root[data-theme="light"] .blackboard .details a:hover {
-  color: #ffffff;
-}
-
-:root[data-theme="light"] .blackboard .dots i {
-  background: var(--chalk-faint);
-}
-
-:root[data-theme="light"] .blackboard .dots i.on {
-  background: var(--chalk);
-}
-
-:root[data-theme="light"] .blackboard .cert-list li::before {
-  color: #a8dcb4;
+  .cv-side-inner {
+    position: static;
+  }
 }
 
 /* ---------- Hobbies ---------- */
@@ -2368,24 +2162,21 @@ main {
 .footer-mark {
   width: auto;
   height: 46px;
-  opacity: 0.85;
+  visibility: hidden;
 }
 
 .footer-mark-item:hover {
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--neon) 70%, transparent));
 }
 
-.footer-mark-item:hover .footer-mark {
-  opacity: 1;
-}
-
-/* Dark: footer icons and signature use the profile card's deep violet.
-   The signature's colour lives inside the SVG file, so it is repainted through a mask. */
+/* Dark: footer icons use the deep violet */
 :root[data-theme="dark"] .footer-links svg {
   color: var(--accent-deep);
 }
 
-:root[data-theme="dark"] .footer-mark-item::before {
+/* The signature is painted in the theme's deep accent (violet at night, orange by day). Its colour
+   lives inside the SVG file, so it is repainted through a mask and the <img> only holds the space. */
+.footer-mark-item::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -2395,12 +2186,8 @@ main {
   opacity: 0.85;
 }
 
-:root[data-theme="dark"] .footer-mark-item:hover::before {
+.footer-mark-item:hover::before {
   opacity: 1;
-}
-
-:root[data-theme="dark"] .footer-mark {
-  visibility: hidden;
 }
 
 @media (max-width: 600px) {
@@ -2556,10 +2343,6 @@ html[data-dir="back"]::view-transition-new(page) {
   box-shadow: 0 0 18px -4px color-mix(in srgb, var(--neon) 70%, transparent);
 }
 
-/* The resume's profile card uses the same violet as the intro page badge */
-:root[data-theme="dark"] .card.profile-card {
-  --accent: var(--accent-deep);
-}
 
 /* ---------- Resume: reading effects (story.js) ---------- */
 /* A soft glow drifts behind the header */
@@ -2793,26 +2576,188 @@ img.cloth-hidden {
   }
 }
 
-/* ---------- Print (handy for the resume) ---------- */
+/* ---------- Print ("Download as PDF" on the resume) ---------- */
+/* Always prints as a light, ink-friendly document, whichever theme is on screen. */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
 @media print {
+  :root,
+  :root[data-theme="dark"] {
+    --bg: #fff;
+    --surface: #fff;
+    --surface-2: #f4f1ec;
+    --text: #15130f;
+    --muted: #4a463f;
+    --border: #ddd6ca;
+    --accent: #9a3412;
+    --accent-deep: #9a3412;
+    --neon: #c2410c;
+    color-scheme: light;
+  }
+
   .site-nav,
   .site-footer,
   .theme-toggle,
-  .cta {
+  .skip-link,
+  .rail,
+  .rail-spacer,
+  .cta,
+  .cv-print {
     display: none !important;
   }
 
   body {
     background: #fff;
-    color: #000;
+    color: var(--text);
+    font-size: 10pt;
+    line-height: 1.5;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   .card {
     box-shadow: none;
   }
 
-  .reveal-ready .reveal {
-    opacity: 1;
-    transform: none;
+  /* Nothing waits for a scroll animation on paper */
+  .reveal-ready .reveal,
+  .reveal-ready .reveal .word > span,
+  .skill-words li,
+  .check-list li,
+  .dots i {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .cv-wrap {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cv,
+  :root[data-theme="dark"] .cv {
+    grid-template-columns: 215px minmax(0, 1fr);
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .cv-side {
+    background: var(--surface-2);
+    padding: 1.25rem 1rem;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cv-side-inner {
+    position: static;
+  }
+
+  .cv-side .details {
+    font-size: 0.82rem;
+  }
+
+  .cv-side img {
+    width: 84px;
+    height: 84px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  .cv-main {
+    padding: 0 0 0 1.5rem;
+  }
+
+  .cv-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .cv-header h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .cv-header .lead {
+    font-size: 0.95rem;
+  }
+
+  .resume-header::before {
+    display: none;
+  }
+
+  /* Tighter rhythm so Profile, Skills and Strengths share the first page */
+  .resume-main > section {
+    margin-bottom: 0.95rem;
+  }
+
+  .resume-main h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .resume-main p {
+    margin-bottom: 0.55em;
+  }
+
+  .skill-groups {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.6rem 1rem;
+  }
+
+  .skill-words {
+    gap: 0 0.7rem;
+  }
+
+  .skill-group h3,
+  .strength h3 {
+    margin-bottom: 0.25rem;
+  }
+
+  .skill-words li {
+    font-size: 0.86rem;
+    line-height: 1.42;
+    white-space: normal;
+  }
+
+  .strengths {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 1.5rem;
+  }
+
+  .strength p {
+    font-size: 0.83rem;
+    line-height: 1.38;
+  }
+
+  /* Keep each heading with what follows it */
+  .resume-main h2 {
+    break-after: avoid;
+  }
+
+  #education,
+  #before {
+    break-inside: avoid;
+  }
+
+  .timeline > li,
+  .strength,
+  .skill-group {
+    break-inside: avoid;
+  }
+
+  .timeline::after {
+    display: none;
+  }
+
+  .timeline::before {
+    background: var(--border);
   }
 }

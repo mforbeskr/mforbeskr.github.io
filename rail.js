@@ -29,6 +29,28 @@
     nav.appendChild(list);
     document.body.appendChild(nav);
 
+    // Leave room after the last section so it, and the end of it, can scroll up past the reading
+    // line. Without it, the page bottoms out early: jumping to a late section (say Education) would
+    // stop short and mark the section after it instead.
+    var spacer = document.createElement("div");
+    spacer.className = "rail-spacer";
+    spacer.setAttribute("aria-hidden", "true");
+    var footer = document.querySelector(".site-footer");
+    if (footer) footer.parentNode.insertBefore(spacer, footer);
+    else document.body.appendChild(spacer);
+
+    function makeRoom() {
+      spacer.style.height = "0px";
+      var last = sections[sections.length - 1].getBoundingClientRect();
+      var vh = window.innerHeight;
+      var reach = Math.max(last.top - vh * 0.3, last.bottom - vh * 0.45) + window.scrollY;
+      var maxScroll = document.documentElement.scrollHeight - vh;
+      spacer.style.height = Math.max(0, Math.ceil(reach - maxScroll)) + "px";
+    }
+    makeRoom();
+    window.addEventListener("load", makeRoom);
+    window.addEventListener("resize", makeRoom);
+
     var current = -1;
     function update() {
       var line = window.innerHeight * 0.4, next = 0;
