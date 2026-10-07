@@ -199,32 +199,36 @@
     }
   }
 
-  document.querySelectorAll("img[data-cloth]").forEach(function (img) {
-    try {
-      Cloth(img);
-    } catch (e) {
-      console.warn("Cloth effect skipped:", e);
-    }
-  });
-  if (!cloths.length) return;
+  // WebGL starts once the page has settled (see whenSettled in script.js); until then the plain
+  // portrait shows.
+  (window.whenSettled || function (fn) { fn(); })(function () {
+    document.querySelectorAll("img[data-cloth]").forEach(function (img) {
+      try {
+        Cloth(img);
+      } catch (e) {
+        console.warn("Cloth effect skipped:", e);
+      }
+    });
+    if (!cloths.length) return;
 
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        cloths.forEach(function (c) {
-          if (c.img === entry.target) c.visible = entry.isIntersecting;
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          cloths.forEach(function (c) {
+            if (c.img === entry.target) c.visible = entry.isIntersecting;
+          });
         });
+      }, { rootMargin: "100px" });
+      cloths.forEach(function (c) {
+        io.observe(c.img);
       });
-    }, { rootMargin: "100px" });
-    cloths.forEach(function (c) {
-      io.observe(c.img);
-    });
-  }
+    }
 
-  window.addEventListener("resize", function () {
-    cloths.forEach(function (c) {
-      if (c.ready) layout(c);
+    window.addEventListener("resize", function () {
+      cloths.forEach(function (c) {
+        if (c.ready) layout(c);
+      });
     });
+    requestAnimationFrame(frame);
   });
-  requestAnimationFrame(frame);
 })();

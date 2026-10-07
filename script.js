@@ -34,6 +34,29 @@
     return root.dataset.theme;
   }
 
+  // Heavy effects (the scenery's animation, the WebGL portrait) wait until the page has loaded and
+  // any page-to-page slide has finished, so they don't compete with it. Scripts call
+  // whenSettled(fn) to start then.
+  var waiting = 1, settled = false, onSettle = [];
+  function release() {
+    if (--waiting > 0 || settled) return;
+    settled = true;
+    onSettle.forEach(function (fn) {
+      fn();
+    });
+  }
+  function holdUntil(done) {
+    waiting++;
+    done(release);
+  }
+  window.whenSettled = function (fn) {
+    if (settled) fn();
+    else onSettle.push(fn);
+  };
+  window.addEventListener("load", function () {
+    setTimeout(release, 150);
+  });
+
   function directionFrom(from) {
     if (from < 0 || here < 0 || from === here) return null;
     return from < here ? "forward" : "back";
@@ -56,8 +79,11 @@
         return;
       }
       root.dataset.dir = dir;
-      e.viewTransition.finished.finally(function () {
-        delete root.dataset.dir;
+      holdUntil(function (done) {
+        e.viewTransition.finished.finally(function () {
+          delete root.dataset.dir;
+          done();
+        });
       });
     });
   } else if (!reduceMotion) {
@@ -66,9 +92,12 @@
     var enterDir = directionFrom(from === null ? -1 : Number(from));
     if (enterDir) {
       root.classList.add("fallback-enter-" + enterDir);
-      setTimeout(function () {
-        root.classList.remove("fallback-enter-" + enterDir);
-      }, 600);
+      holdUntil(function (done) {
+        setTimeout(function () {
+          root.classList.remove("fallback-enter-" + enterDir);
+          done();
+        }, 600);
+      });
     }
 
     document.addEventListener("click", function (e) {
