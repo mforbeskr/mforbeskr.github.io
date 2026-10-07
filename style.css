@@ -1057,19 +1057,12 @@ main {
   margin-top: calc(-1 * clamp(3rem, 9vw, 7rem));
 }
 
-.stat-num {
+.stat-line {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
   margin-bottom: 0.7rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  font-variant-numeric: tabular-nums;
-  color: var(--accent);
 }
 
-.stat-num::after {
+.stat-line::after {
   content: "";
   flex: 1;
   height: 1px;
@@ -1079,14 +1072,8 @@ main {
   transition: transform 0.5s var(--ease-out);
 }
 
-.stat:hover .stat-num::after {
+.stat:hover .stat-line::after {
   transform: scaleX(1);
-}
-
-.eyebrow-num {
-  font-variant-numeric: tabular-nums;
-  color: var(--text);
-  margin-right: 0.35rem;
 }
 
 /* Headlines rise in word by word when their block scrolls into view */
@@ -1611,9 +1598,8 @@ main {
   box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(0 0 0 / 0.6), 0 0 40px -20px color-mix(in srgb, var(--neon) 40%, transparent);
 }
 
-/* Dark: the sidebar (icons, language dots) and the section numbers use the deep neon violet */
-:root[data-theme="dark"] .cv-side,
-:root[data-theme="dark"] .resume-main h2::before {
+/* Dark: the sidebar (icons, language dots) uses the deep neon violet */
+:root[data-theme="dark"] .cv-side {
   --accent: var(--accent-deep);
 }
 
@@ -2367,25 +2353,7 @@ html[data-dir="back"]::view-transition-new(page) {
   }
 }
 
-/* Numbered section headings whose divider line draws in */
-.resume-main {
-  counter-reset: resume-section;
-}
-
-.resume-main > section {
-  counter-increment: resume-section;
-}
-
-.resume-main h2::before {
-  content: counter(resume-section, decimal-leading-zero);
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  font-variant-numeric: tabular-nums;
-  color: var(--accent);
-}
-
+/* Section headings whose divider line draws in */
 .resume-main h2::after {
   transform-origin: left;
   transition: transform 1.1s var(--ease-out) 0.2s;
@@ -2487,11 +2455,6 @@ html[data-dir="back"]::view-transition-new(page) {
   opacity: 0;
   transform: translateX(6px);
   transition: opacity 0.3s, transform 0.4s var(--ease-out);
-}
-
-.rail-num {
-  font-variant-numeric: tabular-nums;
-  color: var(--accent);
 }
 
 .rail-tick {
