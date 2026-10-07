@@ -27,10 +27,10 @@
     <link rel="stylesheet" href="style.css?v=58"/>
     <link rel="expect" href="#page-end" blocking="render"/>
     <script src="content.js?v=12"></script>
-    <script src="script.js?v=18"></script>
-    <script src="scene.js?v=8" defer></script>
-    <script src="rail.js?v=6" defer></script>
-    <script src="cloth.js?v=4" defer></script>
+    <script src="script.js?v=19"></script>
+    <script src="scene.js?v=9" defer></script>
+    <script src="rail.js?v=7" defer></script>
+    <script src="cloth.js?v=5" defer></script>
     <script src="story.js?v=8" defer></script>
 </head>
 <body>
@@ -42,10 +42,8 @@
             <span>Magnus <span class="brand-mid">Forbes </span>Kjær-Rasmussen</span>
         </a>
         <ul class="nav-links">
-            <li><a href="#intro" aria-current="page">Introduction</a></li>
+            <li><a href="#intro" aria-current="page">Home</a></li>
             <li><a href="resume.html">Resume</a></li>
-            <li><a href="#work">Portfolio</a></li>
-            <li><a href="#hobbies">Hobbies</a></li>
         </ul>
         <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -165,7 +163,7 @@
 
         </div>
 
-        <section class="container facts" data-nav="#intro" aria-label="Quick facts">
+        <section class="container facts" aria-label="Quick facts">
             <ul class="stats">
                 <li class="reveal">
                     <a class="card stat" href="resume.html#now-studying">
@@ -200,7 +198,7 @@
 
         <div class="scene-break" data-scene="2" aria-hidden="true"></div>
 
-        <section class="container section" id="about" data-rail="About" data-nav="#intro">
+        <section class="container section" id="about" data-rail="About">
             <div class="split">
                 <div class="split-aside reveal">
                     <p class="eyebrow"><span class="eyebrow-num">01</span>About me</p>
@@ -413,7 +411,7 @@
             </div>
         </section>
 
-        <section class="container section reveal" id="contact" data-rail="Contact" data-nav="#hobbies">
+        <section class="container section reveal" id="contact" data-rail="Contact">
             <div class="cta">
                 <div>
                     <p class="cta-eyebrow">Get in touch</p>

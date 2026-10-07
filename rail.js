@@ -1,14 +1,11 @@
 // Section rail: a stripe of ticks on the right edge, one per [data-rail] section on the page.
 // The current section's tick stretches out and shows its number and name; clicking jumps there.
-// On the one-page front page it also moves the top nav's underline: a section's data-nav says
-// which nav link it belongs to (default: its own id).
 (function () {
   "use strict";
 
   document.addEventListener("DOMContentLoaded", function () {
     var sections = Array.prototype.slice.call(document.querySelectorAll("[data-rail][id]"));
     if (sections.length < 2) return;
-    var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
     var nav = document.createElement("nav");
     nav.className = "rail";
@@ -63,11 +60,6 @@
       current = next;
       links.forEach(function (a, i) {
         if (i === next) a.setAttribute("aria-current", "location");
-        else a.removeAttribute("aria-current");
-      });
-      var hash = sections[next].dataset.nav || "#" + sections[next].id;
-      Array.prototype.forEach.call(navLinks, function (a) {
-        if (a.getAttribute("href") === hash) a.setAttribute("aria-current", "page");
         else a.removeAttribute("aria-current");
       });
     }

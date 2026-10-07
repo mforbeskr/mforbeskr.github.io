@@ -257,7 +257,10 @@
     if (canvas) canvas.remove();
     return;
   }
-  resize();
-  new ResizeObserver(resize).observe(scene);
-  requestAnimationFrame(frame);
+  // The animated "air" starts once the page has settled (see whenSettled in script.js).
+  (window.whenSettled || function (fn) { fn(); })(function () {
+    resize();
+    new ResizeObserver(resize).observe(scene);
+    requestAnimationFrame(frame);
+  });
 })();
