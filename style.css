@@ -2331,28 +2331,6 @@ html[data-dir="back"]::view-transition-new(page) {
 
 
 /* ---------- Resume: reading effects (story.js) ---------- */
-/* A soft glow drifts behind the header */
-.resume-header {
-  position: relative;
-  isolation: isolate;
-}
-
-.resume-header::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -30% -10% -10% -20%;
-  background: radial-gradient(40% 50% at 30% 50%, color-mix(in srgb, var(--neon) 14%, transparent), transparent 70%);
-  animation: header-glow 16s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-@keyframes header-glow {
-  to {
-    transform: translate(12%, 6%) scale(1.1);
-  }
-}
-
 /* Section headings whose divider line draws in */
 .resume-main h2::after {
   transform-origin: left;
@@ -2650,10 +2628,6 @@ img.cloth-hidden {
 
   .cv-header .lead {
     font-size: 0.95rem;
-  }
-
-  .resume-header::before {
-    display: none;
   }
 
   /* Tighter rhythm so Profile, Skills and Strengths share the first page */
