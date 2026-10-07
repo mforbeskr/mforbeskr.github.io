@@ -1,5 +1,5 @@
 // Section rail: a stripe of ticks on the right edge, one per [data-rail] section on the page.
-// The current section's tick stretches out and shows its number and name; clicking jumps there.
+// The current section's tick stretches out and shows its name; clicking jumps there.
 (function () {
   "use strict";
 
@@ -16,8 +16,7 @@
       var a = document.createElement("a");
       a.href = "#" + section.id;
       a.innerHTML =
-        '<span class="rail-text"><span class="rail-num">' + String(i + 1).padStart(2, "0") + "</span>" +
-        '<span class="rail-label"></span></span><span class="rail-tick" aria-hidden="true"></span>';
+        '<span class="rail-text"><span class="rail-label"></span></span><span class="rail-tick" aria-hidden="true"></span>';
       a.querySelector(".rail-label").textContent = section.dataset.rail;
       li.appendChild(a);
       list.appendChild(li);
