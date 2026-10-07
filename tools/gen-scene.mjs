@@ -355,7 +355,8 @@ function glints(r, n, x0, x1, y0, y1, fx = null, fw = 0) {
   return d;
 }
 
-function stars(r, n, y0, y1, color) {
+// Static stars go in the layer itself, the twinkling ones in its motion overlay.
+function stars(L, r, n, y0, y1, color) {
   let dim = "", bright = "", tw = "";
   for (let i = 0; i < n; i++) {
     const x = r() * W, y = y0 + Math.pow(r(), 1.5) * (y1 - y0), s = 0.6 + Math.pow(r(), 3) * 1.9;
@@ -366,9 +367,9 @@ function stars(r, n, y0, y1, color) {
     tw += `<g class="tw" style="animation-delay:-${(r() * 6).toFixed(1)}s"><circle cx="${f(x)}" cy="${f(y)}" r="2.3"/>` +
       `<path d="M${f(x - 10)},${f(y)}h20M${f(x)},${f(y - 10)}v20" stroke="${color}" stroke-width=".9" opacity=".6"/></g>`;
   }
-  return `<path d="${dim}" fill="${color}" opacity=".45"/><path d="${bright}" fill="${color}" opacity=".9"/><g fill="${color}">${tw}</g>`;
+  L.add(`<path d="${dim}" fill="${color}" opacity=".45"/><path d="${bright}" fill="${color}" opacity=".9"/>`);
+  L.animate(".tw{animation:tw 5s ease-in-out infinite alternate}@keyframes tw{from{opacity:.2}to{opacity:1}}", `<g fill="${color}">${tw}</g>`);
 }
-const TWINKLE = ".tw{animation:tw 5s ease-in-out infinite alternate}@keyframes tw{from{opacity:.2}to{opacity:1}}";
 
 // ---------- One layer file ----------
 
@@ -378,6 +379,8 @@ class Layer {
     this.defs = [];
     this.parts = [];
     this.css = "";
+    this.motion = [];
+    this.motionCss = "";
     this.cache = new Map();
   }
   grad(kind, stops, attrs = "") {
@@ -412,6 +415,13 @@ class Layer {
   }
   add(...s) {
     this.parts.push(...s);
+    return this;
+  }
+  // Animated details live in a small overlay file (<name>-fx.svg) drawn over the layer, so the big
+  // layer itself never has to be redrawn per frame; phones and reduced-motion visitors skip it.
+  animate(css, ...s) {
+    if (!this.motionCss.includes(css)) this.motionCss += css;
+    this.motion.push(...s);
     return this;
   }
   path(d, fill, extra = "") {
@@ -457,10 +467,13 @@ class Layer {
     return this.path(box(x - s * 0.42, y - s * 1.08, s * 0.84, s * 0.16) + box(x - s * 0.42, y + s * 0.92, s * 0.84, s * 0.16), tones.cap);
   }
   save() {
-    const css = this.css + "@media (prefers-reduced-motion:reduce){*{animation:none!important}}";
-    write(`${this.name}.svg`,
+    const doc = (css, body, defs = "") =>
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" preserveAspectRatio="xMidYMax slice">` +
-      `${MARK}<defs>${this.defs.join("")}</defs><style>${css}</style>${this.parts.join("")}</svg>\n`);
+      `${MARK}<defs>${defs}</defs>${css ? `<style>${css}</style>` : ""}${body}</svg>\n`;
+    write(`${this.name}.svg`, doc(this.css, this.parts.join(""), this.defs.join("")));
+    if (this.motion.length) {
+      write(`${this.name}-fx.svg`, doc(this.motionCss + "@media (prefers-reduced-motion:reduce){*{animation:none!important}}", this.motion.join("")));
+    }
   }
 }
 
@@ -487,9 +500,8 @@ const LANTERN = { glow: "#b46cff", core: "#fff4ff", light: "#e3bcff", edge: "#8a
 function night1() {
   let r = rng(101);
   const sky = new Layer("night-1-sky");
-  sky.css = TWINKLE;
   sky.fill(sky.vert([[0, "#06040d"], [0.35, "#120a24"], [0.62, "#261742"], [0.82, "#43316a"], [1, "#5a4785"]]));
-  sky.add(stars(r, 300, 0, 950, "#ece4ff"));
+  stars(sky, r, 300, 0, 950, "#ece4ff");
   sky.puff(260, 120, 1150, 360, "#07040e", 0.85).puff(2520, 40, 820, 240, "#07040e", 0.7);
   sky.puff(1990, 470, 900, 820, "#9f7cf0", 0.24).puff(1990, 470, 470, 470, "#ece2ff", 0.4);
   sky.add(`<circle cx="1990" cy="470" r="250" fill="${sky.grad("radial", [[0, "#fefcff"], [0.75, "#efe7ff"], [1, "#cdbcf3"]], 'cx=".42" cy=".4" r=".62"')}"/>`);
@@ -574,9 +586,8 @@ function night1() {
 function night2() {
   let r = rng(111);
   const sky = new Layer("night-2-sky");
-  sky.css = TWINKLE;
   sky.fill(sky.vert([[0, "#0a0716"], [0.3, "#271d49"], [0.58, "#655799"], [0.78, "#a497d4"], [1, "#c6bcec"]]));
-  sky.add(stars(r, 140, 0, 420, "#efe8ff"));
+  stars(sky, r, 140, 0, 420, "#efe8ff");
   sky.puff(1280, 560, 900, 560, "#f1eaff", 0.5);
   sky.puff(600, 330, 900, 120, "#3b2e68", 0.55).puff(2050, 280, 800, 110, "#3b2e68", 0.5);
   sky.puff(1000, 470, 700, 70, "#e4dafc", 0.4).puff(1700, 520, 640, 60, "#e4dafc", 0.35);
@@ -672,7 +683,6 @@ function night2() {
 function night3() {
   let r = rng(121);
   const sky = new Layer("night-3-sky");
-  sky.css = TWINKLE;
   const skyFill = sky.vert([[0, "#05030c"], [0.45, "#170f2e"], [0.72, "#33235a"], [1, "#54408a"]]);
   sky.fill(skyFill);
   sky.puff(1100, 420, 1500, 150, "#8b6fd6", 0.22, 0, -14).puff(1100, 420, 900, 60, "#d9c9ff", 0.18, 0, -14);
@@ -682,7 +692,7 @@ function night3() {
     band += circle(x, y, 0.5 + r() * 1.1);
   }
   sky.path(band, "#efe7ff", ` opacity=".6"`);
-  sky.add(stars(r, 300, 0, 900, "#efe7ff"));
+  stars(sky, r, 300, 0, 900, "#efe7ff");
   sky.puff(2090, 250, 260, 260, "#c9b3ff", 0.3);
   sky.defs.push(`<mask id="crescent"><circle cx="2090" cy="250" r="62" fill="#fff"/><circle cx="2118" cy="232" r="56" fill="#000"/></mask>`);
   sky.add(`<circle cx="2090" cy="250" r="62" fill="#f6f0ff" mask="url(#crescent)"/>`);
@@ -807,7 +817,6 @@ function jungleRidge(L, r, keys, tones, size, rough = 0.1) {
 
 // A waterfall: a pale sheet, strands that stream down (CSS), and mist where it lands.
 function waterfall(L, r, x, top, bottom, w) {
-  if (!L.css.includes("@keyframes fall")) L.css += ".fall{animation:fall linear infinite}@keyframes fall{to{stroke-dashoffset:-180}}";
   L.add(`<path d="M${f(x - w / 2)},${f(top)}C${f(x - w * 0.55)},${f(top + 60)} ${f(x - w * 0.6)},${f(bottom - 200)} ${f(x - w * 0.75)},${f(bottom)}` +
     `L${f(x + w * 0.75)},${f(bottom)}C${f(x + w * 0.6)},${f(bottom - 200)} ${f(x + w * 0.55)},${f(top + 60)} ${f(x + w / 2)},${f(top)}Z" ` +
     `fill="${L.vert([[0, "#ffffff", 0.7], [0.5, "#eef5f4", 0.8], [1, "#ffffff", 0.95]], top, bottom)}"/>`);
@@ -817,7 +826,7 @@ function waterfall(L, r, x, top, bottom, w) {
     s += `<path class="fall" style="animation-duration:${(1 + r() * 1.4).toFixed(2)}s" d="M${f(sx)},${f(top)}Q${f(sx + (sx - x) * 0.1)},${f((top + bottom) / 2)} ${f(sx + (sx - x) * 0.5)},${f(bottom)}" ` +
       `stroke="${r() < 0.55 ? "#ffffff" : "#cfe0df"}" stroke-width="${f(1.2 + r() * 3.5)}" stroke-dasharray="${f(dash)} ${f(180 - dash)}" stroke-dashoffset="${f(r() * 180)}" opacity="${(0.4 + r() * 0.5).toFixed(2)}"/>`;
   }
-  L.add(`<g fill="none">${s}</g>`);
+  L.animate(".fall{animation:fall linear infinite}@keyframes fall{to{stroke-dashoffset:-180}}", `<g fill="none">${s}</g>`);
   L.puff(x, top + 6, w * 0.9, 14, "#ffffff", 0.8);
   for (let i = 0; i < 6; i++) L.puff(x + (r() - 0.5) * w * 2.2, bottom - r() * 50, w * (1 + r()), 40 + r() * 40, "#ffffff", 0.75);
 }
@@ -1123,26 +1132,39 @@ function day3() {
 const SETS = { night: [night1, night2, night3], day: [day1, day2, day3] };
 const LAYERS = ["sky", "far", "mid", "near", "front"];
 const SPEEDS = [0.6, 0.45, 0.32, 0.18, 0];
+// Where each scene's interest lies (0 = left edge, 1 = right edge). Narrow screens only see a slice
+// of the 16:9 art, so scene.js aims that slice here instead of at the calm middle.
+const FOCUS = { night: [0.8, 0.5, 0.8], day: [0.8, 0.18, 0.5] };
 
 // Whatever file a layer currently has: your own image first, then the generated SVG.
 function fileFor(base) {
   return [...RASTER, "svg"].map((ext) => `${base}.${ext}`).find((name) => fs.existsSync(path.join(OUT, name)));
 }
 
-const layer = (file, speed, lazy) =>
-  `<div class="scene-layer" data-speed="${speed}"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice"><image ${lazy ? "data-href" : "href"}="assets/scene/${file}" width="${W}" height="${H}"/></svg></div>`;
+// A layer's motion overlay is used only with the generated SVG it belongs to.
+function motionFor(base, file) {
+  const fx = `${base}-fx.svg`;
+  return file === `${base}.svg` && fs.readFileSync(path.join(OUT, file), "utf8").includes(MARK) && fs.existsSync(path.join(OUT, fx)) ? fx : null;
+}
 
-// Only the first scene loads straight away; scene.js swaps data-href to href when a later one is near.
+// Every image waits in data-href: scene.js loads the theme you are looking at, scene by scene.
+function layer(base, speed) {
+  const file = fileFor(base), fx = motionFor(base, file);
+  const img = (name, extra = "") => `<image data-href="assets/scene/${name}"${extra} width="${W}" height="${H}"/>`;
+  return `<div class="scene-layer" data-speed="${speed}"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">` +
+    img(file) + (fx ? img(fx, " data-motion") : "") + `</svg></div>`;
+}
+
 function sceneMarkup(indent) {
   const i = (n) => "\n" + indent + "    ".repeat(n);
   let out = `<!-- scene:start (generated by tools/gen-scene.mjs) -->${i(0)}<div class="scene" aria-hidden="true">`;
   for (let k = 0; k < 3; k++) {
     out += `${i(1)}<div class="scene-chapter${k === 0 ? " is-shown" : ""}" data-chapter="${k + 1}">`;
     for (const set of Object.keys(SETS)) {
-      out += `${i(2)}<div class="scene-set scene-${set}">`;
+      out += `${i(2)}<div class="scene-set scene-${set}" data-set="${set}" data-focus="${FOCUS[set][k]}">`;
       LAYERS.forEach((name, n) => {
-        const file = fileFor(`${set}-${k + 1}-${name}`);
-        if (file) out += i(3) + layer(file, SPEEDS[n], k > 0);
+        const base = `${set}-${k + 1}-${name}`;
+        if (fileFor(base)) out += i(3) + layer(base, SPEEDS[n]);
       });
       out += `${i(2)}</div>`;
     }
@@ -1152,7 +1174,7 @@ function sceneMarkup(indent) {
 }
 
 // Clear out generated layers that no longer belong to any scene.
-const current = new Set(Object.keys(SETS).flatMap((set) => [1, 2, 3].flatMap((k) => LAYERS.map((n) => `${set}-${k}-${n}.svg`))));
+const current = new Set(Object.keys(SETS).flatMap((set) => [1, 2, 3].flatMap((k) => LAYERS.flatMap((n) => [`${set}-${k}-${n}.svg`, `${set}-${k}-${n}-fx.svg`]))));
 for (const old of fs.readdirSync(OUT)) {
   const file = path.join(OUT, old);
   if (old.endsWith(".svg") && !current.has(old) && fs.readFileSync(file, "utf8").includes(MARK)) fs.unlinkSync(file);

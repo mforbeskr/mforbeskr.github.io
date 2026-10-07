@@ -6,6 +6,9 @@
 // (where there is no text) show the landscape in full.
 // The canvas adds the "air" for each scene: drifting petals or violet fireflies at night; by day,
 // sunlit motes, plus gulls over the terrace.
+// Only the theme you are looking at is fetched, scene by scene as you near it. Phones skip the
+// animated overlays, and narrow screens aim their slice of each 16:9 scene at its data-focus point
+// instead of at the calm middle.
 (function () {
   "use strict";
 
@@ -13,11 +16,13 @@
   var scene = document.querySelector(".scene");
   if (!scene) return;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var skipMotion = reduceMotion || window.matchMedia("(max-width: 760px)").matches;
 
   var chapters = Array.prototype.map.call(scene.querySelectorAll(".scene-chapter"), function (el) {
     return {
       el: el,
-      loaded: el.classList.contains("is-shown"),
+      wanted: false,
+      loaded: {},
       layers: Array.prototype.map.call(el.querySelectorAll(".scene-layer"), function (layer) {
         return { el: layer, depth: 1 - (parseFloat(layer.dataset.speed) || 0) };
       }),
@@ -31,11 +36,31 @@
   var active = 1;
   var pointer = { x: 0, tx: 0 };
 
+  function theme() {
+    return root.dataset.theme === "light" ? "day" : "night";
+  }
+
   function load(chapter) {
-    if (!chapter || chapter.loaded) return;
-    chapter.loaded = true;
-    chapter.el.querySelectorAll("image[data-href]").forEach(function (img) {
+    if (!chapter) return;
+    chapter.wanted = true;
+    var set = theme();
+    if (chapter.loaded[set]) return;
+    chapter.loaded[set] = true;
+    chapter.el.querySelectorAll(".scene-" + set + " image[data-href]").forEach(function (img) {
+      if (skipMotion && img.hasAttribute("data-motion")) return;
       img.setAttribute("href", img.getAttribute("data-href"));
+    });
+  }
+
+  // Narrower than 16:9, the screen sees only a slice of each scene: centre it on the scene's focus.
+  function aim() {
+    var view = Math.min(2560, (1440 * (scene.offsetWidth + 64)) / Math.max(1, scene.offsetHeight));
+    scene.querySelectorAll(".scene-set").forEach(function (set) {
+      var x = Math.max(0, Math.min(2560 - view, (parseFloat(set.dataset.focus) || 0.5) * 2560 - view / 2));
+      var box = view >= 2560 ? "0 0 2560 1440" : x.toFixed(0) + " 0 " + view.toFixed(0) + " 1440";
+      set.querySelectorAll("svg").forEach(function (svg) {
+        svg.setAttribute("viewBox", box);
+      });
     });
   }
 
@@ -251,7 +276,16 @@
 
   // ---------- Wiring ----------
   window.addEventListener("scroll", place, { passive: true });
-  window.addEventListener("resize", place);
+  window.addEventListener("resize", function () {
+    aim();
+    place();
+  });
+  // Switching theme fetches the other set for every scene that has been needed so far.
+  new MutationObserver(function () {
+    chapters.forEach(function (c) {
+      if (c.wanted) load(c);
+    });
+  }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
   window.addEventListener("pointermove", function (e) {
     pointer.tx = (e.clientX / window.innerWidth) * 2 - 1;
   }, { passive: true });
@@ -261,6 +295,8 @@
       chapters.forEach(load);
     }, 2500);
   });
+  load(chapters[0]);
+  aim();
   place();
 
   if (reduceMotion || !ctx) {

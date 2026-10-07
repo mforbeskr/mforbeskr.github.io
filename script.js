@@ -179,13 +179,6 @@
       card.style.setProperty("--my", e.clientY - r.top + "px");
     });
 
-    // Resume: "Download as PDF" opens the print dialog; the print styles lay the sheet out as a CV.
-    document.querySelectorAll("[data-print]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        window.print();
-      });
-    });
-
     // Portfolio filters: they sort the main project grid only; "More on GitHub" always shows everything
     var filters = document.querySelectorAll(".filter");
     var grid = document.querySelector("[data-projects].is-collapsed");
