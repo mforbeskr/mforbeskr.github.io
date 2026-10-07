@@ -4,7 +4,8 @@
 // A veil in the page colour keeps text readable: it follows how much of the screen is taken up by
 // content, so text always sits on a calm background, while the hero and each .scene-break
 // (where there is no text) show the landscape in full.
-// The canvas adds the "air" for each scene: fireflies, snow, pollen and swallows, or desert dust.
+// The canvas adds the "air" for each scene: drifting petals or violet fireflies at night; by day,
+// sunlit motes, plus gulls over the terrace.
 (function () {
   "use strict";
 
@@ -108,7 +109,7 @@
 
   function resetAir() {
     var m = mode();
-    var count = m === "night3" ? 90 : m === "night2" ? 12 : 34;
+    var count = m === "night1" ? 46 : m.indexOf("night") === 0 ? 30 : 26;
     motes = [];
     for (var i = 0; i < Math.round(count * Math.min(1, W / 1400)); i++) motes.push(newMote(true));
     birds = [];
@@ -141,18 +142,31 @@
       if (m.x < -10) m.x = W + 10;
       if (m.x > W + 10) m.x = -10;
       var glow = 0.5 + 0.5 * Math.sin(t / 600 + m.phase * 3);
-      var color = m.hue ? "201,163,255," : "220,255,150,";
+      var color = m.hue ? "255,214,250," : "196,150,255,";
       dot(m.x, m.y, m.size * 4, "rgba(" + color + (0.12 * glow).toFixed(3) + ")");
       dot(m.x, m.y, m.size, "rgba(" + color + (0.35 + 0.65 * glow).toFixed(3) + ")");
     });
   }
 
-  function snow(t) {
+  // Petals blown off the purple tree, tumbling as they fall.
+  function petals(t) {
     motes.forEach(function (m, i) {
-      m.y += m.vy * 0.8;
-      m.x += Math.sin(t / 1300 + m.phase) * 0.35 + 0.1;
-      if (m.y > H + 5) motes[i] = newMote(false);
-      dot(m.x, m.y, m.size * 0.9, "rgba(240,236,255," + (0.35 + m.size * 0.25).toFixed(3) + ")");
+      m.y += m.vy * 0.5;
+      m.x += 0.35 + Math.sin(t / 1100 + m.phase) * 0.6;
+      if (m.y > H + 10 || m.x > W + 10) {
+        motes[i] = newMote(false);
+        motes[i].x = Math.random() * W * 1.2 - W * 0.2;
+      }
+      var spin = t / 900 + m.phase;
+      ctx.save();
+      ctx.translate(m.x, m.y);
+      ctx.rotate(spin);
+      ctx.scale(1, 0.3 + 0.7 * Math.abs(Math.sin(spin * 0.7)));
+      ctx.fillStyle = m.hue ? "rgba(214,176,255,0.75)" : "rgba(150,84,226,0.8)";
+      ctx.beginPath();
+      ctx.ellipse(0, 0, m.size * 2.6, m.size * 1.4, 0, 0, 6.283);
+      ctx.fill();
+      ctx.restore();
     });
   }
 
@@ -176,24 +190,18 @@
     if (p >= 1) comet = null;
   }
 
-  // Warm specks: pollen rises gently in the garden; desert dust blows sideways.
-  function specks(t, windy) {
+  // Sunlit motes drifting gently upward.
+  function specks(t) {
     motes.forEach(function (m, i) {
-      if (windy) {
-        m.x += 0.6 + m.size * 0.3;
-        m.y += Math.sin(t / 900 + m.phase) * 0.2;
-        if (m.x > W + 10) { m.x = -10; m.y = H * (0.4 + Math.random() * 0.6); }
-      } else {
-        m.x += m.vx + Math.sin(t / 1700 + m.phase) * 0.2;
-        m.y -= m.vy * 0.25;
-        if (m.y < H * 0.25) { motes[i] = newMote(false); motes[i].y = H; }
-      }
+      m.x += m.vx + Math.sin(t / 1700 + m.phase) * 0.2;
+      m.y -= m.vy * 0.25;
+      if (m.y < H * 0.25) { motes[i] = newMote(false); motes[i].y = H; }
       var a = 0.25 + 0.35 * (0.5 + 0.5 * Math.sin(t / 900 + m.phase));
-      dot(m.x, m.y, m.size * 0.9, (windy ? "rgba(214,160,110," : "rgba(255,226,150,") + a.toFixed(3) + ")");
+      dot(m.x, m.y, m.size * 0.9, "rgba(255,240,200," + a.toFixed(3) + ")");
     });
   }
 
-  // Swallows over the garden and the olive groves: a few V-shapes crossing now and then.
+  // Gulls over the valley: a few V-shapes crossing now and then.
   function flock(t) {
     if (!birds.length && t > nextBirds) {
       var dir = Math.random() < 0.5 ? 1 : -1, y0 = H * (0.1 + Math.random() * 0.2);
@@ -203,7 +211,7 @@
       nextBirds = t + 10000 + Math.random() * 12000;
     }
     var span = 8;
-    ctx.strokeStyle = "rgba(60,48,58,0.55)";
+    ctx.strokeStyle = "rgba(52,70,96,0.55)";
     ctx.lineWidth = 1.5;
     ctx.lineCap = "round";
     birds = birds.filter(function (bird) {
@@ -233,10 +241,12 @@
       resetAir();
     }
     ctx.clearRect(0, 0, W, H);
-    if (m === "night1" || m === "night2") { fireflies(t); shootingStars(t); }
-    else if (m === "night3") snow(t);
-    else if (m === "day1" || m === "day2") { specks(t, false); flock(t); }
-    else specks(t, true);
+    if (m === "night1") { petals(t); shootingStars(t); }
+    else if (m === "night2" || m === "night3") { fireflies(t); shootingStars(t); }
+    else {
+      specks(t);
+      if (m === "day1") flock(t);
+    }
   }
 
   // ---------- Wiring ----------
