@@ -54,7 +54,8 @@
     }
 
     // A timeline fills down to the reading line; each entry's dot lights up once the line passes it.
-    var line = vh * 0.6;
+    // (rail.js leaves enough room at the end of the page for the last entries to reach the line.)
+    var line = vh * 0.5;
     timelines.forEach(function (tl) {
       var r = tl.getBoundingClientRect();
       tl.style.setProperty("--fill", Math.min(1, Math.max(0, (line - r.top) / r.height)).toFixed(3));

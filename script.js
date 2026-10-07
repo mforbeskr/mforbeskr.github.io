@@ -90,21 +90,6 @@
     });
   }
 
-  // A word as a row of letter spans, each knowing its position from the left (--n) and right (--r).
-  function fillWord(word) {
-    var wrap = document.createElement("span");
-    wrap.className = "fill-word";
-    word.split("").forEach(function (ch, i) {
-      var span = document.createElement("span");
-      span.className = "letter";
-      span.textContent = ch;
-      span.style.setProperty("--n", i);
-      span.style.setProperty("--r", word.length - 1 - i);
-      wrap.appendChild(span);
-    });
-    return wrap;
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     // Theme toggle
     var toggle = document.querySelector(".theme-toggle");
@@ -165,53 +150,10 @@
       card.style.setProperty("--my", e.clientY - r.top + "px");
     });
 
-    // Resume: split the card headings into letters so the dark-mode hover can fill them one at a
-    // time. Screen readers get the original heading; the letters are hidden from them.
-    document.querySelectorAll(".paper h3").forEach(function (el) {
-      var label = document.createElement("span");
-      label.className = "sr-only";
-      label.textContent = el.textContent;
-      var visual = fillWord(el.textContent);
-      visual.setAttribute("aria-hidden", "true");
-      el.replaceChildren(label, visual);
-    });
-
-    // Resume papers: grab one with the mouse, fling it around, and it springs back to its spot.
-    document.querySelectorAll(".paper").forEach(function (paper) {
-      var drag = null;
-
-      paper.addEventListener("pointerdown", function (e) {
-        // Dark mode shows the sheets as fixed glass cards.
-        if (e.pointerType === "touch" || e.button !== 0 || currentTheme() === "dark") return;
-        e.preventDefault();
-        paper.setPointerCapture(e.pointerId);
-        paper.classList.remove("is-returning");
-        paper.classList.add("is-dragging");
-        drag = { x: e.clientX, y: e.clientY, lastX: e.clientX, spin: 0 };
-      });
-
-      paper.addEventListener("pointermove", function (e) {
-        if (!drag) return;
-        var vx = e.clientX - drag.lastX;
-        drag.lastX = e.clientX;
-        // Swing like paper held at the top: tilt follows horizontal speed, eased so it doesn't jitter.
-        drag.spin += (Math.max(-10, Math.min(10, vx * 0.9)) - drag.spin) * 0.25;
-        paper.style.transform =
-          "translate(" + (e.clientX - drag.x) + "px, " + (e.clientY - drag.y) + "px) rotate(" + drag.spin.toFixed(2) + "deg) scale(1.02)";
-      });
-
-      function release() {
-        if (!drag) return;
-        drag = null;
-        paper.classList.remove("is-dragging");
-        paper.classList.add("is-returning");
-        paper.style.transform = "";
-      }
-
-      paper.addEventListener("pointerup", release);
-      paper.addEventListener("pointercancel", release);
-      paper.addEventListener("transitionend", function (e) {
-        if (e.propertyName === "transform" && !drag) paper.classList.remove("is-returning");
+    // Resume: "Download as PDF" opens the print dialog; the print styles lay the sheet out as a CV.
+    document.querySelectorAll("[data-print]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        window.print();
       });
     });
 
