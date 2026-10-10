@@ -909,12 +909,13 @@ function day1() {
 
   r = rng(622);
   const far = new Layer("day-1-far");
-  far.add(`<rect x="-40" y="960" width="1700" height="140" fill="${far.vert([[0, "#cfe6e1"], [1, "#b7dbd4"]], 960, 1100)}"/>`);
-  far.path(glints(r, 70, 0, 1600, 966, 1060), "#ffffff", ` opacity=".5"`);
-  jungleRidge(far, r, [[-140, 980], [160, 830], [480, 780], [820, 870], [1150, 980]], HAZE_JUNGLE, 30);
-  far.band(860, 1000, "#f6f3ec", 0.55);
-  const cliff = rock(r, [[1660, 1100], [1780, 760], [1880, 480], [1980, 330], [2120, 310], [2320, 250], [2520, 210], [2720, 190]], 0.08, 6);
-  far.path(poly(cliff.concat([[2720, 1100]])), far.vert([[0, "#a2b9ad"], [0.7, "#b7c9be"], [1, "#d6e0d8"]], 200, 1100));
+  jungleRidge(far, r, [[-140, 1000], [160, 830], [480, 780], [820, 870], [1150, 960], [1500, 1000]], HAZE_JUNGLE, 30);
+  // The lake fills the whole valley floor, so its shores are the hills themselves, never a straight cut
+  far.path(box(-40, 972, W + 80, H - 932), far.vert([[0, "#d6ebe6"], [0.25, "#c4e1da"], [1, "#b2d6cf"]], 972, H));
+  far.path(glints(r, 110, 0, W, 980, 1180), "#ffffff", ` opacity=".5"`);
+  far.band(860, 1010, "#f6f3ec", 0.55);
+  const cliff = rock(r, [[1520, H + 40], [1600, 1060], [1780, 760], [1880, 480], [1980, 330], [2120, 310], [2320, 250], [2520, 210], [2720, 190]], 0.08, 6);
+  far.path(poly(cliff.concat([[2720, H + 40]])), far.vert([[0, "#a2b9ad"], [0.7, "#b7c9be"], [1, "#d6e0d8"]], 200, 1100));
   let streaks = "";
   for (let i = 0; i < 26; i++) {
     const x = 1880 + r() * 800, y = yAt(cliff, x) + 30 + r() * 200;
@@ -923,13 +924,17 @@ function day1() {
   far.path(streaks, "#93ab9f", ` opacity=".35"`);
   far.add(canopy(r, cliff.filter(([, y], i) => i % 4 === 0 && y < 420).map(([x, y]) => [x, y + 14]), 30, ["#8fa99a", "#9db5a6", "#b2c7b8", "#b2c7b8"], { light: [-0.4, -0.9] }));
   waterfall(far, r, 2080, yAt(cliff, 2080) + 18, 1010, 70);
+  // The cliff's foot sinks into the lake behind a bank of spray
+  far.path(box(1480, 990, W - 1440, H - 950), far.vert([[0, "#c4e1da", 0], [0.06, "#c4e1da", 0.95], [1, "#b2d6cf", 0.95]], 990, H));
+  far.path(glints(r, 50, 1500, W, 1010, 1180), "#ffffff", ` opacity=".45"`);
   far.band(900, 1100, "#ffffff", 0.6);
   far.save();
 
   r = rng(633);
   const mid = new Layer("day-1-mid");
-  jungleRidge(mid, r, [[-140, 1130], [160, 1030], [460, 1050], [760, 1140]], NEAR_JUNGLE, 34);
-  jungleRidge(mid, r, [[1720, 1150], [2000, 1050], [2300, 1010], [2720, 990]], NEAR_JUNGLE, 34);
+  // Both banks slope down into the water below the terrace floor, so no edge shows through the glass
+  jungleRidge(mid, r, [[-140, 1130], [160, 1030], [460, 1050], [760, 1140], [1000, 1260], [1100, 1460]], NEAR_JUNGLE, 34);
+  jungleRidge(mid, r, [[1420, 1460], [1560, 1250], [1760, 1140], [2000, 1050], [2300, 1010], [2720, 990]], NEAR_JUNGLE, 34);
   let palms = "";
   for (const [x, top, lean] of [[120, 470, 40], [320, 580, -30], [2170, 430, -50], [2340, 330, 30], [2480, 500, 60]]) {
     palms += palm(r, [x, 1160], [x + lean, top], { ...SLIM_PALM, bow: lean * 0.5 });
