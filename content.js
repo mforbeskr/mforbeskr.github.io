@@ -47,7 +47,7 @@ window.SITE = {
       featured: true,
       wide: true,
       badge: "Live on Google Play · App Store next",
-      desc: "A Danish peer-to-peer marketplace for equestrian equipment. I'm building it together with a friend: a mobile app in Expo / React Native on Supabase, plus a separate React admin panel for moderation, support and role-based access. It's live on Google Play under our developer name, Fortera Studio — with the App Store as the next step.",
+      desc: "A Danish peer-to-peer marketplace for equestrian equipment; a mobile app in Expo / React Native on Supabase, plus a separate React admin panel for moderation, support and role-based access. It's live on Google Play, with the App Store as the next step.",
       chips: ["React Native", "TypeScript", "Supabase"],
       link: "Visit",
       media: { type: "image", src: "assets/tackly-feature.jpg", alt: "Tackly — Giv dit rideudstyr nye eventyr", width: 1024, height: 500 },
