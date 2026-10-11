@@ -136,10 +136,10 @@ function grass(r, n, x0, x1, base, h, w = 2.4) {
 }
 
 // Grass rooted along an uneven ground line (pts), each tuft sunk a little into it so none floats.
-function grassOn(r, n, x0, x1, pts, h, w = 2.4) {
+function grassOn(r, n, x0, x1, pts, h, w = 2.4, sink = 4) {
   let d = "";
   for (let i = 0; i < n; i++) {
-    const x = lerp(x0, x1, r()), b = yAt(pts, x) + 4 + r() * 6;
+    const x = lerp(x0, x1, r()), b = yAt(pts, x) + sink + r() * sink * 1.5;
     for (let k = 0; k < 5; k++) d += blade(x + (r() - 0.5) * 18, b, h * (0.4 + r() * 0.8), w, (r() - 0.5) * h * 0.7);
   }
   return d;
@@ -588,9 +588,11 @@ function night1() {
   mid.path(tree.wood, "#140c22");
   mid.add(canopy(r, tree.tips, 56, PURPLE, { light: [0.75, -0.65], specks: 2 }));
   const crag = rock(r, [[-140, 930], [90, 880], [330, 890], [520, 915], [620, 965], [590, 1040], [660, 1110], [560, 1200], [600, 1300], [520, 1480], [-140, 1480]], 0.14, 5);
-  mid.path(poly(crag), mid.vert([[0, "#261a42"], [1, "#0b0716"]], 880, H));
+  const cragFill = mid.vert([[0, "#261a42"], [1, "#0b0716"]], 880, H);
+  // The grass is the rock's own tone and only just rooted, so it shows against the sky and never as
+  // dark marks on the cliff face; the moonlit rim is drawn over its roots
+  mid.path(poly(crag), cragFill).path(grassOn(r, 18, 40, 540, crag, 34, 2.4, 1.5), cragFill);
   mid.add(`<path d="${line(crag.slice(0, Math.floor(crag.length * 0.42)))}" fill="none" stroke="#a48ee6" stroke-width="3" opacity=".35"/>`);
-  mid.path(grassOn(r, 18, 40, 560, crag, 34), "#140c22");
   mid.band(1150, 1330, "#5d4a92", 0.5);
   mid.save();
 
@@ -621,7 +623,7 @@ function night1() {
   const lc = rock(r, [[-140, 1380], [90, 1350], [250, 1372], [380, 1420], [430, 1480], [-140, 1480]], 0.2, 4);
   const rc = rock(r, [[2180, 1480], [2260, 1400], [2420, 1360], [2700, 1350], [2700, 1480]], 0.2, 4);
   front.path(poly(lc) + poly(rc), "#07040d");
-  front.path(grassOn(r, 12, -20, 330, lc, 70) + grassOn(r, 12, 2270, 2580, rc.slice(1), 80), "#07040d");
+  front.path(grassOn(r, 12, -20, 330, lc, 70) + grassOn(r, 12, 2340, 2580, rc.slice(1), 80), "#07040d");
   let petals = "";
   for (let i = 0; i < 56; i++) {
     const x = r() < 0.6 ? r() * 900 : 1700 + r() * 860, y = r() * 1300;
@@ -632,10 +634,119 @@ function night1() {
   front.save();
 }
 
-// 2 · A temple town in the mountains: lantern-lit street climbing into the mist.
+// 2 · A torii standing in a still lake below the snowy peak; bamboo and maple at the edges.
 function night2() {
-  let r = rng(111);
+  let r = rng(121);
   const sky = new Layer("night-2-sky");
+  const skyFill = sky.vert([[0, "#05030c"], [0.45, "#170f2e"], [0.72, "#33235a"], [1, "#54408a"]]);
+  sky.fill(skyFill);
+  sky.puff(1100, 420, 1500, 150, "#8b6fd6", 0.22, 0, -14).puff(1100, 420, 900, 60, "#d9c9ff", 0.18, 0, -14);
+  let band = "";
+  for (let i = 0; i < 380; i++) {
+    const t = r(), x = lerp(-200, 2500, t), y = 420 + (x - 1100) * Math.tan((-14 * Math.PI) / 180) + (r() - 0.5) * 200 * (0.4 + r());
+    band += circle(x, y, 0.5 + r() * 1.1);
+  }
+  sky.path(band, "#efe7ff", ` opacity=".6"`);
+  stars(sky, r, 300, 0, 900, "#efe7ff");
+  sky.puff(2090, 250, 260, 260, "#c9b3ff", 0.3);
+  sky.defs.push(`<mask id="crescent"><circle cx="2090" cy="250" r="62" fill="#fff"/><circle cx="2118" cy="232" r="56" fill="#000"/></mask>`);
+  sky.add(`<circle cx="2090" cy="250" r="62" fill="#f6f0ff" mask="url(#crescent)"/>`);
+  sky.save();
+
+  r = rng(232);
+  const far = new Layer("night-2-far");
+  const peak = rock(r, [[980, 1040], [1300, 860], [1480, 720], [1600, 636], [1660, 630], [1730, 668], [1900, 780], [2200, 920], [2500, 1040]], 0.05, 6);
+  const capLine = peak.filter(([, y]) => y < 760);
+  const cap = capLine.concat(displace(r, [[capLine.at(-1)[0], capLine.at(-1)[1]], [1660, 740], [capLine[0][0], capLine[0][1]]], 0.25, 4)
+    .map(([x, y], i) => [x, y + (i % 4 === 1 ? 26 : 0)]));
+  const mountains = `<path d="${area(peak, 1040)}" fill="#54447f"/><path d="${poly(cap)}" fill="#ddd0f7" opacity=".75"/>`;
+  const ridgeL = area(rock(r, [[-120, 930], [200, 870], [520, 920], [900, 980], [1200, 1040]], 0.1, 6), 1040);
+  const ridgeR = area(rock(r, [[1900, 1040], [2200, 960], [2450, 900], [2700, 930]], 0.1, 6), 1040);
+  far.add(mountains).path(ridgeL + ridgeR, "#3f3271");
+  far.band(900, 1060, "#a796da", 0.45);
+  far.add(`<rect x="-40" y="1036" width="${W + 80}" height="${H - 1000}" fill="${far.vert([[0, "#4b3c7c"], [0.3, "#271d4b"], [1, "#100b20"]], 1036, H)}"/>`);
+  // The reflection fades out toward the shore instead of showing the snowline at the water's edge
+  far.defs.push(`<linearGradient id="fade" x1="0" y1="1036" x2="0" y2="1340" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>` +
+    `<mask id="reflect"><rect x="-40" y="1036" width="${W + 80}" height="${H - 1000}" fill="url(#fade)"/></mask>`);
+  far.add(`<g mask="url(#reflect)"><g transform="translate(0 2076) scale(1 -1)" opacity=".28">${mountains}<path d="${ridgeL + ridgeR}" fill="#3f3271"/></g></g>`);
+  far.path(glints(r, 140, 0, W, 1050, H), "#d8caff", ` opacity=".35"`);
+  far.band(1010, 1100, "#9e8cd2", 0.5);
+  far.save();
+
+  r = rng(343);
+  const mid = new Layer("night-2-mid");
+  // The islet reaches further right, so the pine has rock under its roots
+  const islePts = rock(r, [[150, 1092], [240, 1050], [420, 1028], [560, 1032], [650, 1046], [710, 1068], [760, 1092]], 0.1, 5);
+  const shrine = pagoda(r, 420, 1034, 150, 3, 34);
+  const px = 600, py = yAt(islePts, px) + 5;
+  const trunk = quad([px, py], [588, py - 40], [606, py - 74], 10);
+  const pine = growTree(r, 606, py - 74, -1.5, 40, 8, 3, { spread: 0.8, flat: 0.6, shrink: 0.7 });
+  const pineWood = taper(trunk, 13, 8) + pine.wood + poly([[px - 14, py + 4], [px - 5, py - 8], [px + 5, py - 8], [px + 14, py + 4]]);
+  const isleArt = `<path d="${poly(islePts) + shrine.body + pineWood}" fill="#1b1331"/>`;
+  mid.add(`<g transform="translate(0 2184) scale(1 -1)" opacity=".3">${isleArt}</g>`, isleArt);
+  mid.add(canopy(r, pine.tips, 22, ["#150f28", "#1f1739", "#2c2250", "#2c2250"], { squash: 0.45 }));
+  mid.lights(shrine.lights, "#f3dcff", "#b46cff", 0.35);
+  const gate = torii(2080, 1180, 440, 500);
+  mid.add(`<g transform="translate(0 2360) scale(1 -1)" opacity=".32"><path d="${gate}" fill="#4c1d95"/></g>`);
+  mid.puff(2080, 900, 380, 320, "#a855f7", 0.16);
+  mid.path(gate, mid.vert([[0, "#5b21b6"], [1, "#2a0d55"]], 680, 1180));
+  // Rings of ripples where the torii's legs stand in the water
+  let rings = "";
+  for (const lx of [2080 - 440 * 0.35, 2080 + 440 * 0.35]) rings += oval(lx, 1182, 34, 5) + oval(lx, 1184, 62, 9) + oval(lx, 1187, 94, 13);
+  mid.path(rings, "none", ` stroke="#c4b5fd" stroke-width="2" opacity=".28"`);
+  mid.band(1110, 1250, "#8d7cc6", 0.5);
+  mid.save();
+
+  r = rng(454);
+  const near = new Layer("night-2-near");
+  let stalks = "", nodes = "", leaves = "";
+  for (let i = 0; i < 10; i++) {
+    const x = -30 + i * 46 + r() * 30, w = 16 + r() * 18, lean = (r() - 0.25) * 90;
+    const pts = quad([x, 1480], [x + lean * 0.2, 700], [x + lean, -80], 30);
+    stalks += taper(pts, w, w * 0.7);
+    for (let k = 3; k < pts.length - 1; k += 3) nodes += box(pts[k][0] - w * 0.45, pts[k][1], w * 0.9, 3);
+    for (let k = 0; k < 4 + r() * 3; k++) {
+      const [px, py] = pts[Math.floor(2 + r() * 20)];
+      for (let j = 0; j < 5; j++) leaves += leafPath(px, py, (r() < 0.65 ? 0.3 : 2.7) + (r() - 0.5) * 0.9, 60 + r() * 50, 7 + r() * 3);
+    }
+  }
+  near.path(stalks, near.horiz([[0, "#120c22"], [1, "#24193f"]], 0, 520)).path(nodes, "#3a2d60", ` opacity=".8"`).path(leaves, "#1b1330");
+  const mapleTree = growTree(r, 2600, 1340, -2.05, 170, 52, 6, { spread: 0.5, shrink: 0.7, up: 0.08 });
+  near.path(mapleTree.wood, "#100a1c");
+  near.add(canopy(r, mapleTree.tips, 46, PURPLE, { light: [-0.7, -0.7], specks: 2, shape: maple }));
+  near.path(area(wave(r, 1330, [[14, 600], [6, 140]])), "#0d0918").path(grass(r, 40, -40, 2600, 1336, 46), "#0d0918");
+  near.rise(1240, 1400, "#3a2c62", 0.5);
+  near.save();
+
+  r = rng(565);
+  const front = new Layer("night-2-front");
+  const lamp = toro(330, 1450, 300);
+  front.puff(330, 1000, 240, 200, "#c084fc", 0.35);
+  front.path(lamp.stone, front.vert([[0, "#2a2140"], [1, "#0b0815"]], 870, 1450));
+  front.lights([lamp.window], "#f6e6ff", "#b46cff", 0.45);
+  const [wx, wy, ww, wh] = lamp.window;
+  front.add(`<path d="M${f(wx + ww / 2)},${f(wy)}v${f(wh)}M${f(wx)},${f(wy + wh / 2)}h${f(ww)}" stroke="#1a1428" stroke-width="7"/>`);
+  let reeds = "";
+  for (let i = 0; i < 22; i++) {
+    const x = 2200 + r() * 380, h = 160 + r() * 200, bend = (r() - 0.6) * 60;
+    reeds += blade(x, 1460, h, 3, bend);
+    if (r() < 0.4) reeds += oval(x + bend * 0.85, 1460 - h * 0.85, 6, 22, Math.atan2(h, bend) - Math.PI / 2);
+  }
+  front.path(reeds, "#08050f");
+  let fall = "";
+  for (let i = 0; i < 40; i++) fall += oval(r() < 0.55 ? 1700 + r() * 860 : r() * 900, r() * 1300, 5 + r() * 5, 2.5 + r() * 2, r() * 3);
+  front.path(fall, "#9a5ae6", ` opacity=".8"`);
+  let spray = "";
+  for (let i = 0; i < 40; i++) spray += leafPath(-20 + r() * 380, -20 + r() * 60, 0.6 + r() * 1.2, 70 + r() * 70, 8 + r() * 4);
+  front.path(spray, "#0a0714");
+  front.puff(1300, 1450, 1500, 100, "#1c1530", 0.7);
+  front.save();
+}
+
+// 3 · A temple town in the mountains: lantern-lit street climbing into the mist.
+function night3() {
+  let r = rng(111);
+  const sky = new Layer("night-3-sky");
   sky.fill(sky.vert([[0, "#0a0716"], [0.3, "#271d49"], [0.58, "#655799"], [0.78, "#a497d4"], [1, "#c6bcec"]]));
   stars(sky, r, 140, 0, 420, "#efe8ff");
   sky.puff(1280, 560, 900, 560, "#f1eaff", 0.5);
@@ -644,7 +755,7 @@ function night2() {
   sky.save();
 
   r = rng(222);
-  const far = new Layer("night-2-far");
+  const far = new Layer("night-3-far");
   const spire = (cx, base, w, h) => poly(rock(r, [[cx - w / 2, base], [cx - w * 0.22, base - h * 0.55], [cx - w * 0.06, base - h], [cx + w * 0.07, base - h * 0.96], [cx + w * 0.24, base - h * 0.5], [cx + w / 2, base]], 0.12, 6));
   far.path(spire(1280, 1040, 1000, 600) + spire(1000, 1040, 560, 470) + spire(1580, 1040, 600, 520), "#8a7eb8");
   far.band(560, 860, "#ddd3f6", 0.45);
@@ -666,7 +777,7 @@ function night2() {
   far.save();
 
   r = rng(333);
-  const mid = new Layer("night-2-mid");
+  const mid = new Layer("night-3-mid");
   // Left: a rounded crag with a shoulder where a pine grows. Right: a cliff that steps down in ledges.
   const lcliff = rock(r, [[-140, 1480], [-140, 560], [60, 520], [210, 540], [330, 600], [372, 650], [440, 674], [494, 698], [484, 742], [448, 790], [470, 880], [520, 960], [550, 1060], [600, 1220], [620, 1480]], 0.07, 5);
   const rcliff = rock(r, [[2700, 1480], [2700, 520], [2560, 508], [2440, 516], [2330, 526], [2292, 560], [2284, 606], [2210, 622], [2156, 636], [2122, 696], [2134, 758], [2082, 840], [2060, 960], [2010, 1120], [1990, 1480]], 0.06, 5);
@@ -728,7 +839,7 @@ function night2() {
   mid.save();
 
   r = rng(444);
-  const near = new Layer("night-2-near");
+  const near = new Layer("night-3-near");
   // The ground the street and the houses stand on, fading into the mist at the horizon
   near.path(box(-40, 1000, W + 80, H - 960), near.vert([[0, "#a99bd8", 0], [0.05, "#a99bd8"], [0.4, "#6f62a3"], [1, "#2e2550"]], 1000, H));
   // The temple stands on a stepped terrace on this same layer, so the road always runs right up its steps
@@ -791,7 +902,7 @@ function night2() {
   near.save();
 
   r = rng(555);
-  const front = new Layer("night-2-front");
+  const front = new Layer("night-3-front");
   for (const [x, y, a] of [[-60, 120, -0.08], [2620, 60, -3.06]]) {
     const p = growTree(r, x, y, a, 200, 46, 5, { spread: 0.5, flat: 0.55, shrink: 0.68 });
     front.path(p.wood, "#0a0714");
@@ -799,115 +910,6 @@ function night2() {
   }
   front.lantern(2330, 330, 74, 260, LANTERN);
   front.puff(500, 1440, 1000, 100, "#1c1530", 0.75).puff(2100, 1440, 1000, 100, "#1c1530", 0.75);
-  front.save();
-}
-
-// 3 · A torii standing in a still lake below the snowy peak; bamboo and maple at the edges.
-function night3() {
-  let r = rng(121);
-  const sky = new Layer("night-3-sky");
-  const skyFill = sky.vert([[0, "#05030c"], [0.45, "#170f2e"], [0.72, "#33235a"], [1, "#54408a"]]);
-  sky.fill(skyFill);
-  sky.puff(1100, 420, 1500, 150, "#8b6fd6", 0.22, 0, -14).puff(1100, 420, 900, 60, "#d9c9ff", 0.18, 0, -14);
-  let band = "";
-  for (let i = 0; i < 380; i++) {
-    const t = r(), x = lerp(-200, 2500, t), y = 420 + (x - 1100) * Math.tan((-14 * Math.PI) / 180) + (r() - 0.5) * 200 * (0.4 + r());
-    band += circle(x, y, 0.5 + r() * 1.1);
-  }
-  sky.path(band, "#efe7ff", ` opacity=".6"`);
-  stars(sky, r, 300, 0, 900, "#efe7ff");
-  sky.puff(2090, 250, 260, 260, "#c9b3ff", 0.3);
-  sky.defs.push(`<mask id="crescent"><circle cx="2090" cy="250" r="62" fill="#fff"/><circle cx="2118" cy="232" r="56" fill="#000"/></mask>`);
-  sky.add(`<circle cx="2090" cy="250" r="62" fill="#f6f0ff" mask="url(#crescent)"/>`);
-  sky.save();
-
-  r = rng(232);
-  const far = new Layer("night-3-far");
-  const peak = rock(r, [[980, 1040], [1300, 860], [1480, 720], [1600, 636], [1660, 630], [1730, 668], [1900, 780], [2200, 920], [2500, 1040]], 0.05, 6);
-  const capLine = peak.filter(([, y]) => y < 760);
-  const cap = capLine.concat(displace(r, [[capLine.at(-1)[0], capLine.at(-1)[1]], [1660, 740], [capLine[0][0], capLine[0][1]]], 0.25, 4)
-    .map(([x, y], i) => [x, y + (i % 4 === 1 ? 26 : 0)]));
-  const mountains = `<path d="${area(peak, 1040)}" fill="#54447f"/><path d="${poly(cap)}" fill="#ddd0f7" opacity=".75"/>`;
-  const ridgeL = area(rock(r, [[-120, 930], [200, 870], [520, 920], [900, 980], [1200, 1040]], 0.1, 6), 1040);
-  const ridgeR = area(rock(r, [[1900, 1040], [2200, 960], [2450, 900], [2700, 930]], 0.1, 6), 1040);
-  far.add(mountains).path(ridgeL + ridgeR, "#3f3271");
-  far.band(900, 1060, "#a796da", 0.45);
-  far.add(`<rect x="-40" y="1036" width="${W + 80}" height="${H - 1000}" fill="${far.vert([[0, "#4b3c7c"], [0.3, "#271d4b"], [1, "#100b20"]], 1036, H)}"/>`);
-  // The reflection fades out toward the shore instead of showing the snowline at the water's edge
-  far.defs.push(`<linearGradient id="fade" x1="0" y1="1036" x2="0" y2="1340" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>` +
-    `<mask id="reflect"><rect x="-40" y="1036" width="${W + 80}" height="${H - 1000}" fill="url(#fade)"/></mask>`);
-  far.add(`<g mask="url(#reflect)"><g transform="translate(0 2076) scale(1 -1)" opacity=".28">${mountains}<path d="${ridgeL + ridgeR}" fill="#3f3271"/></g></g>`);
-  far.path(glints(r, 140, 0, W, 1050, H), "#d8caff", ` opacity=".35"`);
-  far.band(1010, 1100, "#9e8cd2", 0.5);
-  far.save();
-
-  r = rng(343);
-  const mid = new Layer("night-3-mid");
-  // The islet reaches further right, so the pine has rock under its roots
-  const islePts = rock(r, [[150, 1092], [240, 1050], [420, 1028], [560, 1032], [650, 1046], [710, 1068], [760, 1092]], 0.1, 5);
-  const shrine = pagoda(r, 420, 1034, 150, 3, 34);
-  const px = 600, py = yAt(islePts, px) + 5;
-  const trunk = quad([px, py], [588, py - 40], [606, py - 74], 10);
-  const pine = growTree(r, 606, py - 74, -1.5, 40, 8, 3, { spread: 0.8, flat: 0.6, shrink: 0.7 });
-  const pineWood = taper(trunk, 13, 8) + pine.wood + poly([[px - 14, py + 4], [px - 5, py - 8], [px + 5, py - 8], [px + 14, py + 4]]);
-  const isleArt = `<path d="${poly(islePts) + shrine.body + pineWood}" fill="#1b1331"/>`;
-  mid.add(`<g transform="translate(0 2184) scale(1 -1)" opacity=".3">${isleArt}</g>`, isleArt);
-  mid.add(canopy(r, pine.tips, 22, ["#150f28", "#1f1739", "#2c2250", "#2c2250"], { squash: 0.45 }));
-  mid.lights(shrine.lights, "#f3dcff", "#b46cff", 0.35);
-  const gate = torii(2080, 1180, 440, 500);
-  mid.add(`<g transform="translate(0 2360) scale(1 -1)" opacity=".32"><path d="${gate}" fill="#4c1d95"/></g>`);
-  mid.puff(2080, 900, 380, 320, "#a855f7", 0.16);
-  mid.path(gate, mid.vert([[0, "#5b21b6"], [1, "#2a0d55"]], 680, 1180));
-  // Rings of ripples where the torii's legs stand in the water
-  let rings = "";
-  for (const lx of [2080 - 440 * 0.35, 2080 + 440 * 0.35]) rings += oval(lx, 1182, 34, 5) + oval(lx, 1184, 62, 9) + oval(lx, 1187, 94, 13);
-  mid.path(rings, "none", ` stroke="#c4b5fd" stroke-width="2" opacity=".28"`);
-  mid.band(1110, 1250, "#8d7cc6", 0.5);
-  mid.save();
-
-  r = rng(454);
-  const near = new Layer("night-3-near");
-  let stalks = "", nodes = "", leaves = "";
-  for (let i = 0; i < 10; i++) {
-    const x = -30 + i * 46 + r() * 30, w = 16 + r() * 18, lean = (r() - 0.25) * 90;
-    const pts = quad([x, 1480], [x + lean * 0.2, 700], [x + lean, -80], 30);
-    stalks += taper(pts, w, w * 0.7);
-    for (let k = 3; k < pts.length - 1; k += 3) nodes += box(pts[k][0] - w * 0.45, pts[k][1], w * 0.9, 3);
-    for (let k = 0; k < 4 + r() * 3; k++) {
-      const [px, py] = pts[Math.floor(2 + r() * 20)];
-      for (let j = 0; j < 5; j++) leaves += leafPath(px, py, (r() < 0.65 ? 0.3 : 2.7) + (r() - 0.5) * 0.9, 60 + r() * 50, 7 + r() * 3);
-    }
-  }
-  near.path(stalks, near.horiz([[0, "#120c22"], [1, "#24193f"]], 0, 520)).path(nodes, "#3a2d60", ` opacity=".8"`).path(leaves, "#1b1330");
-  const mapleTree = growTree(r, 2600, 1340, -2.05, 170, 52, 6, { spread: 0.5, shrink: 0.7, up: 0.08 });
-  near.path(mapleTree.wood, "#100a1c");
-  near.add(canopy(r, mapleTree.tips, 46, PURPLE, { light: [-0.7, -0.7], specks: 2, shape: maple }));
-  near.path(area(wave(r, 1330, [[14, 600], [6, 140]])), "#0d0918").path(grass(r, 40, -40, 2600, 1336, 46), "#0d0918");
-  near.rise(1240, 1400, "#3a2c62", 0.5);
-  near.save();
-
-  r = rng(565);
-  const front = new Layer("night-3-front");
-  const lamp = toro(330, 1450, 300);
-  front.puff(330, 1000, 240, 200, "#c084fc", 0.35);
-  front.path(lamp.stone, front.vert([[0, "#2a2140"], [1, "#0b0815"]], 870, 1450));
-  front.lights([lamp.window], "#f6e6ff", "#b46cff", 0.45);
-  const [wx, wy, ww, wh] = lamp.window;
-  front.add(`<path d="M${f(wx + ww / 2)},${f(wy)}v${f(wh)}M${f(wx)},${f(wy + wh / 2)}h${f(ww)}" stroke="#1a1428" stroke-width="7"/>`);
-  let reeds = "";
-  for (let i = 0; i < 22; i++) {
-    const x = 2200 + r() * 380, h = 160 + r() * 200, bend = (r() - 0.6) * 60;
-    reeds += blade(x, 1460, h, 3, bend);
-    if (r() < 0.4) reeds += oval(x + bend * 0.85, 1460 - h * 0.85, 6, 22, Math.atan2(h, bend) - Math.PI / 2);
-  }
-  front.path(reeds, "#08050f");
-  let fall = "";
-  for (let i = 0; i < 40; i++) fall += oval(r() < 0.55 ? 1700 + r() * 860 : r() * 900, r() * 1300, 5 + r() * 5, 2.5 + r() * 2, r() * 3);
-  front.path(fall, "#9a5ae6", ` opacity=".8"`);
-  let spray = "";
-  for (let i = 0; i < 40; i++) spray += leafPath(-20 + r() * 380, -20 + r() * 60, 0.6 + r() * 1.2, 70 + r() * 70, 8 + r() * 4);
-  front.path(spray, "#0a0714");
-  front.puff(1300, 1450, 1500, 100, "#1c1530", 0.7);
   front.save();
 }
 
@@ -1272,7 +1274,7 @@ const LAYERS = ["sky", "far", "mid", "near", "front"];
 const SPEEDS = [0.6, 0.45, 0.32, 0.18, 0];
 // Where each scene's interest lies (0 = left edge, 1 = right edge). Narrow screens only see a slice
 // of the 16:9 art, so scene.js aims that slice here instead of at the calm middle.
-const FOCUS = { night: [0.8, 0.5, 0.8], day: [0.8, 0.18, 0.5] };
+const FOCUS = { night: [0.8, 0.8, 0.5], day: [0.8, 0.18, 0.5] };
 
 // Whatever file a layer currently has: your own image first, then the generated SVG.
 function fileFor(base) {
