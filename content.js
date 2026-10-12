@@ -42,7 +42,7 @@ window.SITE = {
   projects: [
     {
       title: "Tackly",
-      url: "https://www.tackly.dk/",
+      url: "https://tackly.dk/",
       tags: ["personal", "app", "web"],
       featured: true,
       wide: true,
