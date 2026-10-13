@@ -782,19 +782,40 @@ function night3() {
   const lcliff = rock(r, [[-140, 1480], [-140, 560], [60, 520], [210, 540], [330, 600], [372, 650], [440, 674], [494, 698], [484, 742], [448, 790], [470, 880], [520, 960], [550, 1060], [600, 1220], [620, 1480]], 0.07, 5);
   const rcliff = rock(r, [[2700, 1480], [2700, 520], [2560, 508], [2440, 516], [2330, 526], [2292, 560], [2284, 606], [2210, 622], [2156, 636], [2122, 696], [2134, 758], [2082, 840], [2060, 960], [2010, 1120], [1990, 1480]], 0.06, 5);
   const lp = pagoda(r, 220, 545, 320, 4, 70, { lattice: true });
-  // A temple hall with a two-tier roof on the right, its doors a row of lattice screens
-  const hall = box(2440, 440, 200, 68) + roof(2540, 446, 300, 64) + box(2492, 356, 96, 34) + roof(2540, 362, 190, 46);
-  const hallDoors = [0, 1, 2, 3].map((k) => [2452 + k * 46, 452, 38, 48]);
+  // A temple hall on the right, wholly in frame: a stone platform with a railing, a lower hall of
+  // lattice doors between posts, an upper storey with its own windows, and two curved roofs whose
+  // ridges end in upturned finials
+  const hx = 2400;
+  let hall = box(hx - 112, 502, 224, 16) + box(hx - 100, 440, 200, 64) + roof(hx, 446, 264, 62) +
+    box(hx - 52, 352, 104, 40) + box(hx - 64, 386, 128, 7) + roof(hx, 360, 184, 46);
+  for (const sx of [-1, 1]) {
+    hall += poly([[hx + sx * 14, 316], [hx + sx * 30, 314], [hx + sx * 40, 300], [hx + sx * 34, 298], [hx + sx * 26, 308], [hx + sx * 14, 310]]);
+  }
+  hall += box(hx - 4, 296, 8, 18) + circle(hx, 294, 6);
+  const hallDoors = [0, 1, 2, 3].map((k) => [hx - 88 + k * 46, 452, 38, 46]);
+  const hallWindows = [[hx - 40, 360, 34, 24], [hx + 6, 360, 34, 24]];
+  let rail = `M${hx - 112},492H${hx + 112}`;
+  for (let x = hx - 108; x <= hx + 108; x += 12) rail += `M${x},492V502`;
   const cliffFill = mid.vert([[0, "#33285a"], [1, "#171129"]], 460, 1300);
   // Stone foundations run down into the rock, so neither building overhangs the cliff top
   // A tapered stone plinth under the pagoda, its feet in the rock
   mid.path(poly([[116, 540], [324, 540], [344, 700], [96, 700]]), "#2a2148");
   mid.path(`M120,566H328M123,592H331`, "none", ` stroke="#1d1535" stroke-width="2.5" opacity=".7"`);
   mid.path(lp.body, "#1d1535");
-  // The hall stands against open sky, so its timber is a shade lighter and the moon catches its roof edges
-  mid.path(hall + box(2416, 504, 248, 90), "#2b2152", ` stroke="#54468c" stroke-width="2.5" stroke-linejoin="round"`);
-  mid.lights(lp.lights.concat(hallDoors), "#dcc6f7", "#b46cff", 0.2);
-  mid.lattice(lp.lights, "#1d1535").lattice(hallDoors, "#2b2152");
+  // The moon catches the hall's edges. It is drawn twice, stroked and then filled over, so the rim shows
+  // only on the outline; each piece is its own path, as the roofs wind the other way from the walls and
+  // would cut holes where they overlap
+  const plinth = poly([[hx - 112, 516], [hx + 112, 516], [hx + 128, 640], [hx - 132, 640]]);
+  const pieces = (hall + plinth).split("M").filter(Boolean).map((d) => `<path d="M${d}"/>`).join("");
+  mid.add(`<g fill="#130d24" stroke="#54468c" stroke-width="5" stroke-linejoin="round">${pieces}</g><g fill="#130d24">${pieces}</g>`);
+  mid.path(`M${hx - 114},540H${hx + 115}M${hx - 118},566H${hx + 118}`, "none", ` stroke="#1d1535" stroke-width="2.5" opacity=".7"`);
+  mid.lights(lp.lights.concat(hallDoors, hallWindows), "#dcc6f7", "#b46cff", 0.2);
+  mid.lattice(lp.lights.concat(hallDoors, hallWindows), "#1d1535");
+  // Posts between the doors, and the railing along the front of the platform
+  let posts = "";
+  for (const x of [hx - 100, hx - 45, hx + 1, hx + 47, hx + 94]) posts += box(x, 446, 6, 58);
+  mid.path(posts, "#120c22");
+  mid.add(`<path d="${rail}" fill="none" stroke="#54468c" stroke-width="2.5"/>`);
   mid.path(poly(lcliff) + poly(rcliff), cliffFill);
   // Two different pines. Left: upright, its trunk rising from the crag's shoulder.
   // Right: smaller and windswept, growing out of a crack in the cliff face and curving up toward the light.
@@ -842,17 +863,12 @@ function night3() {
   const near = new Layer("night-3-near");
   // The ground the street and the houses stand on, fading into the mist at the horizon
   near.path(box(-40, 1000, W + 80, H - 960), near.vert([[0, "#a99bd8", 0], [0.05, "#a99bd8"], [0.4, "#6f62a3"], [1, "#2e2550"]], 1000, H));
-  // The temple stands on a stepped terrace on this same layer, so the road always runs right up its steps
+  // The temple stands on a three-step terrace on this same layer, so the road always runs right up to it
   near.path(box(1080, 960, 400, 20) + box(1045, 978, 470, 20) + box(1010, 996, 540, 22), "#4f437c");
   const temple = pagoda(r, 1280, 960, 330, 4, 64, { lattice: true });
   near.path(temple.body, "#5d5089");
   near.lights(temple.lights, "#f3e4ff", "#c084fc", 0.16);
   near.lattice(temple.lights, "#5d5089");
-  let steps = "";
-  for (let y = 966; y < 1014; y += 8) steps += `M1204,${y}H1356`;
-  near.path(box(1200, 960, 160, 54), "#6a5c98");
-  near.add(`<path d="${steps}" stroke="#463a72" stroke-width="2.5"/>`);
-  near.puff(1280, 1004, 400, 34, "#b3a7df", 0.4);
   const road = poly([[1200, 1010], [1360, 1010], [1880, 1480], [680, 1480]]);
   near.path(road, near.vert([[0, "#6a5c98"], [0.4, "#3a3060"], [1, "#1c1630"]], 1010, H));
   near.add(`<path d="M1200,1010L680,1480M1360,1010L1880,1480" stroke="#1a1430" stroke-width="4" opacity=".45"/>`);
@@ -867,6 +883,8 @@ function night3() {
     }
   }
   near.add(`<path d="${joints}" fill="none" stroke="#1a1430" stroke-width="2.5" opacity=".55"/>`);
+  // The same mist lies over the terrace and the far end of the road, which are at the same distance
+  near.puff(1280, 1004, 400, 34, "#b3a7df", 0.4).puff(1280, 1034, 230, 46, "#b3a7df", 0.4);
   near.puff(1000, 1360, 220, 50, "#c084fc", 0.3).puff(1600, 1330, 220, 46, "#c084fc", 0.3);
   // Stone lanterns on the verges, smaller as the road runs away
   for (const [x, base, s, tone] of [[1062, 1110, 34, "#4a3f74"], [1498, 1110, 34, "#4a3f74"], [800, 1300, 78, "#241c40"], [1760, 1300, 78, "#241c40"]]) {
@@ -881,20 +899,31 @@ function night3() {
   near.path(box(110, 900, 230, 150), "#e7c9ff", ` opacity=".55"`);
   near.puff(225, 975, 260, 160, "#b46cff", 0.25);
   near.add(`<path d="M110,950h230M110,1000h230M168,900v150M225,900v150M282,900v150" stroke="#140f25" stroke-width="5"/>`);
-  near.path(box(470, 820, 8, 660) + box(540, 840, 8, 640), "#0e0a1a");
-  near.path(box(478, 850, 56, 300), "#3d1470");
-  near.add(`<circle cx="506" cy="920" r="18" fill="none" stroke="#c8a6f7" stroke-width="3" opacity=".7"/>`);
   for (const [x, y] of [[90, 840], [250, 858], [400, 876]]) near.lantern(x, y, 34, 40, LANTERN);
   // Right row
   near.path(poly([[2700, 640], [2040, 735], [1970, 705], [1984, 768], [2700, 712]]) + poly([[2700, 712], [2130, 772], [2120, 1480], [2700, 1480]]), "#140f25");
   near.path(box(2240, 860, 260, 170), "#e7c9ff", ` opacity=".5"`);
   near.puff(2370, 945, 280, 170, "#b46cff", 0.25);
   near.add(`<path d="M2240,917h260M2240,973h260M2305,860v170M2370,860v170M2435,860v170" stroke="#140f25" stroke-width="5"/>`);
-  near.path(box(2044, 760, 8, 720) + box(2044, 784, 92, 8), "#0e0a1a");
-  near.path(box(2060, 790, 70, 330), "#e9d5ff", ` opacity=".85"`);
-  near.path(box(2060, 790, 70, 18) + box(2060, 1104, 70, 16), "#140f25");
-  near.add(`<circle cx="2095" cy="890" r="22" fill="none" stroke="#5b21b6" stroke-width="5"/><path d="M2078,950q17,-6 34,0M2082,985q13,-5 26,0M2080,1020q15,-6 30,0" fill="none" stroke="#5b21b6" stroke-width="6" stroke-linecap="round"/>`);
   for (const [x, y] of [[2190, 800], [2330, 790], [2480, 776]]) near.lantern(x, y, 36, 40, LANTERN);
+  // Nobori banners on their own poles out on the verges, clear of the houses: each pole stands in a
+  // stone footing, an arm at the top holds the cloth, and loops tie its long edge to the pole
+  const nobori = (x, base, top, w, side, cloth, mark) => {
+    const px = side < 0 ? x : x + w, h = base - top, bot = base - h * 0.22;
+    near.puff(x + w / 2, base, w * 1.3, 12, "#0c0818", 0.65);
+    near.path(box(px - 4, top, 8, base - top) + box(Math.min(px, x) - 2, top + 10, w + 6, 7) + circle(px, top - 4, 7) +
+      box(px - 16, base - 22, 32, 24) + box(px - 12, base - 30, 24, 10), "#0e0a1a");
+    const bx = side < 0 ? x + 10 : x, bw = w - 10;
+    near.path(`M${bx},${top + 17}H${bx + bw}V${bot - 8}Q${bx + bw * 0.5},${bot + 6} ${bx},${bot}Z`, cloth);
+    let loops = "";
+    for (let y = top + 50; y < bot - 20; y += 52) loops += box(side < 0 ? px + 2 : px - 10, y, 8, 12);
+    near.path(loops, "#0e0a1a");
+    near.add(mark);
+  };
+  nobori(612, 1352, 820, 78, -1, near.vert([[0, "#4a1a86"], [1, "#2e0f5e"]], 830, 1240),
+    `<circle cx="661" cy="930" r="20" fill="none" stroke="#c8a6f7" stroke-width="3.5" opacity=".75"/><path d="M646,1000h30M646,1040h30M646,1080h30" stroke="#c8a6f7" stroke-width="3" opacity=".5"/>`);
+  nobori(1886, 1372, 770, 82, 1, near.vert([[0, "#efe1ff"], [1, "#cdb5f2"]], 780, 1230),
+    `<circle cx="1927" cy="880" r="22" fill="none" stroke="#5b21b6" stroke-width="5"/><path d="M1910,950q17,-6 34,0M1914,990q13,-5 26,0M1912,1030q15,-6 30,0" fill="none" stroke="#5b21b6" stroke-width="6" stroke-linecap="round"/>`);
   // The wanderer is on this layer so the road stays under his feet as the layers drift
   const walker = ronin(1050, 1420, 250, true, { ponytail: true });
   near.puff(1050, 1300, 200, 170, "#c084fc", 0.18).puff(1050, 1420, 70, 12, "#0c0818", 0.7);
@@ -908,7 +937,7 @@ function night3() {
     front.path(p.wood, "#0a0714");
     front.add(canopy(r, p.tips, 50, ["#08060f", "#110c1f", "#1d1533", "#1d1533"], { squash: 0.42, light: [0, -1] }));
   }
-  front.lantern(2330, 330, 74, 260, LANTERN);
+  front.lantern(2170, 330, 74, 260, LANTERN);
   front.puff(500, 1440, 1000, 100, "#1c1530", 0.75).puff(2100, 1440, 1000, 100, "#1c1530", 0.75);
   front.save();
 }
