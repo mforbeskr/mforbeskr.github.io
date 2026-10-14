@@ -1784,6 +1784,10 @@ main {
   clip: rect(0 0 0 0);
 }
 
+.details .print-only {
+  display: none;
+}
+
 .details dd {
   margin: 0;
   word-break: break-word;
@@ -2586,6 +2590,10 @@ img.cloth-hidden {
 
   .cv-side .details {
     font-size: 0.82rem;
+  }
+
+  .details .print-only {
+    display: grid;
   }
 
   .cv-side img {
