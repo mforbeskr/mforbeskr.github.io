@@ -16,6 +16,7 @@
  *     { type: "logo", src, alt, name, className }          logo on a plain tile
  *     { type: "tile", name, sub, icon, colors: [a, b] }    gradient tile with text
  *     { type: "placeholder" }                              simple </> tile
+ *   da: { ... }         -> Danish versions of any of the fields above (for media, only the parts that change)
  *
  * GitHub: public repos with the topic below are added automatically under
  * "More on GitHub" in the Portfolio section (unless they're already listed here).
@@ -31,12 +32,20 @@ window.SITE = {
     3: {
       short: "C# & .NET, building a CPU in DigiSim, and algorithms & complexity",
       long: "learning C# and .NET, building a CPU from logic gates in DigiSim, and digging into algorithms and time complexity",
+      da: {
+        short: "C# & .NET, at bygge en CPU i DigiSim og algoritmer & kompleksitet",
+        long: "lærer C# og .NET, bygger en CPU af logiske gates i DigiSim og dykker ned i algoritmer og tidskompleksitet",
+      },
     },
   },
 
   studyingFallback: {
     short: "Software Engineering at VIA University College",
     long: "studying Software Engineering at VIA University College",
+    da: {
+      short: "Softwareingeniør på VIA University College",
+      long: "læser til softwareingeniør på VIA University College",
+    },
   },
 
   projects: [
@@ -51,6 +60,10 @@ window.SITE = {
       chips: ["React Native", "TypeScript", "Supabase"],
       link: "Visit",
       media: { type: "image", src: "assets/tackly-feature.jpg", alt: "Tackly — Giv dit rideudstyr nye eventyr", width: 1024, height: 500 },
+      da: {
+        badge: "Live på Google Play · App Store er næste skridt",
+        desc: "En dansk peer-to-peer-markedsplads for rideudstyr: en mobilapp i Expo / React Native på Supabase plus et separat adminpanel i React til moderation, support og rollebaseret adgang. Den er live på Google Play, og App Store er næste skridt.",
+      },
     },
     {
       title: "Hos Qilej",
@@ -62,6 +75,10 @@ window.SITE = {
       chips: ["HTML", "CSS", "Freelance"],
       link: "Visit",
       media: { type: "logo", src: "assets/hosqilej.png", alt: "Hos Qilej logo", className: "tile-qilej" },
+      da: {
+        desc: "Hjemmeside for en barbershop i Roskilde — ydelser, priser, åbningstider og integreret onlinebooking.",
+        media: { alt: "Hos Qilejs logo" },
+      },
     },
     {
       title: "LearnHub",
@@ -79,6 +96,10 @@ window.SITE = {
         sub: "2nd semester project",
         icon: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',
       },
+      da: {
+        desc: "En læringsplatform med kurser, moduler, lektioner og tilmeldinger — et REST API i Spring Boot på PostgreSQL med en React-frontend, dækket af unit- og integrationstests. Bygget i et team på fire med mig som Product Owner.",
+        media: { sub: "Projekt på 2. semester" },
+      },
     },
     {
       title: "Smart Parking Lot",
@@ -94,6 +115,11 @@ window.SITE = {
         sub: "client ⇄ server",
         colors: ["#3b6fd6", "#1e3a7a"],
         icon: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>',
+      },
+      da: {
+        desc: "Eksamensprojekt i netværk og samtidighed, bygget sammen med en medstuderende. En socket-server udveksler JSON-beskeder med JavaFX-klienter til sensorer, lys og skærme ved hjælp af producer–consumer og heartbeats.",
+        chips: ["Java", "Sockets", "Samtidighed"],
+        media: { sub: "klient ⇄ server" },
       },
     },
     {
@@ -111,6 +137,11 @@ window.SITE = {
         colors: ["#4a7c59", "#24402d"],
         icon: '<path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/>',
       },
+      da: {
+        desc: "En aktiemarkedssimulator i JavaFX. Aktiernes adfærd styres af State-mønsteret, handelsgebyrerne af Strategy-mønsteret, og data gemmes i filer med en Unit of Work.",
+        chips: ["Java", "JavaFX", "Designmønstre"],
+        media: { sub: "2. semester" },
+      },
     },
     {
       title: ".NET Forum",
@@ -126,6 +157,10 @@ window.SITE = {
         sub: "C# · .NET",
         colors: ["#7c4dff", "#512bd4"],
         icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+      },
+      da: {
+        badge: "I gang",
+        desc: "En Reddit-inspireret forumapplikation i C# og .NET — et projekt på 3. semester, der bygges op opgave for opgave: entiteter og repositories, en CLI og lagring i filer indtil videre.",
       },
     },
     {
@@ -143,6 +178,11 @@ window.SITE = {
         colors: ["#2b8a8a", "#164a4f"],
         icon: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5 10.8 16M16 7.5 13.2 16M8.5 6h7"/>',
       },
+      da: {
+        badge: "I gang",
+        desc: "Et projekt i distribuerede systemer på 3. semester: en gRPC-service i Java med PostgreSQL bagved, der sporer produkter og deres dele tilbage til deres oprindelse.",
+        media: { sub: "gRPC-service" },
+      },
     },
     {
       title: "Kattis Solutions",
@@ -152,6 +192,10 @@ window.SITE = {
       chips: ["Java", "Algorithms"],
       link: "GitHub",
       media: { type: "tile", className: "tile-kattis", name: ">_ kattis", sub: "accepted ✓" },
+      da: {
+        desc: "Mine løsninger på algoritmiske programmeringsopgaver fra Kattis — træning i problemløsning i Java.",
+        chips: ["Java", "Algoritmer"],
+      },
     },
     {
       title: "Kløverly Application",
@@ -161,6 +205,10 @@ window.SITE = {
       chips: ["Java", "JavaFX"],
       link: "GitHub",
       media: { type: "image", src: "https://i.ibb.co/JwMp3TbK/Sk-rmbillede-2025-12-17-121902.png", alt: "Screenshot of the Kløverly JavaFX application" },
+      da: {
+        desc: "Projekt på 1. semester — en JavaFX-desktopapp, der holder styr på beboere, opgaver og point.",
+        media: { alt: "Skærmbillede af Kløverly-applikationen i JavaFX" },
+      },
     },
     {
       title: "Kløverly Website",
@@ -170,6 +218,10 @@ window.SITE = {
       chips: ["HTML", "CSS"],
       link: "Visit",
       media: { type: "image", src: "https://i.ibb.co/4gFJVHp1/KLOIN.png", alt: "Screenshot of the Kløverly website" },
+      da: {
+        desc: "Den tilhørende hjemmeside til Kløverly-semesterprojektet, bygget fra bunden i HTML og CSS.",
+        media: { alt: "Skærmbillede af Kløverlys hjemmeside" },
+      },
     },
     {
       title: "Whack-A-Jan",
@@ -179,6 +231,11 @@ window.SITE = {
       chips: ["JavaScript", "Game"],
       link: "Play",
       media: { type: "image", src: "https://i.ibb.co/RpL7VmxK/g5-WU5-Ydi-400x400-removebg-preview.webp", alt: "Whack-A-Jan game character", contain: true },
+      da: {
+        desc: "Et whack-a-mole-agtigt browserspil skrevet i ren JavaScript med DOM-interaktion.",
+        chips: ["JavaScript", "Spil"],
+        media: { alt: "Figuren fra spillet Whack-A-Jan" },
+      },
     },
     {
       title: "Monster Match",
@@ -188,6 +245,10 @@ window.SITE = {
       chips: ["HTML", "CSS"],
       link: "Visit",
       media: { type: "image", src: "https://i.ibb.co/zTHB9qn4/monstermatch5.png", alt: "Screenshot of the Monster Match sign-up page" },
+      da: {
+        desc: "En tilmeldingsformular til mit eget koncept for en datingapp, bygget i HTML og CSS.",
+        media: { alt: "Skærmbillede af tilmeldingssiden på Monster Match" },
+      },
     },
     {
       title: "My First Website",
@@ -197,6 +258,11 @@ window.SITE = {
       chips: ["HTML", "Playground"],
       link: "Visit",
       media: { type: "placeholder" },
+      da: {
+        title: "Min første hjemmeside",
+        desc: "Min første rigtige hjemmeside — en lille skoleopgave, der blev min web-legeplads.",
+        chips: ["HTML", "Legeplads"],
+      },
     },
   ],
 };

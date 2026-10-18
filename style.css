@@ -255,6 +255,49 @@ p {
   display: none;
 }
 
+/* Language toggle: a hairline flag and its code, showing the language you'd switch to */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  margin: 0 -0.6rem 0 -0.9rem;
+  padding: 0 0.6rem;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: 600 0.72rem/1 var(--font-body);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.lang-toggle:hover {
+  color: var(--text);
+}
+
+.lang-toggle > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.lang-toggle svg {
+  width: 19px;
+  height: auto;
+  opacity: 0.85;
+}
+
+.lang-toggle .lang-to-en,
+:root[lang="da"] .lang-toggle .lang-to-da {
+  display: none;
+}
+
+:root[lang="da"] .lang-toggle .lang-to-en {
+  display: inline-flex;
+}
+
 @media (max-width: 720px) {
   .nav-inner {
     flex-wrap: wrap;
@@ -1009,6 +1052,10 @@ main {
   font-size: 1.55em;
   line-height: 1;
   white-space: nowrap;
+  /* Room for the handwritten "!" and descenders that reach past the letter box; otherwise the
+     dark mode's gradient text (clipped to this box) cuts them off */
+  padding: 0.1em 0.15em 0.15em 0;
+  margin: -0.1em -0.15em -0.15em 0;
   transform-origin: left 70%;
   transition:
     transform 0.5s cubic-bezier(0.34, 1.8, 0.5, 1),
@@ -1652,18 +1699,10 @@ main {
 }
 
 .cv-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.5rem;
+  position: relative;
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
-}
-
-.cv-header > div {
-  flex: 1;
-  min-width: 0;
 }
 
 .cv-header h1 {
@@ -1675,13 +1714,35 @@ main {
   margin-bottom: 0;
 }
 
+/* A quiet text link on the eyebrow's line, so the headline below gets the full width */
 .cv-print {
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.cv-print:hover {
+  color: var(--accent);
 }
 
 .cv-print svg {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.cv-print:hover svg {
+  transform: translateY(2px);
 }
 
 .resume-main > section {
@@ -1958,9 +2019,13 @@ main {
 
   .cv-header {
     order: -1;
-    flex-direction: column;
     margin: 0;
     padding: 1.75rem 1.5rem;
+  }
+
+  .cv-print {
+    top: 1.75rem;
+    right: 1.5rem;
   }
 
   .resume-main {
@@ -1998,10 +2063,10 @@ main {
 
 .hobby-art {
   position: absolute;
-  top: 1.4rem;
-  right: 1.4rem;
-  width: 84px;
-  height: 84px;
+  top: 0.9rem;
+  right: 1rem;
+  width: 58px;
+  height: 58px;
   overflow: visible;
   pointer-events: none;
 }
@@ -2035,7 +2100,7 @@ main {
 
 .hobby h2,
 .hobby .tagline {
-  padding-right: 96px;
+  padding-right: 70px;
 }
 
 .hobby h2 {
@@ -2529,6 +2594,7 @@ img.cloth-hidden {
   .site-nav,
   .site-footer,
   .theme-toggle,
+  .lang-toggle,
   .skip-link,
   .rail,
   .rail-spacer,

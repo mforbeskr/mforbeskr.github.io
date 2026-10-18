@@ -1,4 +1,5 @@
-// Prints resume.html (using its print styles) to the PDF that the resume's download button serves.
+// Prints resume.html (using its print styles) to the PDFs that the resume's download button serves,
+// one in English and one in Danish.
 // Run after changing the resume: node tools/gen-cv-pdf.mjs
 // Needs Edge or Chrome; set BROWSER=/path/to/browser if neither is found in the usual place.
 import fs from "node:fs";
@@ -8,7 +9,10 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const OUT = path.join(REPO, "assets/Magnus-Forbes-Kjaer-Rasmussen-CV.pdf");
+const OUTPUTS = {
+  en: "assets/Magnus-Forbes-Kjaer-Rasmussen-CV.pdf",
+  da: "assets/Magnus-Forbes-Kjaer-Rasmussen-CV-da.pdf",
+};
 
 const candidates = [
   process.env.BROWSER,
@@ -23,18 +27,21 @@ const candidates = [
 const browser = candidates.find((p) => p && fs.existsSync(p));
 if (!browser) throw new Error("No Edge or Chrome found; set BROWSER=/path/to/browser");
 
-const profile = fs.mkdtempSync(path.join(os.tmpdir(), "cv-pdf-"));
-try {
-  execFileSync(browser, [
-    "--headless=new",
-    "--disable-gpu",
-    `--user-data-dir=${profile}`,
-    "--no-pdf-header-footer",
-    "--virtual-time-budget=5000",
-    `--print-to-pdf=${OUT}`,
-    pathToFileURL(path.join(REPO, "resume.html")).href,
-  ], { stdio: "ignore" });
-} finally {
-  fs.rmSync(profile, { recursive: true, force: true });
+for (const [lang, file] of Object.entries(OUTPUTS)) {
+  const out = path.join(REPO, file);
+  const profile = fs.mkdtempSync(path.join(os.tmpdir(), "cv-pdf-"));
+  try {
+    execFileSync(browser, [
+      "--headless=new",
+      "--disable-gpu",
+      `--user-data-dir=${profile}`,
+      "--no-pdf-header-footer",
+      "--virtual-time-budget=5000",
+      `--print-to-pdf=${out}`,
+      pathToFileURL(path.join(REPO, "resume.html")).href + "?lang=" + lang,
+    ], { stdio: "ignore" });
+  } finally {
+    fs.rmSync(profile, { recursive: true, force: true });
+  }
+  console.log(file, (fs.statSync(out).size / 1024).toFixed(0) + " KB");
 }
-console.log(path.relative(REPO, OUT), (fs.statSync(OUT).size / 1024).toFixed(0) + " KB");

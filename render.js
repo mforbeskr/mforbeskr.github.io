@@ -1,8 +1,21 @@
 (function () {
   "use strict";
 
+  var i18n = window.I18N || { lang: "en", apply: function () {}, t: function (key, english) { return english; } };
+  var t = i18n.t;
+  // Swap in the Danish copy before anything below (or story.js, rail.js) reads the page.
+  i18n.apply();
+
   var site = window.SITE;
   if (!site) return;
+
+  // Content entries can carry a da: { ... } with the Danish versions of their fields.
+  function localized(entry) {
+    if (i18n.lang !== "da" || !entry.da) return entry;
+    var out = Object.assign({}, entry, entry.da);
+    if (entry.media && entry.da.media) out.media = Object.assign({}, entry.media, entry.da.media);
+    return out;
+  }
 
   var ARROW =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>';
@@ -21,6 +34,7 @@
   }
 
   function ordinal(n) {
+    if (i18n.lang === "da") return n + ".";
     var suffixes = ["th", "st", "nd", "rd"];
     var v = n % 100;
     return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
@@ -69,14 +83,14 @@
       "<h3>" + esc(p.title) + "</h3>" +
       "<p>" + esc(p.desc) + "</p>" +
       '<div class="project-foot"><ul class="chips">' + chips + "</ul>" +
-      '<span class="project-link">' + esc(p.link) + " " + ARROW + "</span></div>" +
+      '<span class="project-link">' + esc(t("link." + p.link, p.link)) + " " + ARROW + "</span></div>" +
       "</div></a>"
     );
   }
 
   document.querySelectorAll("[data-projects]").forEach(function (grid) {
     grid.innerHTML = site.projects.map(function (p, i) {
-      return card(p, i, true);
+      return card(localized(p), i, true);
     }).join("");
   });
 
@@ -119,13 +133,14 @@
       title: repo.name.replace(/[-_]+/g, " "),
       url: site || repo.html_url,
       tags: tagsFor(repo),
-      desc: repo.description || "No description yet.",
+      desc: repo.description || t("github.noDesc", "No description yet."),
       chips: chips,
       link: site ? "Visit" : "GitHub",
       media: {
         type: "tile",
         name: repo.name.replace(/[-_]+/g, " "),
-        sub: "Updated " + new Date(repo.pushed_at).toLocaleDateString("en-GB", { month: "short", year: "numeric" }),
+        sub: t("github.updated", "Updated") + " " +
+          new Date(repo.pushed_at).toLocaleDateString(i18n.lang === "da" ? "da-DK" : "en-GB", { month: "short", year: "numeric" }),
         colors: LANGUAGE_COLORS[repo.language] || DEFAULT_COLORS,
         icon: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
       },
@@ -182,7 +197,7 @@
   }
 
   var semester = currentSemester();
-  var studying = site.studying[semester] || site.studyingFallback;
+  var studying = localized(site.studying[semester] || site.studyingFallback);
 
   document.querySelectorAll("[data-semester]").forEach(function (el) {
     el.textContent = el.dataset.semester === "ordinal" ? ordinal(semester) : semester;

@@ -25,10 +25,12 @@
 
   var here = pageIndex(location.href);
 
-  // A saved choice wins; first-time visitors get their device's mode.
+  // A saved choice wins; first-time visitors always start in light mode.
   var savedTheme = store("localStorage", "colorTheme");
-  if (savedTheme === "light" || savedTheme === "dark") root.dataset.theme = savedTheme;
-  else root.dataset.theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  root.dataset.theme = savedTheme === "dark" ? "dark" : "light";
+  var t = window.I18N ? window.I18N.t : function (key, english) {
+    return english;
+  };
 
   function currentTheme() {
     return root.dataset.theme;
@@ -124,7 +126,9 @@
     var toggle = document.querySelector(".theme-toggle");
     if (toggle) {
       var labelToggle = function () {
-        toggle.setAttribute("aria-label", "Switch to " + (currentTheme() === "dark" ? "light" : "dark") + " mode");
+        toggle.setAttribute("aria-label", currentTheme() === "dark"
+          ? t("theme.toLight", "Switch to light mode")
+          : t("theme.toDark", "Switch to dark mode"));
       };
       toggle.addEventListener("click", function () {
         var next = currentTheme() === "dark" ? "light" : "dark";
@@ -133,6 +137,14 @@
         labelToggle();
       });
       labelToggle();
+    }
+
+    // Language toggle: it shows the language you'd switch to
+    var langToggle = document.querySelector(".lang-toggle");
+    if (langToggle && window.I18N) {
+      langToggle.addEventListener("click", function () {
+        window.I18N.set(window.I18N.lang === "da" ? "en" : "da");
+      });
     }
 
     // Scroll reveal
@@ -194,7 +206,9 @@
       grid.classList.toggle("is-collapsed", !expanded && !filtering && more > 0);
       showAll.parentElement.hidden = filtering || more === 0;
       showAll.setAttribute("aria-expanded", String(expanded));
-      showAll.textContent = expanded ? "Show fewer" : "Show all " + grid.children.length + " projects";
+      showAll.textContent = expanded
+        ? t("showFewer", "Show fewer")
+        : t("showAll", "Show all {n} projects").replace("{n}", grid.children.length);
     }
     function applyFilter(btn) {
       var tag = btn.dataset.filter;

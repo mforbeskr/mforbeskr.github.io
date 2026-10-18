@@ -9,7 +9,7 @@
 
     var nav = document.createElement("nav");
     nav.className = "rail";
-    nav.setAttribute("aria-label", "Sections on this page");
+    nav.setAttribute("aria-label", window.I18N ? window.I18N.t("rail.aria", "Sections on this page") : "Sections on this page");
     var list = document.createElement("ol");
     var links = sections.map(function (section, i) {
       var li = document.createElement("li");
