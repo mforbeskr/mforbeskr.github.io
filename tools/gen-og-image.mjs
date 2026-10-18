@@ -42,10 +42,9 @@ const html = `<!DOCTYPE html>
     box-shadow: 0 2px 4px rgb(40 30 15 / 0.06), 0 30px 60px -24px rgb(40 30 15 / 0.35);
   }
   .eyebrow {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 26px;
+    margin-bottom: 26px;
     color: #c2410c; font-size: 20px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   }
-  .eyebrow::before { content: ""; width: 40px; height: 3px; border-radius: 3px; background: #c2410c; }
   h1 { font-family: "Playfair Display", serif; font-weight: 800; font-size: 64px; line-height: 1.08; }
   p { margin-top: 26px; color: #625d55; font-size: 27px; font-weight: 500; line-height: 1.45; }
   .url { margin-top: 40px; color: #1c1a17; font-size: 21px; font-weight: 600; letter-spacing: 0.02em; }
