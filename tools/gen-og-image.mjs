@@ -1,7 +1,8 @@
 // Draws the link-preview image (og:image) that LinkedIn, Slack and friends show for the site.
 // Run after changing the portrait, title or wording below: node tools/gen-og-image.mjs
-// LinkedIn shows it as small as ~360px wide and recompresses it, so it keeps to a few large elements
-// and is rendered at twice the size for a sharper downscale.
+// LinkedIn shows it as small as ~360px wide and recompresses anything it has to resize, so it keeps
+// to a few large elements and is delivered at exactly the 1200x627 they ask for: drawn at twice that
+// size, then scaled down smoothly and saved as a high-quality JPEG.
 // Needs Edge or Chrome; set BROWSER=/path/to/browser if neither is found in the usual place.
 import fs from "node:fs";
 import os from "node:os";
@@ -10,7 +11,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const OUT = path.join(REPO, "assets/og-image.png");
+const OUT = path.join(REPO, "assets/og-image.jpg");
 const WIDTH = 1200;
 const HEIGHT = 627;
 const SCALE = 2;
@@ -55,21 +56,44 @@ const html = `<!DOCTYPE html>
   </div>
 </body></html>`;
 
+// Second pass: scale the big screenshot down on a canvas and print it back as a JPEG data URL.
+const shrink = (src) => `<!DOCTYPE html><body><script>
+  const img = new Image();
+  img.onload = () => {
+    const c = document.createElement("canvas");
+    c.width = ${WIDTH}; c.height = ${HEIGHT};
+    const g = c.getContext("2d");
+    g.imageSmoothingQuality = "high";
+    g.drawImage(img, 0, 0, ${WIDTH}, ${HEIGHT});
+    const out = document.createElement("pre");
+    out.id = "out";
+    out.textContent = c.toDataURL("image/jpeg", 0.95);
+    document.body.appendChild(out);
+  };
+  img.src = ${JSON.stringify(src)};
+</script></body>`;
+
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "og-image-"));
 try {
   const page = path.join(tmp, "og.html");
+  const big = path.join(tmp, "og-big.png");
   fs.writeFileSync(page, html);
-  execFileSync(browser, [
+  const run = (args) => execFileSync(browser, [
     "--headless=new",
     "--disable-gpu",
     "--hide-scrollbars",
+    "--allow-file-access-from-files",
     `--user-data-dir=${path.join(tmp, "profile")}`,
-    `--force-device-scale-factor=${SCALE}`,
-    `--window-size=${WIDTH},${HEIGHT}`,
     "--virtual-time-budget=8000",
-    `--screenshot=${OUT}`,
-    pathToFileURL(page).href,
-  ], { stdio: "ignore" });
+    ...args,
+  ], { stdio: ["ignore", "pipe", "ignore"], maxBuffer: 64 * 1024 * 1024 });
+  run([`--force-device-scale-factor=${SCALE}`, `--window-size=${WIDTH},${HEIGHT}`, `--screenshot=${big}`, pathToFileURL(page).href]);
+  const shrinkPage = path.join(tmp, "shrink.html");
+  fs.writeFileSync(shrinkPage, shrink(pathToFileURL(big).href));
+  const dom = run(["--dump-dom", pathToFileURL(shrinkPage).href]).toString();
+  const data = /data:image\/jpeg;base64,([A-Za-z0-9+/=]+)/.exec(dom);
+  if (!data) throw new Error("Couldn't scale the image down");
+  fs.writeFileSync(OUT, Buffer.from(data[1], "base64"));
 } finally {
   fs.rmSync(tmp, { recursive: true, force: true });
 }
