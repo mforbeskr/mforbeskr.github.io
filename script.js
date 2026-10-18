@@ -122,7 +122,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    // Theme toggle
     var toggle = document.querySelector(".theme-toggle");
     if (toggle) {
       var labelToggle = function () {
@@ -147,7 +146,6 @@
       });
     }
 
-    // Scroll reveal
     var reveals = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window && !reduceMotion) {
       var io = new IntersectionObserver(
@@ -182,7 +180,6 @@
       window.addEventListener("load", sweep);
     }
 
-    // Cursor spotlight on cards
     document.addEventListener("pointermove", function (e) {
       var card = e.target.closest && e.target.closest(".spotlight");
       if (!card) return;
@@ -259,7 +256,6 @@
       });
     });
 
-    // Footer year
     document.querySelectorAll("[data-year]").forEach(function (el) {
       el.textContent = new Date().getFullYear();
     });

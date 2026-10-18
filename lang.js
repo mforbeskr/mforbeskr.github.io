@@ -8,8 +8,7 @@
  * Project texts and "what I'm studying" are translated next to the English in content.js (the da: fields).
  *
  * First visit: the first of the browser's languages that is Danish or English wins (anything else
- * gets English). The navbar toggle saves a choice, and ?lang=da or ?lang=en in a link overrides both,
- * handy for sending a Danish CV link.
+ * gets English). The navbar toggle saves a choice, and ?lang=da or ?lang=en in a link overrides both.
  */
 (function () {
   "use strict";
@@ -47,7 +46,6 @@
   document.documentElement.lang = lang;
 
   var DA = {
-    // Shared
     "skip": "Spring til indhold",
     "nav.aria": "Hovedmenu",
     "nav.home": "Forside",
@@ -65,7 +63,6 @@
     "showAll": "Vis alle {n} projekter",
     "showFewer": "Vis færre",
 
-    // Home
     "home.title": "Magnus Forbes Kjær-Rasmussen · Softwareingeniør-trainee",
     "home.desc": "Magnus Forbes Kjær-Rasmussen, softwareingeniør-trainee på VIA University College, bosat i Hedehusene. Full-stack-, Java- og webudvikling.",
     "rail.intro": "Intro",
@@ -193,7 +190,6 @@
     "contact.email": "Send mig en mail",
     "home.footer": "Softwareingeniør-trainee på VIA University College · Hedehusene, Danmark ·",
 
-    // CV
     "cv.title": "CV · Magnus Forbes Kjær-Rasmussen",
     "cv.desc": "CV for Magnus Forbes Kjær-Rasmussen, softwareingeniørstuderende på VIA University College. Kompetencer, uddannelse og erfaring.",
     "cv.sideAria": "Personlige oplysninger",

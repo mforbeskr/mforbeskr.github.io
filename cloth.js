@@ -25,7 +25,7 @@
     "  vec2 d = uv - u_poke.xy;",
     "  d.x *= u_aspect;",
     "  float r = length(d);",
-    "  z += u_poke.z * exp(-r * r * 40.0) * sin(r * 34.0 - t * 6.0) * 0.85;", // the ripple under the cursor
+    "  z += u_poke.z * exp(-r * r * 40.0) * sin(r * 34.0 - t * 6.0) * 0.85;",
     "  return z * pinned(uv) * u_amp;",
     "}",
     "void main() {",
@@ -134,7 +134,6 @@
     };
     source.src = img.currentSrc || img.src;
 
-    // Pointer: the cloth livens up on hover and ripples where the cursor is.
     var host = img.parentElement;
     host.addEventListener("pointermove", function (e) {
       var r = img.getBoundingClientRect();

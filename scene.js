@@ -173,7 +173,6 @@
     });
   }
 
-  // Petals blown off the purple tree, tumbling as they fall.
   function petals(t) {
     motes.forEach(function (m, i) {
       m.y += m.vy * 0.5;
@@ -215,7 +214,6 @@
     if (p >= 1) comet = null;
   }
 
-  // Sunlit motes drifting gently upward.
   function specks(t) {
     motes.forEach(function (m, i) {
       m.x += m.vx + Math.sin(t / 1700 + m.phase) * 0.2;
@@ -226,7 +224,6 @@
     });
   }
 
-  // Gulls over the valley: a few V-shapes crossing now and then.
   function flock(t) {
     if (!birds.length && t > nextBirds) {
       var dir = Math.random() < 0.5 ? 1 : -1, y0 = H * (0.1 + Math.random() * 0.2);
