@@ -210,12 +210,11 @@
     "cv.fluent": "Flydende i skrift og tale",
     "cv.good": "Godt",
     "cv.basic": "Grundlæggende forståelse",
-    "cv.eyebrow": "CV",
     "cv.h1": "Softwareingeniørstuderende",
     "cv.lead":
       "Læser til softwareingeniør på VIA University College — og har allerede en markedspladsapp, " +
       "hjemmesider for kunder og teamprojekter ude ved siden af.",
-    "cv.pdf": "Download som PDF",
+    "cv.pdf": "Download CV som PDF",
     "cv.pdfHref": "assets/Magnus-Forbes-Kjaer-Rasmussen-CV-da.pdf",
     "rail.profile": "Profil",
     "rail.skills": "Kompetencer",
@@ -232,7 +231,7 @@
       "Jeg nyder den menneskelige side af software lige så meget — at omsætte ønsker til klare krav og " +
       "holde et team på vej i samme retning, som jeg gjorde som Product Owner på LearnHub.",
     "cv.skills": "Tekniske kompetencer",
-    "cv.skillLangs": "Programmeringssprog",
+    "cv.skillLangs": "Kodesprog",
     "cv.skillWeb": "Web &amp; frameworks",
     "cv.skillDb": "Databaser &amp; værktøjer",
     "cv.skillMethods": "Metoder &amp; roller",

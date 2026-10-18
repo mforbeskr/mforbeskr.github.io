@@ -117,6 +117,11 @@ p {
   border-radius: 6px;
 }
 
+/* Sections the rail moves focus to (so Tab carries on from there) shouldn't get a ring */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
 .skip-link {
   position: absolute;
   left: 16px;
@@ -1633,6 +1638,7 @@ main {
   grid-template-columns: 290px minmax(0, 1fr);
   background: var(--surface);
   border: 1px solid var(--border);
+  position: relative;
   border-radius: 22px;
   box-shadow: var(--shadow-lg);
   overflow: clip;
@@ -1699,7 +1705,6 @@ main {
 }
 
 .cv-header {
-  position: relative;
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
@@ -1714,18 +1719,18 @@ main {
   margin-bottom: 0;
 }
 
-/* A quiet text link on the eyebrow's line, so the headline below gets the full width */
+/* Just an icon and "PDF", tucked into the card's top-right corner above the headline */
 .cv-print {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1.1rem;
+  right: clamp(1.5rem, 4.5vw, 3.5rem);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   color: var(--muted);
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
   line-height: 1.7;
   text-decoration: none;
   transition: color 0.2s;
@@ -2020,12 +2025,8 @@ main {
   .cv-header {
     order: -1;
     margin: 0;
-    padding: 1.75rem 1.5rem;
-  }
-
-  .cv-print {
-    top: 1.75rem;
-    right: 1.5rem;
+    /* Extra room on top so the PDF link sits above the headline, not beside it */
+    padding: 3rem 1.5rem 1.75rem;
   }
 
   .resume-main {

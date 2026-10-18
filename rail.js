@@ -18,6 +18,15 @@
       a.innerHTML =
         '<span class="rail-text"><span class="rail-label"></span></span><span class="rail-tick" aria-hidden="true"></span>';
       a.querySelector(".rail-label").textContent = section.dataset.rail;
+      // Jump without putting #section in the address, so a copied URL is just the page.
+      a.addEventListener("click", function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        var smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        section.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
+        if (!section.hasAttribute("tabindex")) section.setAttribute("tabindex", "-1");
+        section.focus({ preventScroll: true });
+      });
       li.appendChild(a);
       list.appendChild(li);
       return a;

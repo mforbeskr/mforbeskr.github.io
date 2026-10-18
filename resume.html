@@ -21,12 +21,12 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=60"/>
+    <link rel="stylesheet" href="style.css?v=63"/>
     <link rel="expect" href="#page-end" blocking="render"/>
-    <script src="lang.js?v=1"></script>
+    <script src="lang.js?v=4"></script>
     <script src="content.js?v=13"></script>
     <script src="script.js?v=21"></script>
-    <script src="rail.js?v=8" defer></script>
+    <script src="rail.js?v=9" defer></script>
     <script src="story.js?v=8" defer></script>
 </head>
 <body>
@@ -130,16 +130,15 @@
                 <div class="cv-main">
                     <header class="cv-header">
                         <div>
-                            <p class="eyebrow reveal" data-i18n="cv.eyebrow">Resume</p>
                             <h1 class="reveal" style="--delay: 0.05s" data-split data-i18n="cv.h1">Software Engineering Student</h1>
                             <p class="lead reveal" style="--delay: 0.1s" data-i18n="cv.lead">
                                 Studying Software Engineering at VIA University College — and already
                                 shipping a marketplace app, client websites and team projects on the side.
                             </p>
                         </div>
-                        <a class="cv-print" href="assets/Magnus-Forbes-Kjaer-Rasmussen-CV.pdf" data-i18n-attr="href:cv.pdfHref" download>
+                        <a class="cv-print" href="assets/Magnus-Forbes-Kjaer-Rasmussen-CV.pdf" aria-label="Download CV as PDF" data-i18n-attr="href:cv.pdfHref aria-label:cv.pdf" download>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-                            <span data-i18n="cv.pdf">Download as PDF</span>
+                            PDF
                         </a>
                     </header>
                     <div class="resume-main">
