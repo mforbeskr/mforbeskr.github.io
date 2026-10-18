@@ -1,5 +1,7 @@
 // Draws the link-preview image (og:image) that LinkedIn, Slack and friends show for the site.
 // Run after changing the portrait, title or wording below: node tools/gen-og-image.mjs
+// LinkedIn shows it as small as ~360px wide and recompresses it, so it keeps to a few large elements
+// and is rendered at twice the size for a sharper downscale.
 // Needs Edge or Chrome; set BROWSER=/path/to/browser if neither is found in the usual place.
 import fs from "node:fs";
 import os from "node:os";
@@ -11,6 +13,7 @@ const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(REPO, "assets/og-image.png");
 const WIDTH = 1200;
 const HEIGHT = 627;
+const SCALE = 2;
 
 const candidates = [
   process.env.BROWSER,
@@ -33,29 +36,22 @@ const html = `<!DOCTYPE html>
   * { box-sizing: border-box; margin: 0; }
   html, body { width: ${WIDTH}px; height: ${HEIGHT}px; overflow: hidden; }
   body {
-    display: flex; align-items: center; gap: 72px; padding: 0 88px 0 72px;
+    display: flex; align-items: center; gap: 64px; padding: 0 64px 0 64px;
     background: radial-gradient(900px 500px at 85% 0%, #fff1e6, transparent 70%), #fbfaf6;
     color: #1c1a17; font-family: Inter, sans-serif;
   }
   img {
-    flex-shrink: 0; width: 392px; height: 490px; object-fit: cover; border-radius: 28px;
+    flex-shrink: 0; width: 420px; height: 525px; object-fit: cover; border-radius: 30px;
     box-shadow: 0 2px 4px rgb(40 30 15 / 0.06), 0 30px 60px -24px rgb(40 30 15 / 0.35);
   }
-  .eyebrow {
-    margin-bottom: 26px;
-    color: #c2410c; font-size: 20px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  }
-  h1 { font-family: "Playfair Display", serif; font-weight: 800; font-size: 64px; line-height: 1.08; }
-  p { margin-top: 26px; color: #625d55; font-size: 27px; font-weight: 500; line-height: 1.45; }
-  .url { margin-top: 40px; color: #1c1a17; font-size: 21px; font-weight: 600; letter-spacing: 0.02em; }
+  h1 { font-family: "Playfair Display", serif; font-weight: 800; font-size: 74px; line-height: 1.08; white-space: nowrap; }
+  p { margin-top: 30px; color: #c2410c; font-size: 38px; font-weight: 600; line-height: 1.25; }
 </style></head>
 <body>
   <img src="https://i.ibb.co/SXbLSw55/1000008802.jpg" alt=""/>
   <div>
-    <div class="eyebrow">Software Engineering</div>
     <h1>Magnus Forbes<br/>Kjær-Rasmussen</h1>
-    <p>Full-stack developer, VIA University College student and founder of Tackly.</p>
-    <div class="url">mforbeskr.github.io</div>
+    <p>Software Engineering</p>
   </div>
 </body></html>`;
 
@@ -68,7 +64,7 @@ try {
     "--disable-gpu",
     "--hide-scrollbars",
     `--user-data-dir=${path.join(tmp, "profile")}`,
-    "--force-device-scale-factor=1",
+    `--force-device-scale-factor=${SCALE}`,
     `--window-size=${WIDTH},${HEIGHT}`,
     "--virtual-time-budget=8000",
     `--screenshot=${OUT}`,
