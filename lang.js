@@ -67,7 +67,7 @@
 
     // Home
     "home.title": "Magnus Forbes Kjær-Rasmussen · Softwareingeniør-trainee",
-    "home.desc": "Magnus Forbes Kjær-Rasmussen — softwareingeniør-trainee på VIA University College, bosat i Hedehusene. Full-stack-, Java- og webudvikling.",
+    "home.desc": "Magnus Forbes Kjær-Rasmussen, softwareingeniør-trainee på VIA University College, bosat i Hedehusene. Full-stack-, Java- og webudvikling.",
     "rail.intro": "Intro",
     "rail.about": "Om mig",
     "rail.portfolio": "Portfolio",
@@ -77,20 +77,20 @@
     "home.h1": 'Hej, jeg er Magnus.<br/>Jeg bygger bro mellem <span class="accent">kode</span> og mennesker.',
     "home.lead":
       'Softwareingeniørstuderende på <span data-semester="ordinal">3.</span> semester på VIA University Colleges ' +
-      "fleksible traineeuddannelse. Jeg er glad for full-stack-udvikling og softwarearkitektur — men allermest " +
+      "fleksible traineeuddannelse. Jeg er glad for full-stack-udvikling og softwarearkitektur, men allermest " +
       "for at omsætte det, folk faktisk har brug for, til software, der virker.",
     "home.seeWork": "Se mit arbejde",
     "home.readCv": "Læs mit CV",
     "home.badge": "Softwareingeniør",
     "facts.aria": "Hurtige fakta",
-    "facts.po": "elskede at være Product Owner på LearnHub — en rolle, jeg gerne vil udforske mere",
-    "facts.freelance": "en hjemmeside til en rigtig kunde og Tackly — live på Google Play, App Store er det næste",
+    "facts.po": "elskede at være Product Owner på LearnHub, en rolle, jeg gerne vil udforske mere",
+    "facts.freelance": "en hjemmeside til en rigtig kunde og Tackly, live på Google Play med App Store som det næste",
     "facts.balance": "familieliv i Hedehusene, gaming, basketball og klaver derhjemme",
 
     "about.eyebrow": "Om mig",
     "about.title": "Nysgerrig, praktisk og rolig under pres.",
     "about.p1":
-      "Jeg har altid villet vide, <em>hvorfor</em> ting virker — og når jeg først ved det, kan jeg ikke lade " +
+      "Jeg har altid villet vide, <em>hvorfor</em> ting virker, og når jeg først ved det, kan jeg ikke lade " +
       "være med at spørge mig selv, om de kunne virke bedre. Er det her virkelig det bedste, det kan blive? " +
       "Hvor er flaskehalsen? Hvad ville gøre det nemmere for alle, der bruger det? Software er stedet, hvor " +
       "den nysgerrighed og kreativitet endelig får lov at bygge noget. Jeg kan godt lide at grave i de " +
@@ -105,10 +105,10 @@
       "Hvert semester giver mig nye værktøjer, og jeg kan ikke lade være med også at bruge dem uden for " +
       "undervisningen. Det har ført mig fra en enkel one-pager til min gode vens barbershop i Roskilde, " +
       '<a class="brand-word brand-qilej" href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>, ' +
-      'hele vejen til <a class="brand-word brand-tackly" href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a> ' +
-      "— en komplet markedspladsapp til rideudstyr, som jeg nu driver som min egen virksomhed. Den er netop " +
+      'hele vejen til <a class="brand-word brand-tackly" href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>, ' +
+      "en komplet markedspladsapp til rideudstyr, som jeg nu driver som min egen virksomhed. Den er netop " +
       'lanceret på <a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a>, ' +
-      "og App Store er det næste. Hjemmesider, apps og alt derimellem — jeg elsker variationen. " +
+      "og App Store er det næste. Hjemmesider, apps og alt derimellem. Jeg elsker variationen. " +
       '<mark class="callout">Har du brug for en hjemmeside eller en lille app? Du er velkommen til at ' +
       '<a class="reach-out" href="mailto:mforbeskr@outlook.dk">skrive til mig!</a></mark>',
     "about.po":
@@ -126,13 +126,13 @@
     "about.personalTitle": "Lidt mere personligt",
     "about.personal":
       "Jeg bor i Hedehusene med min kæreste gennem mange år og vores lille søn. Jeg går meget op i at " +
-      "balancere ambitioner med de mennesker, der betyder noget — " +
-      '<a href="#hobbies">her er, hvad jeg laver, når jeg ikke sidder på skolebænken</a>.',
+      "balancere ambitioner med de mennesker, der betyder noget. " +
+      '<a href="#hobbies">Her er, hvad jeg laver, når jeg ikke sidder på skolebænken</a>.',
 
     "work.title": "Ting, jeg har bygget",
     "work.lead":
       "Fra en markedspladsapp live på Google Play og en freelance-hjemmeside til en rigtig kunde til " +
-      "semesterprojekter i Java, C# og React — plus masser af små eksperimenter undervejs. Brug filtrene " +
+      "semesterprojekter i Java, C# og React, plus masser af små eksperimenter undervejs. Brug filtrene " +
       "til at skifte mellem personlige projekter og skoleprojekter.",
     "filter.aria": "Filtrér projekter",
     "filter.all": "Alle",
@@ -144,11 +144,11 @@
     "approach.eyebrow": "Sådan arbejder jeg",
     "approach.title": "Jeg lærer ved at bygge",
     "approach.lead":
-      "Projekterne viser forskellige trin på min læringsrejse. Hvert af dem har lært mig noget nyt — og jeg " +
+      "Projekterne viser forskellige trin på min læringsrejse. Hvert af dem har lært mig noget nyt, og jeg " +
       "vender jævnligt tilbage til ældre projekter for at forfine dem, efterhånden som mine evner udvikler sig.",
     "approach.f1Title": "Fra idé til færdigt produkt",
     "approach.f1":
-      "Jeg kan godt lide små, fokuserede projekter, hvor jeg kan tage en idé hele vejen — planlægge " +
+      "Jeg kan godt lide små, fokuserede projekter, hvor jeg kan tage en idé hele vejen: planlægge " +
       "strukturen, designe enkle brugerflader og forfine funktionaliteten gennem test og iteration.",
     "approach.f2Title": "Front-end og meget mere",
     "approach.f2":
@@ -156,7 +156,7 @@
       "projekter lægger jeg vægt på læsbarhed, struktur og vedligeholdelse.",
     "approach.f3Title": "Full-stack i praksis",
     "approach.f3":
-      "Jeg kan godt lide at eje en feature fra ende til anden — database, sikkerhedsregler, API og " +
+      "Jeg kan godt lide at eje en feature fra ende til anden: database, sikkerhedsregler, API og " +
       "brugerflade. Jeg er åben for små opgaver, prototyper og proof-of-concepts for startups, mindre " +
       "virksomheder og privatkunder.",
 
@@ -164,7 +164,7 @@
     "hobbies.title": "Livet uden for koden",
     "hobbies.lead":
       "Når jeg ikke studerer eller arbejder med software, bruger jeg tiden på ting, der holder mig både " +
-      "kreativ og jordbunden. Interesser uden for teknologien betyder noget — ikke kun for balancen, men " +
+      "kreativ og jordbunden. Interesser uden for teknologien betyder noget, ikke kun for balancen, men " +
       "også for inspiration og motivation på lang sigt.",
     "hobby.musicTitle": "Musik",
     "hobby.musicTag": "At lytte og at skabe",
@@ -179,11 +179,11 @@
     "hobby.gamingTag": "Strategi, teamwork og lederskab",
     "hobby.gaming":
       "En hobby gennem mange år, som har formet min måde at tænke strategi og teamwork på. I tre år drev jeg " +
-      "en World of Warcraft-guild og ledte dens raidhold på 25 spillere på den højeste sværhedsgrad — en " +
+      "en World of Warcraft-guild og ledte dens raidhold på 25 spillere på den højeste sværhedsgrad, en " +
       "rolle, jeg voksede ind i, fordi jeg nød at få en stor gruppe til at fungere godt sammen.",
     "hobby.ballTag": "Fokus, energi og balance",
     "hobby.ball":
-      "Basketball og træning holder mig sund og rydder hovedet — især i travle perioder med studier eller arbejde.",
+      "Basketball og træning holder mig sund og rydder hovedet, især i travle perioder med studier eller arbejde.",
 
     "contact.eyebrow": "Kontakt mig",
     "contact.title": "Lad os bygge noget sammen",
@@ -195,7 +195,7 @@
 
     // CV
     "cv.title": "CV · Magnus Forbes Kjær-Rasmussen",
-    "cv.desc": "CV for Magnus Forbes Kjær-Rasmussen — softwareingeniørstuderende på VIA University College. Kompetencer, uddannelse og erfaring.",
+    "cv.desc": "CV for Magnus Forbes Kjær-Rasmussen, softwareingeniørstuderende på VIA University College. Kompetencer, uddannelse og erfaring.",
     "cv.sideAria": "Personlige oplysninger",
     "cv.role": "Softwareingeniør · VIA UC",
     "cv.address": "Adresse",
@@ -212,7 +212,7 @@
     "cv.basic": "Grundlæggende forståelse",
     "cv.h1": "Softwareingeniørstuderende",
     "cv.lead":
-      "Læser til softwareingeniør på VIA University College — og har allerede en markedspladsapp, " +
+      "Læser til softwareingeniør på VIA University College, og har allerede en markedspladsapp, " +
       "hjemmesider for kunder og teamprojekter ude ved siden af.",
     "cv.pdf": "Download CV som PDF",
     "cv.pdfHref": "assets/Magnus-Forbes-Kjaer-Rasmussen-CV-da.pdf",
@@ -225,10 +225,10 @@
     "cv.profile": "Profil",
     "cv.profile1":
       "Full-stack-udvikler og stifter af Tackly, en markedspladsapp bygget i React Native på Supabase. Jeg " +
-      "har arbejdet i hele stakken — fra databasedesign og REST API'er i Spring Boot og .NET til " +
-      "React-frontends — og jeg er bedst, hvor tekniske beslutninger møder det, brugerne faktisk har brug for.",
+      "har arbejdet i hele stakken, fra databasedesign og REST API'er i Spring Boot og .NET til " +
+      "React-frontends, og jeg er bedst, hvor tekniske beslutninger møder det, brugerne faktisk har brug for.",
     "cv.profile2":
-      "Jeg nyder den menneskelige side af software lige så meget — at omsætte ønsker til klare krav og " +
+      "Jeg nyder den menneskelige side af software lige så meget: at omsætte ønsker til klare krav og " +
       "holde et team på vej i samme retning, som jeg gjorde som Product Owner på LearnHub.",
     "cv.skills": "Tekniske kompetencer",
     "cv.skillLangs": "Kodesprog",
@@ -247,11 +247,11 @@
       "Jeg kan godt lide at hjælpe en gruppe med at fungere godt sammen: en klar plan, klare roller og en " +
       "god stemning. Meget af det lærte jeg ved at organisere raid-aftener for 25 personer, og det er det, " +
       "der gjorde Product Owner-rollen naturlig for mig. Jeg slipper ikke noget, der har mit navn på, før " +
-      "jeg er tilfreds — heller ikke selvom det er mig, der skal bære det tunge læs. En perfektionist, vil " +
+      "jeg er tilfreds, heller ikke selvom det er mig, der skal bære det tunge læs. En perfektionist, vil " +
       "nogle måske sige!",
     "cv.s3Title": "Formidler",
     "cv.s3":
-      "Jeg kan oversætte tekniske problemer til et sprog, alle interessenter forstår — en evne, jeg har " +
+      "Jeg kan oversætte tekniske problemer til et sprog, alle interessenter forstår, en evne, jeg har " +
       "skærpet i supporten af PayPals internationale kunder og i min hverdag.",
     "cv.s4Title": "Rolig under pres",
     "cv.s4":
@@ -260,12 +260,12 @@
     "cv.experience": "Erfaring",
     "cv.tacklyRole": "Stifter &amp; full-stack-udvikler",
     "cv.tacklyOrg": 'Egen virksomhed · <a href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>',
-    "cv.tacklyWhen": "2026 – nu",
+    "cv.tacklyWhen": "2026 til nu",
     "cv.tackly1": "Bygger en peer-to-peer-markedsplads for rideudstyr: en mobilapp i Expo / React Native.",
     "cv.tackly2": "Har bygget et separat adminpanel i React til moderation, support og rollebaseret adgang.",
     "cv.tackly3":
-      'Allerede lanceret på <a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a> ' +
-      "— App Store er det næste!",
+      'Allerede lanceret på <a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a>, ' +
+      "og App Store er det næste!",
     "cv.qilejRole": "Freelance-webudvikler",
     "cv.qilejOrg": '<a href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a> · barbershop i Roskilde',
     "cv.qilejWhen": "Kundeprojekt",
@@ -279,7 +279,7 @@
     "cv.education": "Uddannelse",
     "cv.degree": "Professionsbachelor som softwareingeniør (ingeniørtrainee)",
     "cv.degreeOrg": "VIA University College · online / fleksibel model",
-    "cv.degreeWhen": "2025 – nu",
+    "cv.degreeWhen": "2025 til nu",
     "cv.degree1": "Fokus: full-stack-udvikling, objektorienteret programmering, databaser, softwarearkitektur og agile metoder.",
     "cv.degree2":
       'Lige nu på <span data-semester="ordinal">3.</span> semester: ' +
@@ -290,11 +290,12 @@
     "cv.before": "Før tech",
     "cv.rescueRole": "Brandmand &amp; redningsspecialist (værnepligt)",
     "cv.rescueOrg": "Beredskabsstyrelsen",
-    "cv.rescueWhen": "feb. 2024 – okt. 2024",
+    "cv.rescueWhen": "feb. 2024 til okt. 2024",
     "cv.careRole": "Sundhed &amp; service",
     "cv.careOrg": "Roskilde Sygehus, Roskilde Kommune m.fl.",
+    "cv.careWhen": "2021 til 2025",
     "cv.supportRole": "Teknisk kundeservicemedarbejder",
-    "cv.supportWhen": "nov. 2019 – feb. 2020",
+    "cv.supportWhen": "nov. 2019 til feb. 2020",
     "cv.footer": "Softwareingeniørstuderende på VIA University College · Hedehusene, Danmark ·",
   };
 

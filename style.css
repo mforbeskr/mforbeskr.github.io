@@ -356,23 +356,12 @@ main {
 }
 
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1rem;
-}
-
-.eyebrow::before {
-  content: "";
-  width: 24px;
-  height: 2px;
-  background: currentColor;
-  border-radius: 2px;
 }
 
 .section-title {
@@ -1704,10 +1693,9 @@ main {
   padding: clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 4.5vw, 3.5rem);
 }
 
+/* No divider under the intro: the first section heading (Profile) draws its own line */
 .cv-header {
   margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
 }
 
 .cv-header h1 {
@@ -2027,6 +2015,8 @@ main {
     margin: 0;
     /* Extra room on top so the PDF link sits above the headline, not beside it */
     padding: 3rem 1.5rem 1.75rem;
+    /* Here the header sits above the sidebar, so it keeps a line to separate them */
+    border-bottom: 1px solid var(--border);
   }
 
   .resume-main {
@@ -2571,24 +2561,29 @@ img.cloth-hidden {
 }
 
 /* ---------- Print ("Download as PDF" on the resume) ---------- */
-/* Always prints as a light, ink-friendly document, whichever theme is on screen. */
-@page {
-  size: A4;
-  margin: 12mm;
-}
-
+/* Prints the résumé exactly as it looks on screen in light mode: the desktop layout is laid out at
+   screen width and scaled down to fit an A4 page, instead of being restyled for paper. */
 @media print {
-  :root,
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
   :root[data-theme="dark"] {
-    --bg: #fff;
-    --surface: #fff;
-    --surface-2: #f4f1ec;
-    --text: #15130f;
-    --muted: #4a463f;
-    --border: #ddd6ca;
-    --accent: #9a3412;
-    --accent-deep: #9a3412;
-    --neon: #c2410c;
+    --bg: #fbfaf6;
+    --surface: #ffffff;
+    --surface-2: #f5f2eb;
+    --text: #1c1a17;
+    --muted: #625d55;
+    --border: #e8e3d8;
+    --accent: #c2410c;
+    --accent-deep: #c2410c;
+    --accent-strong: #7c2d12;
+    --accent-soft: #fff1e6;
+    --chip-border: #c2410c;
+    --chip-text: #9a3412;
+    --neon: #ff6a1a;
+    --on-accent: #ffffff;
     color-scheme: light;
   }
 
@@ -2606,18 +2601,33 @@ img.cloth-hidden {
 
   body {
     background: #fff;
-    color: var(--text);
-    font-size: 10pt;
-    line-height: 1.5;
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
-  .card {
+  /* 1000px of screen layout across the printable A4 width (186mm, about 703px) */
+  .cv-wrap {
+    width: 1000px;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    zoom: 0.703;
+  }
+
+  .cv,
+  :root[data-theme="dark"] .cv {
     box-shadow: none;
+  }
+
+  .cv-side-inner {
+    position: static;
+  }
+
+  .details .print-only {
+    display: grid;
   }
 
   /* Nothing waits for a scroll animation on paper */
@@ -2625,134 +2635,24 @@ img.cloth-hidden {
   .reveal-ready .reveal .word > span,
   .skill-words li,
   .check-list li,
-  .dots i {
+  .dots i,
+  .resume-main h2::after {
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .cv-wrap {
-    max-width: none;
-    padding: 0;
-  }
-
-  .cv,
-  :root[data-theme="dark"] .cv {
-    grid-template-columns: 215px minmax(0, 1fr);
-    background: #fff;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .cv-side {
-    background: var(--surface-2);
-    padding: 1.25rem 1rem;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-
-  .cv-side-inner {
-    position: static;
-  }
-
-  .cv-side .details {
-    font-size: 0.82rem;
-  }
-
-  .details .print-only {
-    display: grid;
-  }
-
-  .cv-side img {
-    width: 84px;
-    height: 84px;
-    border-radius: 16px;
-    box-shadow: none;
-  }
-
-  .cv-main {
-    padding: 0 0 0 1.5rem;
-  }
-
-  .cv-header {
-    margin-bottom: 1rem;
-    padding-bottom: 0.85rem;
-  }
-
-  .cv-header h1 {
-    font-size: 1.6rem;
-    margin-bottom: 0.35rem;
-  }
-
-  .cv-header .lead {
-    font-size: 0.95rem;
-  }
-
-  /* Tighter rhythm so Profile, Skills and Strengths share the first page */
-  .resume-main > section {
-    margin-bottom: 0.95rem;
-  }
-
-  .resume-main h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .resume-main p {
-    margin-bottom: 0.55em;
-  }
-
-  .skill-groups {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.6rem 1rem;
-  }
-
-  .skill-words {
-    gap: 0 0.7rem;
-  }
-
-  .skill-group h3,
-  .strength h3 {
-    margin-bottom: 0.25rem;
-  }
-
-  .skill-words li {
-    font-size: 0.86rem;
-    line-height: 1.42;
-    white-space: normal;
-  }
-
-  .strengths {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem 1.5rem;
-  }
-
-  .strength p {
-    font-size: 0.83rem;
-    line-height: 1.38;
-  }
-
-  /* Keep each heading with what follows it */
-  .resume-main h2 {
-    break-after: avoid;
-  }
-
-  #education,
-  #before {
-    break-inside: avoid;
-  }
-
-  .timeline > li,
-  .strength,
-  .skill-group {
-    break-inside: avoid;
   }
 
   .timeline::after {
     display: none;
   }
 
-  .timeline::before {
-    background: var(--border);
+  /* Keep headings with what follows, and entries in one piece */
+  .resume-main h2 {
+    break-after: avoid;
+  }
+
+  .timeline > li,
+  .strength,
+  .skill-group {
+    break-inside: avoid;
   }
 }
