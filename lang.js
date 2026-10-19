@@ -230,6 +230,7 @@
     "cv.skillLangs": "Kodesprog",
     "cv.skillWeb": "Web &amp; frameworks",
     "cv.skillDb": "Databaser &amp; værktøjer",
+    "cv.skillAi": "AI-værktøjer",
     "cv.skillMethods": "Metoder &amp; roller",
     "cv.teamLead": "Teamledelse",
     "cv.stakeholders": "Interessentkommunikation",
