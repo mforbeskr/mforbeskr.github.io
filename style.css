@@ -202,6 +202,20 @@ p {
   transition: color 0.2s, background-color 0.2s;
 }
 
+/* Reserves room for the wider of a link's two translations (data-w), so switching language doesn't shift the nav */
+.nav-links a[data-w] {
+  display: grid;
+  justify-items: center;
+}
+
+.nav-links a[data-w]::before {
+  content: attr(data-w);
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: 600;
+}
+
 .nav-links a:hover {
   color: var(--text);
   background: var(--surface-2);
@@ -262,7 +276,7 @@ p {
 
 /* Language toggle: a hairline flag and its code, showing the language you'd switch to */
 .lang-toggle {
-  display: inline-flex;
+  display: inline-grid;
   align-items: center;
   height: 40px;
   margin: 0 -0.6rem 0 -0.9rem;
@@ -282,7 +296,9 @@ p {
   color: var(--text);
 }
 
+/* Both labels share one cell, so DA and EN take the same width and the nav doesn't shift */
 .lang-toggle > span {
+  grid-area: 1 / 1;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -296,11 +312,11 @@ p {
 
 .lang-toggle .lang-to-en,
 :root[lang="da"] .lang-toggle .lang-to-da {
-  display: none;
+  visibility: hidden;
 }
 
 :root[lang="da"] .lang-toggle .lang-to-en {
-  display: inline-flex;
+  visibility: visible;
 }
 
 @media (max-width: 720px) {

@@ -48,7 +48,7 @@
   var DA = {
     "skip": "Spring til indhold",
     "nav.aria": "Hovedmenu",
-    "nav.home": "Forside",
+    "nav.home": "Portfolio",
     "nav.resume": "CV",
     "lang.toggle": "Read in English",
     "theme.toLight": "Skift til lyst tema",
