@@ -3,10 +3,11 @@
 // At rest the wave is calmer in dark mode, where the fireflies are the thing that should move;
 // on hover both themes get the same gentle swell, plus a ripple under the cursor.
 // The original <img> stays in place (invisible) for layout, screen readers and as the fallback.
+// Phones just show the plain <img>: WebGL on a budget GPU costs more than the effect is worth.
 (function () {
   "use strict";
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce), (max-width: 760px)").matches) return;
 
   var VERTEX = [
     "attribute vec2 a_uv;",
