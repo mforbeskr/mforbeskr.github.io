@@ -7,7 +7,7 @@
 // The canvas adds the "air" for each scene: drifting petals or violet fireflies at night; by day,
 // sunlit motes, plus gulls over the terrace.
 // Only the theme you are looking at is fetched, scene by scene as you near it. Phones skip the
-// animated overlays, and narrow screens aim their slice of each 16:9 scene at its data-focus point
+// animated overlays and the camera flight (they keep the wipes between scenes), and narrow screens aim their slice of each 16:9 scene at its data-focus point
 // instead of at the calm middle.
 (function () {
   "use strict";
@@ -87,7 +87,7 @@
       });
     }
 
-    if (!reduceMotion) {
+    if (!skipMotion) {
       var end = document.documentElement.scrollHeight - vh;
       markers.forEach(function (m, i) {
         var n = Number(m.dataset.scene), c = chapters[n - 1];
