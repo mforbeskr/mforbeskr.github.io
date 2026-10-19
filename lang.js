@@ -188,6 +188,7 @@
       "Er du interesseret i et samarbejde, feedback, eller vil du bare vende en idé? Jeg er altid ivrig " +
       "efter at lære, bidrage og vokse gennem praktiske udfordringer fra den virkelige verden.",
     "contact.email": "Send mig en mail",
+    "contact.linkedin": "Forbind på LinkedIn",
     "home.footer": "Softwareingeniør-trainee på VIA University College · Hedehusene, Danmark ·",
 
     "cv.title": "CV · Magnus Forbes Kjær-Rasmussen",
