@@ -233,6 +233,7 @@
     "cv.skillDb": "Databaser &amp; værktøjer",
     "cv.skillAi": "AI-værktøjer",
     "cv.skillMethods": "Metoder &amp; roller",
+    "cv.skillIde": "IDE'er &amp; editors",
     "cv.teamLead": "Teamledelse",
     "cv.stakeholders": "Interessentkommunikation",
     "cv.strengths": "Personlige styrker",
