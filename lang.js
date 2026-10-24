@@ -71,7 +71,7 @@
     "rail.hobbies": "Hobbyer",
     "rail.contact": "Kontakt",
     "home.status": '<span class="status-dot" aria-hidden="true"></span>Åben for en traineestilling · ca. 2 dage om ugen',
-    "home.h1": 'Hej! Jeg er Magnus.<br/>Jeg forvandler folks ønsker til <span class="accent">intuitiv</span> software.',
+    "home.h1": 'Hej! Jeg er Magnus.<br/>Jeg forvandler idéer<br/>og ønsker til <span class="accent">intuitiv</span>&nbsp;software.',
     "home.lead":
       'Softwareingeniørstuderende på <span data-semester="ordinal">3.</span> semester på VIA University Colleges ' +
       "fleksible traineeuddannelse. Jeg er glad for full-stack-udvikling og softwarearkitektur, men allermest " +

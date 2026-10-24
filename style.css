@@ -592,10 +592,10 @@ main {
   font-weight: 800;
   letter-spacing: -0.01em;
   margin-bottom: 1.25rem;
+  text-wrap: balance;
 }
 
 .hero h1 .accent {
-  font-style: italic;
   color: var(--accent-deep);
 }
 
