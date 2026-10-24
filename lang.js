@@ -71,7 +71,7 @@
     "rail.hobbies": "Hobbyer",
     "rail.contact": "Kontakt",
     "home.status": '<span class="status-dot" aria-hidden="true"></span>Åben for en traineestilling · ca. 2 dage om ugen',
-    "home.h1": 'Hej! Jeg er Magnus.<br/>Jeg forvandler idéer<br/>og ønsker til <span class="accent">intuitiv</span>&nbsp;software.',
+    "home.h1": 'Jeg bygger bro mellem <span class="accent">kode</span> og mennesker.',
     "home.lead":
       'Softwareingeniørstuderende på <span data-semester="ordinal">3.</span> semester på VIA University Colleges ' +
       "fleksible traineeuddannelse. Jeg er glad for full-stack-udvikling og softwarearkitektur, men allermest " +
@@ -104,7 +104,7 @@
       '<a class="brand-word brand-qilej" href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>, ' +
       'hele vejen til <a class="brand-word brand-tackly" href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>, ' +
       "en komplet markedspladsapp til rideudstyr, som jeg nu driver som min egen virksomhed. Den er netop " +
-      'lanceret på <a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a>, ' +
+      'lanceret på <a href="https://play.google.com/store/apps/developer?id=4bestudio" target="_blank" rel="noopener">Google Play</a>, ' +
       "og App Store er det næste. Hjemmesider, apps og alt derimellem. Jeg elsker variationen. " +
       '<mark class="callout">Har du brug for en hjemmeside eller en lille app? Du er velkommen til at ' +
       '<a class="reach-out" href="mailto:mforbeskr@outlook.dk">skrive til mig!</a></mark>',
