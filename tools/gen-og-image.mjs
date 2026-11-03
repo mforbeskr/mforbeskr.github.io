@@ -49,7 +49,7 @@ const html = `<!DOCTYPE html>
   p { margin-top: 30px; color: #c2410c; font-size: 38px; font-weight: 600; line-height: 1.25; }
 </style></head>
 <body>
-  <img src="https://i.ibb.co/SXbLSw55/1000008802.jpg" alt=""/>
+  <img src="${pathToFileURL(path.join(REPO, "assets/img/portrait.jpg")).href}" alt=""/>
   <div>
     <h1>Magnus Forbes<br/>Kjær-Rasmussen</h1>
     <p>Software Engineering</p>

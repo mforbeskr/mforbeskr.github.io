@@ -204,7 +204,7 @@ window.SITE = {
       desc: "1st semester project: a JavaFX desktop app that keeps track of residents, tasks and points.",
       chips: ["Java", "JavaFX"],
       link: "GitHub",
-      media: { type: "image", src: "https://i.ibb.co/JwMp3TbK/Sk-rmbillede-2025-12-17-121902.png", alt: "Screenshot of the Kløverly JavaFX application" },
+      media: { type: "image", src: "assets/img/kloverly-app.png", alt: "Screenshot of the Kløverly JavaFX application" },
       da: {
         desc: "Projekt på 1. semester: en JavaFX-desktopapp, der holder styr på beboere, opgaver og point.",
         media: { alt: "Skærmbillede af Kløverly-applikationen i JavaFX" },
@@ -217,7 +217,7 @@ window.SITE = {
       desc: "The companion website for the Kløverly semester project, built from scratch with HTML and CSS.",
       chips: ["HTML", "CSS"],
       link: "Visit",
-      media: { type: "image", src: "https://i.ibb.co/4gFJVHp1/KLOIN.png", alt: "Screenshot of the Kløverly website" },
+      media: { type: "image", src: "assets/img/kloverly-web.png", alt: "Screenshot of the Kløverly website" },
       da: {
         desc: "Den tilhørende hjemmeside til Kløverly-semesterprojektet, bygget fra bunden i HTML og CSS.",
         media: { alt: "Skærmbillede af Kløverlys hjemmeside" },
@@ -230,7 +230,7 @@ window.SITE = {
       desc: "A whack-a-mole style browser game written in plain JavaScript with DOM interaction.",
       chips: ["JavaScript", "Game"],
       link: "Play",
-      media: { type: "image", src: "https://i.ibb.co/RpL7VmxK/g5-WU5-Ydi-400x400-removebg-preview.webp", alt: "Whack-A-Jan game character", contain: true },
+      media: { type: "image", src: "assets/img/whack-a-jan.webp", alt: "Whack-A-Jan game character", contain: true },
       da: {
         desc: "Et whack-a-mole-agtigt browserspil skrevet i ren JavaScript med DOM-interaktion.",
         chips: ["JavaScript", "Spil"],
@@ -244,7 +244,7 @@ window.SITE = {
       desc: "A sign-up form for a custom dating-app concept, built with HTML and CSS.",
       chips: ["HTML", "CSS"],
       link: "Visit",
-      media: { type: "image", src: "https://i.ibb.co/zTHB9qn4/monstermatch5.png", alt: "Screenshot of the Monster Match sign-up page" },
+      media: { type: "image", src: "assets/img/monster-match.png", alt: "Screenshot of the Monster Match sign-up page" },
       da: {
         desc: "En tilmeldingsformular til mit eget koncept for en datingapp, bygget i HTML og CSS.",
         media: { alt: "Skærmbillede af tilmeldingssiden på Monster Match" },
