@@ -71,13 +71,13 @@ window.SITE = {
       tags: ["personal", "csharp", "app"],
       featured: true,
       badge: "Mobile game · In development",
-      desc: "A vertical climber for phones in Unity: auto-jump up a moonlit Japanese temple tower through 29 levels in 2 chapters, with seeded platforms, checkpoints, portals into mini-game realms like a Fruit Slicer, a shop, skill points and save slots.",
+      desc: "A vertical climber for phones in Unity: auto-jump upwards through levels and chapters, with seeded platforms, checkpoints, portals into mini-game realms, a shop, skill points and save slots. More chapters are on the way.",
       chips: ["Unity", "C#", "URP"],
       link: "Private repo",
       media: { type: "image", src: "assets/jumpo-banner.png", alt: "Jumpo: Climb to explore realms", width: 1600, height: 1000 },
       da: {
         badge: "Mobilspil · Under udvikling",
-        desc: "Et lodret klatrespil til mobilen i Unity: hop op ad et måneoplyst japansk tempeltårn gennem 29 baner i 2 kapitler med seedede platforme, checkpoints, portaler til minispil-verdener som en Fruit Slicer, en butik, skill points og flere gemte spil.",
+        desc: "Et lodret klatrespil til mobilen i Unity: hop opad gennem baner og kapitler med seedede platforme, checkpoints, portaler til minispil-verdener, en butik, skill points og flere gemte spil. Flere kapitler er på vej.",
       },
     },
     {
