@@ -223,7 +223,7 @@
     "rail.before": "Før tech",
     "cv.profile": "Profil",
     "cv.profile1":
-      "Full-stack-udvikler og stifter af Tackly, en markedspladsapp bygget i React Native på Supabase. Jeg " +
+      "Full-stack-udvikler og stifter af 4bestudio, studiet bag Tackly, en markedspladsapp bygget i React Native på Supabase. Jeg " +
       "har arbejdet i hele stakken, fra databasedesign og REST API'er i Spring Boot og .NET til " +
       "React-frontends, og jeg er bedst, hvor tekniske beslutninger møder det, brugerne faktisk har brug for.",
     "cv.profile2":
@@ -260,17 +260,18 @@
       "tager ejerskab og bevarer det kolde hoved for at få det bedste ud af situationen.",
     "cv.experience": "Erfaring",
     "cv.tacklyRole": "Stifter &amp; full-stack-udvikler",
-    "cv.tacklyOrg": 'Egen virksomhed · <a href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>',
+    "cv.tacklyOrg": 'Egen virksomhed · <a href="https://4bestudio.com/" target="_blank" rel="noopener">4bestudio</a>',
     "cv.tacklyWhen": "2026 til nu",
-    "cv.tackly1": "Bygger en peer-to-peer-markedsplads for rideudstyr: en mobilapp i Expo / React Native.",
+    "cv.tackly1":
+      '<a href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>: bygger en peer-to-peer-markedsplads for rideudstyr, en mobilapp i Expo / React Native.',
     "cv.tackly2": "Har bygget et separat adminpanel i React til moderation, support og rollebaseret adgang.",
     "cv.tackly3":
       'Allerede lanceret på <a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a>, ' +
       "og App Store er det næste!",
-    "cv.qilejRole": "Freelance-webudvikler",
-    "cv.qilejOrg": '<a href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a> · barbershop i Roskilde',
-    "cv.qilejWhen": "Kundeprojekt",
-    "cv.qilej1": "Designede og byggede butikkens hjemmeside: ydelser, priser, åbningstider og integreret onlinebooking.",
+    "cv.jumpo1": "Jumpo: et klatrespil til mobilen i Unity og C#, under udvikling og ikke udgivet endnu.",
+    "cv.qilej1":
+      '<a href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>: en kundehjemmeside til en barbershop i Roskilde ' +
+      "med ydelser, priser, åbningstider og integreret onlinebooking.",
     "cv.learnhubOrg":
       '<a href="https://github.com/mforbeskr/SEP2-Project-LearnHub" target="_blank" rel="noopener">LearnHub</a> ' +
       "· VIA University College, 2. semester",

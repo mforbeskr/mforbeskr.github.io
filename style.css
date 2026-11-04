@@ -1965,6 +1965,18 @@ main {
   background: var(--accent);
 }
 
+/* Sub-points under a point (e.g. details under Tackly): a little tighter, with a hollow bullet */
+.check-list.check-sub {
+  margin-top: 0.4rem;
+  gap: 0.35rem;
+}
+
+.check-sub li::before {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  box-sizing: border-box;
+}
+
 .timeline {
   position: relative;
   margin: 0;
