@@ -70,21 +70,23 @@
 
   function card(p, index, allowWide) {
     var classes = "card project spotlight reveal" + (allowWide && p.wide ? " project-featured" : "");
+    // No url (e.g. a private repo): same card, just not a link and no arrow.
+    var tag = p.url ? "a" : "div";
     var delay = index % 3 ? ' style="--delay: ' + (index % 3) * 0.05 + 's"' : "";
     var chips = p.chips.map(function (c) {
       return '<li class="chip">' + esc(c) + "</li>";
     }).join("");
     return (
-      '<a class="' + classes + '" data-tags="' + esc(p.tags.join(" ")) + '"' + (p.featured ? " data-featured" : "") + delay +
-      ' href="' + esc(p.url) + '" target="_blank" rel="noopener">' +
+      "<" + tag + ' class="' + classes + '" data-tags="' + esc(p.tags.join(" ")) + '"' + (p.featured ? " data-featured" : "") + delay +
+      (p.url ? ' href="' + esc(p.url) + '" target="_blank" rel="noopener"' : "") + ">" +
       media(p.media) +
       '<div class="project-body">' +
       (p.badge ? '<p class="project-badge">' + esc(p.badge) + "</p>" : "") +
       "<h3>" + esc(p.title) + "</h3>" +
       "<p>" + esc(p.desc) + "</p>" +
       '<div class="project-foot"><ul class="chips">' + chips + "</ul>" +
-      '<span class="project-link">' + esc(t("link." + p.link, p.link)) + " " + ARROW + "</span></div>" +
-      "</div></a>"
+      (p.link ? '<span class="project-link">' + esc(t("link." + p.link, p.link)) + (p.url ? " " + ARROW : "") + "</span>" : "") + "</div>" +
+      "</div></" + tag + ">"
     );
   }
 

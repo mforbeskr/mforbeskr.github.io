@@ -7,9 +7,10 @@
  *
  * Projects: add a new object to the list. Order here = order on the site.
  *   featured: true      -> shown before "Show all" in the Portfolio section (five fill the grid
- *                          neatly, since Tackly is wide)
+ *                          neatly, since Tackly is wide; personal work first, then school)
  *   wide: true          -> takes two columns
  *   tags                -> used by the filters: personal, school, web, java, csharp, app
+ *   url                 -> leave out for a card that isn't a link (e.g. a private repo)
  *   link                -> text next to the arrow, e.g. "Visit", "GitHub", "Play"
  *   media, one of:
  *     { type: "image", src, alt, contain }                 screenshot or picture
@@ -66,6 +67,27 @@ window.SITE = {
       },
     },
     {
+      title: "Jumpo",
+      tags: ["personal", "csharp", "app"],
+      featured: true,
+      badge: "Mobile game · In development",
+      desc: "A vertical climber for phones in Unity: auto-jump up a moonlit Japanese temple tower through 29 levels in 2 chapters, with seeded platforms, checkpoints, portals into mini-game realms like a Fruit Slicer, a shop, skill points and save slots.",
+      chips: ["Unity", "C#", "URP"],
+      link: "Private repo",
+      media: {
+        type: "tile",
+        name: "Jumpo",
+        sub: "Unity mobile game",
+        colors: ["#8b5cf6", "#3b1f73"],
+        icon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+      },
+      da: {
+        badge: "Mobilspil · Under udvikling",
+        desc: "Et lodret klatrespil til mobilen i Unity: hop op ad et måneoplyst japansk tempeltårn gennem 29 baner i 2 kapitler med seedede platforme, checkpoints, portaler til minispil-verdener som en Fruit Slicer, en butik, skill points og flere gemte spil.",
+        media: { sub: "Unity-mobilspil" },
+      },
+    },
+    {
       title: "Hos Qilej",
       url: "https://www.hosqilej.dk/",
       tags: ["personal", "web"],
@@ -102,10 +124,31 @@ window.SITE = {
       },
     },
     {
+      title: "KIN",
+      url: "https://github.com/emilTejnRasmussen/TS-SEP3-A26-Projekt",
+      tags: ["school", "csharp", "java", "web"],
+      featured: true,
+      badge: "3rd semester · In progress",
+      desc: "An event platform where people find, create and sign up for events. A Blazor frontend talks to an ASP.NET Core user service with JWT login, which reaches a Spring Boot event service over gRPC, each with its own PostgreSQL database. Built as a team.",
+      chips: ["Blazor", "gRPC", "Spring Boot"],
+      link: "GitHub",
+      media: {
+        type: "tile",
+        name: "KIN",
+        sub: "3rd semester project",
+        colors: ["#0f9488", "#134e4a"],
+        icon: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+      },
+      da: {
+        badge: "3. semester · I gang",
+        desc: "En eventplatform, hvor man finder, opretter og tilmelder sig begivenheder. En Blazor-frontend taler med en brugerservice i ASP.NET Core med JWT-login, som når en eventservice i Spring Boot over gRPC, hver med sin egen PostgreSQL-database. Bygget i et team.",
+        media: { sub: "Projekt på 3. semester" },
+      },
+    },
+    {
       title: "Smart Parking Lot",
       url: "https://github.com/mforbeskr/NEC_Exam_2026_Project",
       tags: ["school", "java"],
-      featured: true,
       desc: "Exam project on networking and concurrency, built with a classmate. A socket server exchanges JSON messages with JavaFX sensor, light and display clients, using producer-consumer and heartbeats.",
       chips: ["Java", "Sockets", "Concurrency"],
       link: "GitHub",
@@ -126,7 +169,6 @@ window.SITE = {
       title: "Stock Trading Game",
       url: "https://github.com/mforbeskr/StockTradingGame",
       tags: ["school", "java"],
-      featured: true,
       desc: "A stock market simulator in JavaFX. Stock behaviour is driven by the State pattern, trading fees by the Strategy pattern, and data is saved to files with a Unit of Work.",
       chips: ["Java", "JavaFX", "Design patterns"],
       link: "GitHub",

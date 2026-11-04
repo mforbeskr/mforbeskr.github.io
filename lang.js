@@ -58,6 +58,7 @@
     "portrait.alt": "Portræt af Magnus Forbes Kjær-Rasmussen",
     "link.Visit": "Besøg",
     "link.Play": "Spil",
+    "link.Private repo": "Privat repo",
     "github.noDesc": "Ingen beskrivelse endnu.",
     "github.updated": "Opdateret",
     "showAll": "Vis alle {n} projekter",
