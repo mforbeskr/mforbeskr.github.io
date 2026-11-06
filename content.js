@@ -56,14 +56,14 @@ window.SITE = {
       tags: ["personal", "app", "web"],
       featured: true,
       wide: true,
-      badge: "Live on Google Play · App Store next",
-      desc: "A Danish peer-to-peer marketplace for equestrian equipment; a mobile app in Expo / React Native on Supabase, plus a separate React admin panel for moderation, support and role-based access. It's live on Google Play, with the App Store as the next step.",
+      badge: "Live on the App Store & Google Play",
+      desc: "A Danish peer-to-peer marketplace for equestrian equipment; a mobile app in Expo / React Native on Supabase, plus a separate React admin panel for moderation, support and role-based access. It's live on the App Store and Google Play.",
       chips: ["React Native", "TypeScript", "Supabase"],
       link: "Visit",
       media: { type: "image", src: "assets/tackly-feature.jpg", alt: "Tackly: Giv dit rideudstyr nye eventyr", width: 1024, height: 500 },
       da: {
-        badge: "Live på Google Play · App Store er næste skridt",
-        desc: "En dansk peer-to-peer-markedsplads for rideudstyr: en mobilapp i Expo / React Native på Supabase plus et separat adminpanel i React til moderation, support og rollebaseret adgang. Den er live på Google Play, og App Store er næste skridt.",
+        badge: "Live i App Store og på Google Play",
+        desc: "En dansk peer-to-peer-markedsplads for rideudstyr: en mobilapp i Expo / React Native på Supabase plus et separat adminpanel i React til moderation, support og rollebaseret adgang. Den er live i App Store og på Google Play.",
       },
     },
     {

@@ -83,7 +83,7 @@
     "home.badge": "Softwareingeniør",
     "facts.aria": "Hurtige fakta",
     "facts.po": "elskede at være Product Owner på LearnHub, en rolle, jeg gerne vil udforske mere",
-    "facts.freelance": "en hjemmeside til en rigtig kunde og Tackly, live på Google Play med App Store som det næste",
+    "facts.freelance": "en hjemmeside til en rigtig kunde og Tackly, live i App Store og på Google Play",
     "facts.balance": "familieliv i Hedehusene, gaming, basketball og klaver derhjemme",
 
     "about.eyebrow": "Om mig",
@@ -106,8 +106,9 @@
       '<a class="brand-word brand-qilej" href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>, ' +
       'hele vejen til <a class="brand-word brand-tackly" href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>, ' +
       "en komplet markedspladsapp til rideudstyr, som jeg nu driver som min egen virksomhed. Den er netop " +
-      'lanceret på <a href="https://play.google.com/store/apps/developer?id=4bestudio" target="_blank" rel="noopener">Google Play</a>, ' +
-      "og App Store er det næste. Hjemmesider, apps og alt derimellem. Jeg elsker variationen. " +
+      'lanceret i <a href="https://apps.apple.com/dk/app/id6827721554" target="_blank" rel="noopener">App Store</a> og på ' +
+      '<a href="https://play.google.com/store/apps/developer?id=4bestudio" target="_blank" rel="noopener">Google Play</a>. ' +
+      "Hjemmesider, apps og alt derimellem. Jeg elsker variationen. " +
       '<mark class="callout">Har du brug for en hjemmeside eller en lille app? Du er velkommen til at ' +
       '<a class="reach-out" href="mailto:mforbeskr@outlook.dk">skrive til mig!</a></mark>',
     "about.po":
@@ -130,7 +131,7 @@
 
     "work.title": "Ting, jeg har bygget",
     "work.lead":
-      "Fra en markedspladsapp live på Google Play og en freelance-hjemmeside til en rigtig kunde til " +
+      "Fra en markedspladsapp live i App Store og på Google Play og en freelance-hjemmeside til en rigtig kunde til " +
       "semesterprojekter i Java, C# og React, plus masser af små eksperimenter undervejs. Brug filtrene " +
       "til at skifte mellem personlige projekter og skoleprojekter.",
     "filter.aria": "Filtrér projekter",
@@ -266,8 +267,8 @@
       '<a href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>: bygger en peer-to-peer-markedsplads for rideudstyr, en mobilapp i Expo / React Native.',
     "cv.tackly2": "Har bygget et separat adminpanel i React til moderation, support og rollebaseret adgang.",
     "cv.tackly3":
-      'Allerede lanceret på <a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a>, ' +
-      "og App Store er det næste!",
+      'Lanceret i <a href="https://apps.apple.com/dk/app/id6827721554" target="_blank" rel="noopener">App Store</a> og på ' +
+      '<a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a>!',
     "cv.jumpo1": "Jumpo: et klatrespil til mobilen i Unity og C#, under udvikling og ikke udgivet endnu.",
     "cv.qilej1":
       '<a href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>: en kundehjemmeside til en barbershop i Roskilde ' +
