@@ -879,12 +879,12 @@ main {
 
 /* Gaps between parts of the page where the new landscape has the screen to itself */
 .scene-break {
-  min-height: 30svh;
+  min-height: 12svh;
 }
 
 @media (max-width: 600px) {
   .scene-break {
-    min-height: 22svh;
+    min-height: 8svh;
   }
 }
 
