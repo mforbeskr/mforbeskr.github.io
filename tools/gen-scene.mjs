@@ -1320,8 +1320,11 @@ function motionFor(base, file) {
 function layer(base, speed) {
   const file = fileFor(base), fx = motionFor(base, file);
   const img = (name, extra = "") => `<image data-href="assets/scene/${name}"${extra} width="${W}" height="${H}"/>`;
-  return `<div class="scene-layer" data-speed="${speed}"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">` +
-    img(file) + (fx ? img(fx, " data-motion") : "") + `</svg></div>`;
+  // Animated overlays get their own <svg> (composited layer, see .scene-motion): sharing one with the
+  // landscape would make the browser repaint the whole landscape on every animation frame.
+  const svg = (cls, body) => `<svg${cls} viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">${body}</svg>`;
+  return `<div class="scene-layer" data-speed="${speed}">` +
+    svg("", img(file)) + (fx ? svg(' class="scene-motion"', img(fx, " data-motion")) : "") + `</div>`;
 }
 
 function sceneMarkup(indent) {

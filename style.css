@@ -877,6 +877,11 @@ main {
   overflow: visible;
 }
 
+/* Keeps the animated overlay on its own layer so the static landscape under it isn't repainted */
+.scene-motion {
+  will-change: transform;
+}
+
 /* Gaps between parts of the page where the new landscape has the screen to itself */
 .scene-break {
   min-height: 12svh;

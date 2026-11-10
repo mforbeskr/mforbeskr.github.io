@@ -64,6 +64,15 @@
     });
   }
 
+  // Cross-fading the themes briefly doubles the landscape layers. Past the graphics memory limit the
+  // browser drops some for a frame (a blink), so only the current scene is kept during the fade.
+  var soloTimer = 0;
+  function solo() {
+    chapters.forEach(function (c, i) {
+      c.el.style.visibility = soloTimer && i !== active - 1 ? "hidden" : "";
+    });
+  }
+
   function markerTop(i) {
     return markers[i].getBoundingClientRect().top + window.scrollY;
   }
@@ -85,6 +94,7 @@
         c.el.classList.toggle("is-shown", i < active);
         c.el.classList.toggle("is-covered", i < active - 1);
       });
+      if (soloTimer) solo();
     }
 
     if (!skipMotion) {
@@ -282,6 +292,12 @@
     chapters.forEach(function (c) {
       if (c.wanted) load(c);
     });
+    clearTimeout(soloTimer);
+    soloTimer = setTimeout(function () {
+      soloTimer = 0;
+      solo();
+    }, 1000);
+    solo();
   }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
   window.addEventListener("pointermove", function (e) {
     pointer.tx = (e.clientX / window.innerWidth) * 2 - 1;
