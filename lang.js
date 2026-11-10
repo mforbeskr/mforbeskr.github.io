@@ -73,7 +73,7 @@
     "rail.contact": "Kontakt",
     "home.status": '<span class="status-dot" aria-hidden="true"></span>Åben for en traineestilling · ca. 2 dage om ugen',
     "home.hello": "Hej!",
-    "home.h1": 'Jeg bygger bro mellem <span class="accent">kode</span> og mennesker.',
+    "home.h1": "Jeg trives i rummet mellem koden og de mennesker, den er bygget til.",
     "home.lead":
       'Softwareingeniørstuderende på <span data-semester="ordinal">3.</span> semester på VIA University Colleges ' +
       "fleksible traineeuddannelse. Jeg er glad for full-stack-udvikling og softwarearkitektur, men allermest " +
@@ -89,51 +89,36 @@
     "about.eyebrow": "Om mig",
     "about.title": "Nysgerrig, praktisk og rolig under pres.",
     "about.p1":
-      "Jeg har altid villet vide, <em>hvorfor</em> ting virker, og når jeg først ved det, kan jeg ikke lade " +
-      "være med at spørge mig selv, om de kunne virke bedre. Er det her virkelig det bedste, det kan blive? " +
-      "Hvor er flaskehalsen? Hvad ville gøre det nemmere for alle, der bruger det? Software er stedet, hvor " +
-      "den nysgerrighed og kreativitet endelig får lov at bygge noget. Jeg kan godt lide at grave i de " +
-      "bagvedliggende årsager, og vanen går langt tilbage: Jeg har brugt flere timer, end jeg har lyst til at " +
-      "indrømme, på at theorycrafte gear og builds i spil, bare for at presse lidt mere skade ud. For mig har " +
-      "enhver teknisk udfordring en forklaring, og jagten på den er det, der driver min nysgerrighed som udvikler.",
+      "Jeg har altid villet vide, <em>hvorfor</em> ting virker, og bagefter, om de kunne virke bedre. " +
+      "Software er stedet, hvor den nysgerrighed får lov at bygge noget.",
     "about.semester":
       'Jeg er på mit <span data-semester="ordinal">3.</span> semester nu og ' +
       '<span data-studying="long">lærer C# og .NET, bygger en CPU af logiske gates i DigiSim og dykker ned i ' +
       "algoritmer og tidskompleksitet</span>.",
     "about.projects":
-      "Hvert semester giver mig nye værktøjer, og jeg kan ikke lade være med også at bruge dem uden for " +
-      "undervisningen. Det har ført mig fra en enkel one-pager til min gode vens barbershop i Roskilde, " +
+      "Uden for undervisningen er jeg gået fra en enkel one-pager til min gode vens barbershop, " +
       '<a class="brand-word brand-qilej" href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>, ' +
-      'hele vejen til <a class="brand-word brand-tackly" href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>, ' +
-      "en komplet markedspladsapp til rideudstyr, som jeg nu driver som min egen virksomhed. Den er netop " +
-      'lanceret i <a href="https://apps.apple.com/dk/app/id6827721554" target="_blank" rel="noopener">App Store</a> og på ' +
-      '<a href="https://play.google.com/store/apps/developer?id=4bestudio" target="_blank" rel="noopener">Google Play</a>. ' +
-      "Hjemmesider, apps og alt derimellem. Jeg elsker variationen. " +
+      'til <a class="brand-word brand-tackly" href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>, ' +
+      "en komplet markedspladsapp til rideudstyr, live i " +
+      '<a href="https://apps.apple.com/dk/app/id6827721554" target="_blank" rel="noopener">App Store</a> og på ' +
+      '<a href="https://play.google.com/store/apps/developer?id=4bestudio" target="_blank" rel="noopener">Google Play</a> ' +
+      "under mit eget firma, 4bestudio. " +
       '<mark class="callout">Har du brug for en hjemmeside eller en lille app? Du er velkommen til at ' +
       '<a class="reach-out" href="mailto:mforbeskr@outlook.dk">skrive til mig!</a></mark>',
     "about.po":
       "På vores projekt på 2. semester, " +
       '<a class="brand-word brand-learnhub" href="https://github.com/mforbeskr/SEP2-Project-LearnHub" target="_blank" rel="noopener">LearnHub</a>, ' +
-      "var jeg Product Owner og holdt styr på overblikket, kravene og fremdriften. At organisere folk var " +
-      "ikke helt nyt for mig (et par år med at lede raid-aftener for 25 personer gør sit), men det var første " +
-      "gang, jeg fik lov at gøre det med kode, og jeg elskede det. Det er en retning, jeg gerne vil blive ved " +
-      "med at udvikle mig i.",
-    "about.quote": "Jeg trives i rummet mellem koden og de mennesker, den er bygget til.",
+      "var jeg Product Owner og holdt styr på kravene og fremdriften. Jeg elskede det, og det er en retning, " +
+      "jeg gerne vil blive ved med at udvikle mig i.",
+    "about.quote": "Jeg bygger bro mellem kode og mennesker.",
     "about.calm":
       "Uddannelsen som redningsspecialist og international teknisk support har lært mig at bevare roen, " +
       "tage ejerskab og forklare komplekse ting, så alle kan følge med. Jeg arbejder lige så godt på engelsk " +
       'som på dansk, hvilket gør <strong class="callout">et internationalt team</strong> til et naturligt match.',
-    "about.personalTitle": "Lidt mere personligt",
-    "about.personal":
-      "Jeg bor i Hedehusene med min kæreste gennem mange år og vores lille søn. Jeg går meget op i at " +
-      "balancere ambitioner med de mennesker, der betyder noget. " +
-      '<a href="#hobbies">Her er, hvad jeg laver, når jeg ikke sidder på skolebænken</a>.',
 
     "work.title": "Ting, jeg har bygget",
     "work.lead":
-      "Fra en markedspladsapp live i App Store og på Google Play og en freelance-hjemmeside til en rigtig kunde til " +
-      "semesterprojekter i Java, C# og React, plus masser af små eksperimenter undervejs. Brug filtrene " +
-      "til at skifte mellem personlige projekter og skoleprojekter.",
+      "Fra en markedspladsapp live i App Store og på Google Play til semesterprojekter i Java, C# og React.",
     "filter.aria": "Filtrér projekter",
     "filter.all": "Alle",
     "filter.personal": "Freelance &amp; personlige",
@@ -144,8 +129,7 @@
     "approach.eyebrow": "Sådan arbejder jeg",
     "approach.title": "Jeg lærer ved at bygge",
     "approach.lead":
-      "Projekterne viser forskellige trin på min læringsrejse. Hvert af dem har lært mig noget nyt, og jeg " +
-      "vender jævnligt tilbage til ældre projekter for at forfine dem, efterhånden som mine evner udvikler sig.",
+      "Hvert projekt har lært mig noget nyt, og jeg vender jævnligt tilbage for at forfine de ældre.",
     "approach.f1Title": "Fra idé til færdigt produkt",
     "approach.f1":
       "Jeg kan godt lide små, fokuserede projekter, hvor jeg kan tage en idé hele vejen: planlægge " +
@@ -163,9 +147,7 @@
     "hobbies.eyebrow": "Hobbyer",
     "hobbies.title": "Livet uden for koden",
     "hobbies.lead":
-      "Når jeg ikke studerer eller arbejder med software, bruger jeg tiden på ting, der holder mig både " +
-      "kreativ og jordbunden. Interesser uden for teknologien betyder noget, ikke kun for balancen, men " +
-      "også for inspiration og motivation på lang sigt.",
+      "Det, der holder mig kreativ og jordbunden, når jeg ikke koder.",
     "hobby.musicTitle": "Musik",
     "hobby.musicTag": "At lytte og at skabe",
     "hobby.music":
@@ -180,7 +162,7 @@
     "hobby.gaming":
       "En hobby gennem mange år, som har formet min måde at tænke strategi og teamwork på. I tre år drev jeg " +
       "en World of Warcraft-guild og ledte dens raidhold på 25 spillere på den højeste sværhedsgrad, en " +
-      "rolle, jeg voksede ind i, fordi jeg nød at få en stor gruppe til at fungere godt sammen.",
+      "rolle, jeg voksede ind i, fordi jeg nød at få en stor gruppe til at fungere godt sammen for at nå et fælles mål.",
     "hobby.ballTag": "Fokus, energi og balance",
     "hobby.ball":
       "Basketball og træning holder mig sund og rydder hovedet, især i travle perioder med studier eller arbejde.",

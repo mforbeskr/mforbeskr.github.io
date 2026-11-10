@@ -602,16 +602,13 @@ main {
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 4.4vw, 3.2rem);
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+  line-height: 1.25;
   margin-bottom: 1.25rem;
   text-wrap: balance;
-}
-
-.hero h1 .accent {
-  font-style: italic;
-  color: var(--accent-deep);
 }
 
 .hero .lead {
@@ -718,6 +715,7 @@ main {
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "status photo"
+      "name   photo"
       "title  photo"
       "lead   lead"
       "cta    cta";
@@ -731,6 +729,7 @@ main {
   }
 
   .hero .status { grid-area: status; justify-self: start; }
+  .hero .hero-name { grid-area: name; }
   .hero h1 { grid-area: title; }
   .hero .lead { grid-area: lead; }
   .hero .btn-row { grid-area: cta; }
@@ -754,10 +753,6 @@ main {
   .hero .status {
     font-size: 0.75rem;
     margin-bottom: 1rem;
-  }
-
-  .hero h1 {
-    font-size: 1.75rem;
   }
 }
 
@@ -1067,11 +1062,10 @@ main {
 
 .pull-quote p {
   margin: 0;
-  font-family: "Instrument Serif", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
-  line-height: 1.25;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
   color: var(--text);
   text-wrap: balance;
 }
@@ -1174,7 +1168,13 @@ main {
 }
 
 .pull-quote p {
-  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+}
+
+@media (max-width: 480px) {
+  .pull-quote p {
+    font-size: 1.75rem;
+  }
 }
 
 .story-ready .qw > span {
