@@ -19,8 +19,8 @@
  *     { type: "placeholder" }                              simple </> tile
  *   da: { ... }         -> Danish versions of any of the fields above (for media, only the parts that change)
  *
- * GitHub: public repos with the topic below are added automatically under
- * "More on GitHub" in the Portfolio section (unless they're already listed here).
+ * GitHub: public repos with the topic below are added automatically to the Portfolio grid,
+ * after the projects listed here (unless they're already listed here).
  * Extra topics "school", "personal" or "app" on a repo make the filters work.
  */
 window.SITE = {
@@ -262,7 +262,7 @@ window.SITE = {
     {
       title: "Whack-A-Jan",
       url: "https://mforbeskr.github.io/Browsergame-WhackAJan/",
-      tags: ["personal", "web"],
+      tags: ["school", "web"],
       desc: "A whack-a-mole style browser game written in plain JavaScript with DOM interaction.",
       chips: ["JavaScript", "Game"],
       link: "Play",
@@ -276,7 +276,7 @@ window.SITE = {
     {
       title: "Monster Match",
       url: "https://mforbeskr.github.io/Monster-Match/",
-      tags: ["personal", "web"],
+      tags: ["school", "web"],
       desc: "A sign-up form for a custom dating-app concept, built with HTML and CSS.",
       chips: ["HTML", "CSS"],
       link: "Visit",
@@ -289,7 +289,7 @@ window.SITE = {
     {
       title: "My First Website",
       url: "https://mforbeskr.github.io/MinSideTest/",
-      tags: ["personal", "web"],
+      tags: ["school", "web"],
       desc: "My first proper website, a small school task that became my web playground.",
       chips: ["HTML", "Playground"],
       link: "Visit",

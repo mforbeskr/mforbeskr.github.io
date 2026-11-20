@@ -376,10 +376,6 @@ main {
   padding-top: 0;
 }
 
-[data-github-section][hidden] + .section {
-  padding-top: clamp(2.5rem, 5.5vw, 4.25rem);
-}
-
 .eyebrow {
   font-size: 0.8rem;
   font-weight: 600;
@@ -1356,6 +1352,10 @@ main {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+}
+
+.show-all[hidden] {
+  display: none;
 }
 
 .filter {

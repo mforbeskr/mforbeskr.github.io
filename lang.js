@@ -123,8 +123,6 @@
     "filter.all": "Alle",
     "filter.personal": "Freelance &amp; personlige",
     "filter.school": "Skole",
-    "github.eyebrow": "Direkte fra GitHub",
-    "github.title": "Mere på GitHub",
 
     "approach.eyebrow": "Sådan arbejder jeg",
     "approach.title": "Jeg lærer ved at bygge",

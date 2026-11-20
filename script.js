@@ -188,7 +188,7 @@
       card.style.setProperty("--my", e.clientY - r.top + "px");
     });
 
-    // Portfolio filters: they sort the main project grid only; "More on GitHub" always shows everything
+    // Portfolio filters (tagged GitHub repos are added to the same grid later, see render.js)
     var filters = document.querySelectorAll(".filter");
     var grid = document.querySelector("[data-projects].is-collapsed");
     var showAll = document.querySelector("[data-show-all]");
@@ -215,8 +215,15 @@
       allProjects().forEach(function (p) {
         p.hidden = tag !== "all" && p.dataset.tags.split(" ").indexOf(tag) === -1;
       });
+      currentFilter = btn;
       setCollapsed(tag !== "all");
     }
+    var currentFilter = null;
+    // GitHub repos arrive after the page has loaded: filter them and update the count.
+    document.addEventListener("projects:added", function () {
+      if (currentFilter) applyFilter(currentFilter);
+      else setCollapsed(false);
+    });
     setCollapsed(false);
     if (showAll) {
       showAll.addEventListener("click", function () {

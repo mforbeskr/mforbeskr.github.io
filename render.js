@@ -173,8 +173,9 @@
       });
   }
 
-  var githubSection = document.querySelector("[data-github-section]");
-  if (githubSection && site.github) {
+  // Tagged repos join the main project grid (after the handmade cards) and work with the filters.
+  var projectGrid = document.querySelector("[data-projects]");
+  if (projectGrid && site.github) {
     var known = {};
     site.projects.forEach(function (p) {
       if (p.url) known[normalizeUrl(p.url)] = true;
@@ -188,13 +189,14 @@
           return !known[normalizeUrl(repo.html_url)] && !known[normalizeUrl(repo.homepage)] && !known[normalizeUrl(pagesUrl)];
         });
         if (!extra.length) return;
-        githubSection.querySelector("[data-github-grid]").innerHTML = extra.map(function (repo, i) {
-          return card(repoToProject(repo), i, false).replace(" reveal", "");
-        }).join("");
-        githubSection.hidden = false;
+        var offset = projectGrid.children.length;
+        projectGrid.insertAdjacentHTML("beforeend", extra.map(function (repo, i) {
+          return card(repoToProject(repo), offset + i, false).replace(" reveal", "");
+        }).join(""));
+        document.dispatchEvent(new CustomEvent("projects:added"));
       })
       .catch(function (err) {
-        console.warn("Couldn't load GitHub repos for \"More on GitHub\":", err);
+        console.warn("Couldn't load tagged GitHub repos:", err);
       });
   }
 
