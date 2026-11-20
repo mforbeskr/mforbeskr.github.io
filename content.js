@@ -140,6 +140,22 @@ window.SITE = {
       },
     },
     {
+      title: "4bestudio Intro",
+      tags: ["personal"],
+      badge: "3D animation · Blender",
+      desc: "A 10-second studio intro built entirely in Blender with Python: you get snatched by a vine in a dark jungle and swung up to a chrome 4bestudio wordmark on a cliff above the clouds. The sound design is mine too.",
+      chips: ["Blender", "Python", "Sound design"],
+      link: "Private repo",
+      media: { type: "image", src: "assets/img/4bestudio-intro.webp", alt: "Chrome 4bestudio wordmark on a jungle cliff above the clouds at sunrise", width: 1280, height: 720 },
+      da: {
+        title: "4bestudio-intro",
+        badge: "3D-animation · Blender",
+        desc: "En 10 sekunders studieintro bygget helt i Blender med Python: en lian snupper dig i en mørk jungle og svinger dig op til et krom-logo for 4bestudio på en klippe over skyerne. Lyddesignet har jeg også lavet.",
+        chips: ["Blender", "Python", "Lyddesign"],
+        media: { alt: "Krom-logo for 4bestudio på en junglefyldt klippe over skyerne i solopgang" },
+      },
+    },
+    {
       title: "Smart Parking Lot",
       url: "https://github.com/mforbeskr/NEC_Exam_2026_Project",
       tags: ["school", "java"],
