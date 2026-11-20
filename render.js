@@ -177,7 +177,7 @@
   if (githubSection && site.github) {
     var known = {};
     site.projects.forEach(function (p) {
-      known[normalizeUrl(p.url)] = true;
+      if (p.url) known[normalizeUrl(p.url)] = true;
     });
 
     loadRepos(site.github.user)
