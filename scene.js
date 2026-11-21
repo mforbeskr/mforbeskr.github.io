@@ -73,20 +73,29 @@
     });
   }
 
-  function markerTop(i) {
-    return markers[i].getBoundingClientRect().top + window.scrollY;
-  }
-
   // ---------- Scroll: which scene, how far into it, how much veil ----------
+  // All positions are measured first and all styles written after, so the browser lays the page out
+  // once per frame instead of once per layer.
   function place() {
     var vh = window.innerHeight;
     var y = window.scrollY;
+    var end = document.documentElement.scrollHeight - vh;
+    var tops = markers.map(function (m) {
+      return m.getBoundingClientRect().top;
+    });
+    var covered = 0;
+    content.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      covered += Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+    });
+    var markerTop = function (i) {
+      return tops[i] + y;
+    };
 
     var next = 1;
-    markers.forEach(function (m) {
-      var top = m.getBoundingClientRect().top;
-      if (top < vh * 0.7) next = Number(m.dataset.scene);
-      if (top < vh * 2.5) load(chapters[Number(m.dataset.scene) - 1]);
+    markers.forEach(function (m, i) {
+      if (tops[i] < vh * 0.7) next = Number(m.dataset.scene);
+      if (tops[i] < vh * 2.5) load(chapters[Number(m.dataset.scene) - 1]);
     });
     if (next !== active) {
       active = next;
@@ -98,7 +107,6 @@
     }
 
     if (!skipMotion) {
-      var end = document.documentElement.scrollHeight - vh;
       markers.forEach(function (m, i) {
         var n = Number(m.dataset.scene), c = chapters[n - 1];
         if (!c || Math.abs(n - active) > 1) return;
@@ -115,11 +123,6 @@
       });
     }
 
-    var covered = 0;
-    content.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      covered += Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
-    });
     // Fully veiled once text fills half the screen.
     scene.style.setProperty("--dim", Math.min(1, (covered / vh) * 2).toFixed(3));
     scene.style.setProperty("--scrim", (1 - Math.min(1, y / vh)).toFixed(3));
@@ -282,7 +285,16 @@
   }
 
   // ---------- Wiring ----------
-  window.addEventListener("scroll", place, { passive: true });
+  // At most one placement per frame: scroll events can fire several times between two frames.
+  var placeQueued = false;
+  window.addEventListener("scroll", function () {
+    if (placeQueued) return;
+    placeQueued = true;
+    requestAnimationFrame(function () {
+      placeQueued = false;
+      place();
+    });
+  }, { passive: true });
   window.addEventListener("resize", function () {
     aim();
     place();

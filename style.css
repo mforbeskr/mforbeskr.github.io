@@ -3253,3 +3253,26 @@ img.cloth-hidden {
     display: none;
   }
 }
+
+/* ---------- Long rail jumps: a brief veil instead of gliding past everything (rail.js) ---------- */
+.jump-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 30; /* under the rail (40) and the top bar (50) */
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.26s ease;
+}
+
+.veil-on .jump-veil {
+  opacity: 1;
+  transition-duration: 0.16s;
+}
+
+/* While hidden, everything snaps to its final state instead of animating */
+.is-jumping *:not(.jump-veil),
+.is-jumping *::before,
+.is-jumping *::after {
+  transition: none !important;
+}

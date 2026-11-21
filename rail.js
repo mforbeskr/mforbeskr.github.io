@@ -23,8 +23,13 @@
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         e.preventDefault();
         var smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        section.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
+        var far = Math.abs(section.getBoundingClientRect().top) > window.innerHeight * 1.5;
         if (!section.hasAttribute("tabindex")) section.setAttribute("tabindex", "-1");
+        if (smooth && far) {
+          veilJump(section);
+          return;
+        }
+        section.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
         section.focus({ preventScroll: true });
       });
       li.appendChild(a);
@@ -33,6 +38,32 @@
     });
     nav.appendChild(list);
     document.body.appendChild(nav);
+
+    // Long jumps don't glide through the page (that plays every scene change, zoom, reveal and picture
+    // on the way). The page fades to its background for a moment, jumps while hidden with all
+    // transitions off so everything lands in its final state unseen, then fades back in.
+    var root = document.documentElement;
+    var veil = document.createElement("div");
+    veil.className = "jump-veil";
+    veil.setAttribute("aria-hidden", "true");
+    document.body.appendChild(veil);
+    var jumping = false;
+    function veilJump(section) {
+      if (jumping) return;
+      jumping = true;
+      root.classList.add("veil-on");
+      setTimeout(function () {
+        root.classList.add("is-jumping");
+        section.scrollIntoView({ behavior: "instant" });
+        section.focus({ preventScroll: true });
+        // Give the scroll-driven scripts (scenery, reveals, quote, rail) time to settle before showing it
+        setTimeout(function () {
+          root.classList.remove("is-jumping");
+          root.classList.remove("veil-on");
+          jumping = false;
+        }, 120);
+      }, 170);
+    }
 
     // Leave room after the last section so it, and the end of it, can scroll up past the reading
     // line. Without it, the page bottoms out early: jumping to a late section (say Education) would
