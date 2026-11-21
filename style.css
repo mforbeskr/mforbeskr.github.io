@@ -3214,6 +3214,33 @@ img.cloth-hidden {
   font-weight: 700;
 }
 
+/* Brand titles match their brand words in the text (.brand-qilej, .brand-tackly, .brand-learnhub) */
+.peek-text .peek-brand-qilej {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.peek-text .peek-brand-tackly {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+
+.peek-text .peek-brand-learnhub {
+  width: fit-content;
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, rgb(42 125 155), rgb(87 199 133), rgb(237 229 83));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .peek-text p {
   margin: 0.2rem 0 0;
   font-size: 0.78rem;

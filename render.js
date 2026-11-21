@@ -267,12 +267,19 @@
         : (da ? "Til Android" : "For Android");
       var badge = STORE_BADGES[store];
       return '<div class="peek-store">' +
-        '<div class="peek-text"><strong>Tackly</strong><p>' + esc(sub) + "</p></div>" +
+        '<div class="peek-text"><strong class="peek-brand-tackly">Tackly</strong><p>' + esc(sub) + "</p></div>" +
         '<img class="peek-badge peek-badge-' + store + '" src="' + badge.src + '" alt="' + badge.alt + '" /></div>';
+    };
+
+    // The card's title wears the same brand font as the word you hovered (store links open Tackly)
+    var brandOf = function (link) {
+      var m = /\bbrand-(qilej|tackly|learnhub)\b/.exec(link.className);
+      return m ? m[1] : storeOf(link) ? "tackly" : null;
     };
 
     var showPeek = function (link) {
       var store = storeOf(link);
+      var brand = brandOf(link);
       var p = store ? null : findProject(link.href);
       if ((!p && !store) || link === peekLink) return;
       hidePeek();
@@ -291,7 +298,7 @@
         '<div class="peek-view">' +
         (store
           ? storeCard(link)
-          : media(p.media) + '<div class="peek-text"><strong>' + esc(p.title) + "</strong>" + (p.badge ? "<p>" + esc(p.badge) + "</p>" : "") + "</div>") +
+          : media(p.media) + '<div class="peek-text"><strong' + (brand ? ' class="peek-brand-' + brand + '"' : "") + ">" + esc(p.title) + "</strong>" + (p.badge ? "<p>" + esc(p.badge) + "</p>" : "") + "</div>") +
         '<div class="peek-skeleton"><span></span><span></span><span></span></div></div>';
       var ms = Math.round(440 + Math.random() * 300);
       peek.style.setProperty("--load", ms + "ms");
