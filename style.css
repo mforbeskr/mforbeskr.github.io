@@ -1118,8 +1118,7 @@ main {
   font-size: 1.45em;
 }
 
-.brand-learnhub,
-.tile-learnhub .tile-name {
+.brand-learnhub {
   background: linear-gradient(90deg, rgb(42 125 155), rgb(87 199 133), rgb(237 229 83));
   -webkit-background-clip: text;
   background-clip: text;
@@ -1639,17 +1638,6 @@ main {
   --t1: #1f1830;
   --t2: #0e0b16;
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-}
-
-.code-tile.tile-learnhub {
-  background:
-    radial-gradient(circle at 80% 110%, rgb(69 184 131 / 0.22), transparent 55%),
-    linear-gradient(180deg, #1d3050, #02062f);
-  color: #e4e4e4;
-}
-
-.tile-learnhub svg {
-  color: #45b883;
 }
 
 /* ---------- Call to action ---------- */

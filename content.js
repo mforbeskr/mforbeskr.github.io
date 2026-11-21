@@ -121,17 +121,11 @@ window.SITE = {
       desc: "A learning platform with courses, modules, lessons and enrollments: a Spring Boot REST API on PostgreSQL with a React frontend, covered by unit and integration tests. Built in a team of four, with me as Product Owner.",
       chips: ["Spring Boot", "React", "PostgreSQL"],
       link: "GitHub",
-      media: {
-        type: "tile",
-        className: "tile-learnhub",
-        name: "LearnHub",
-        sub: "2nd semester project",
-        icon: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',
-      },
+      media: { type: "image", src: "assets/img/learnhub.webp", alt: "LearnHub's home page with the sidebar open and the popular courses", width: 1440, height: 900 },
       da: {
         badge: "2. semester · Product Owner",
         desc: "En læringsplatform med kurser, moduler, lektioner og tilmeldinger: et REST API i Spring Boot på PostgreSQL med en React-frontend, dækket af unit- og integrationstests. Bygget i et team på fire med mig som Product Owner.",
-        media: { sub: "Projekt på 2. semester" },
+        media: { alt: "LearnHubs forside med sidemenuen åben og de populære kurser" },
       },
     },
     {
