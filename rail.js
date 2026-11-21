@@ -78,9 +78,10 @@
       }, 170);
     }
 
-    // Leave room after the last section so it, and the end of it, can scroll up past the reading
-    // line. Without it, the page bottoms out early: jumping to a late section (say Education) would
-    // stop short and mark the section after it instead.
+    // Leave just enough room after the last section for the one before it to land like the others.
+    // Without it, the page bottoms out early: jumping to a late section (say Education) would stop
+    // short and mark the section after it instead. The last section needs no room of its own: at
+    // the very bottom it is marked anyway (see update), so a short one adds no empty gap.
     var spacer = document.createElement("div");
     spacer.className = "rail-spacer";
     spacer.setAttribute("aria-hidden", "true");
@@ -90,12 +91,10 @@
 
     function makeRoom() {
       spacer.style.height = "0px";
-      var last = sections[sections.length - 1].getBoundingClientRect();
-      var vh = window.innerHeight;
-      var reach = Math.max(last.top - vh * 0.3, last.bottom - vh * 0.45) + window.scrollY;
-      // ...and enough to land the last section like the others (see landing)
-      reach = Math.max(reach, landing(sections[sections.length - 1], sections.length - 1));
-      var maxScroll = document.documentElement.scrollHeight - vh;
+      var i = sections.length - 2;
+      // A few px past its landing, so the page is not at the bottom (which would mark the last one)
+      var reach = landing(sections[i], i) + 8;
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       spacer.style.height = Math.max(0, Math.ceil(reach - maxScroll)) + "px";
     }
     makeRoom();

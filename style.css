@@ -1632,15 +1632,17 @@ main {
 }
 
 /* ---------- Call to action ---------- */
-/* Kept quiet on purpose: one line of text and two plain links between hairlines */
+/* Kept quiet on purpose: one line of text and two plain links, resting right on the footer's line */
+#contact {
+  padding-bottom: 0;
+}
+
 .cta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem 2.5rem;
-  padding-block: 1.5rem;
-  border-top: 1px solid var(--border);
 }
 
 .cta p {
@@ -2297,7 +2299,7 @@ main {
 
 /* ---------- Footer ---------- */
 .site-footer {
-  margin-top: clamp(3rem, 7vw, 5rem);
+  margin-top: clamp(2rem, 4vw, 2.75rem);
   border-top: 1px solid var(--border);
   padding-block: 2.5rem;
   font-size: 0.925rem;
