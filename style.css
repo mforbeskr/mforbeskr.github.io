@@ -977,20 +977,7 @@ main {
   margin: 0;
 }
 
-.about-cta-brand {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-deep);
-}
-
-:root[data-theme="dark"] .about-cta-brand {
-  color: var(--accent);
-}
-
 .prose .about-cta-ask {
-  margin-top: 0.35rem;
   font-family: "DM Serif Display", var(--font-display);
   font-size: clamp(1.45rem, 2.6vw, 1.95rem);
   line-height: 1.2;
@@ -1221,14 +1208,7 @@ main {
 
 /* ---------- Home: storytelling ---------- */
 .facts {
-  position: relative;
-  z-index: 1;
-  margin-top: calc(-1 * clamp(3rem, 9vw, 7rem) - 8svh);
-}
-
-/* Keeps the cards closer to the section after them */
-.facts + .scene-break {
-  min-height: 5svh;
+  margin-top: 2.5rem;
 }
 
 .word {
@@ -2287,11 +2267,11 @@ main {
 .hobby-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .hobby {
-  padding: 1.75rem;
+  padding: 1.2rem 1.3rem 1.25rem;
   overflow: hidden;
   transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
 }
@@ -2303,10 +2283,10 @@ main {
 
 .hobby-art {
   position: absolute;
-  top: 0.9rem;
-  right: 1rem;
-  width: 58px;
-  height: 58px;
+  top: 0.8rem;
+  right: 0.9rem;
+  width: 64px;
+  height: 64px;
   overflow: visible;
   pointer-events: none;
 }
@@ -2314,7 +2294,7 @@ main {
 .hobby-art circle,
 .hobby-art path {
   fill: none;
-  stroke-width: 2.4;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -2340,24 +2320,24 @@ main {
 
 .hobby h2,
 .hobby .tagline {
-  padding-right: 70px;
+  padding-right: 76px;
 }
 
 .hobby h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.08rem;
+  margin-bottom: 0.2rem;
 }
 
 .hobby .tagline {
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--accent);
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.7rem;
 }
 
 .hobby p:last-child {
   color: var(--muted);
-  font-size: 0.975rem;
+  font-size: 0.9rem;
   margin-bottom: 0;
 }
 

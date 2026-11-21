@@ -29,7 +29,7 @@
     };
   });
   var markers = Array.prototype.slice.call(document.querySelectorAll("[data-scene]"));
-  var content = Array.prototype.slice.call(document.querySelectorAll("main > section:not(.hero):not(.facts), .site-footer"));
+  var content = Array.prototype.slice.call(document.querySelectorAll("main > section:not(.hero), .site-footer"));
   var canvas = scene.querySelector(".scene-fx");
   var ctx = canvas && canvas.getContext("2d");
 

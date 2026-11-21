@@ -102,7 +102,6 @@
       '<a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a> ' +
       "under mit eget firma.",
     "about.cta":
-      '<p class="about-cta-brand">4bestudio</p>' +
       '<p class="about-cta-ask">Har du brug for en hjemmeside eller en lille app?</p>' +
       '<p class="about-cta-go">Jeg hjælper gerne, så bare ' +
       '<a class="reach-out" href="mailto:mforbeskr@outlook.dk">skriv til mig!</a></p>',
