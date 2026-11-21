@@ -85,7 +85,7 @@
       "<h3>" + esc(p.title) + "</h3>" +
       "<p>" + esc(p.desc) + "</p>" +
       '<div class="project-foot"><ul class="chips">' + chips + "</ul>" +
-      (p.link ? '<span class="project-link">' + esc(t("link." + p.link, p.link)) + (p.url ? " " + ARROW : "") + "</span>" : "") + "</div>" +
+      (p.link ?'<span class="project-link">' + esc(t("link." + p.link, p.link)) + (p.url ? " " + ARROW : "") + "</span>" : "") + "</div>" +
       "</div></" + tag + ">"
     );
   }
@@ -243,16 +243,17 @@
       peek.style.top = Math.round(y) + "px";
     };
 
-    // App Store / Google Play links get a smaller card: the store's icon, what it opens, and where.
-    var STORE_ICONS = {
-      apple:
-        '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="peek-as" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1ec0ff"/><stop offset="1" stop-color="#0a6cf0"/></linearGradient></defs>' +
-        '<rect width="40" height="40" rx="9" fill="url(#peek-as)"/><g stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M17.6 10.5 9.8 27M22.4 10.5 30.2 27M12.5 21.5h15"/><path d="M9 30.5h5M26 30.5h5" stroke-width="2.2"/></g></svg>',
-      google:
-        '<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="9" fill="#14121c"/>' +
-        '<path d="M12 9.5v21l11-10.5z" fill="#34a853"/><path d="M12 9.5l14.5 8.2L23 20.5z" fill="#4285f4"/>' +
-        '<path d="M12 30.5l14.5-8.2L23 20.5z" fill="#ea4335"/><path d="M26.5 17.7l4 2.3-0.1.1-3.9 2.2-3.5-1.8z" fill="#fbbc04"/></svg>',
+    // App Store / Google Play links get a smaller card: what it opens, and the store's official badge.
+    // Apple's and Google's rules: their marks only as the official badge artwork, unaltered, never a
+    // home-drawn logo (assets/badges, downloaded from developer.apple.com and play.google.com).
+    var STORE_BADGES = {
+      apple: { src: "assets/badges/app-store.svg", alt: "Download on the App Store" },
+      google: { src: "assets/badges/google-play.png", alt: "Get it on Google Play" },
     };
+    // Load them up front so the badge is there the moment the card opens
+    Object.keys(STORE_BADGES).forEach(function (k) {
+      new Image().src = STORE_BADGES[k].src;
+    });
     var storeOf = function (link) {
       if (/(^|\.)apps\.apple\.com$/.test(link.hostname)) return "apple";
       if (/(^|\.)play\.google\.com$/.test(link.hostname)) return "google";
@@ -261,12 +262,13 @@
     var storeCard = function (link) {
       var da = i18n.lang === "da";
       var store = storeOf(link);
-      var title = store === "apple" ? "Tackly" : "4bestudio";
       var sub = store === "apple"
-        ? (da ? "Hent den i App Store" : "Get it on the App Store")
-        : (da ? "Udvikler på Google Play" : "Developer on Google Play");
-      return '<div class="peek-store">' + STORE_ICONS[store] +
-        '<div class="peek-text"><strong>' + esc(title) + "</strong><p>" + esc(sub) + "</p></div></div>";
+        ? (da ? "Til iPhone og iPad" : "For iPhone and iPad")
+        : (da ? "Til Android" : "For Android");
+      var badge = STORE_BADGES[store];
+      return '<div class="peek-store">' +
+        '<div class="peek-text"><strong>Tackly</strong><p>' + esc(sub) + "</p></div>" +
+        '<img class="peek-badge peek-badge-' + store + '" src="' + badge.src + '" alt="' + badge.alt + '" /></div>';
     };
 
     var showPeek = function (link) {

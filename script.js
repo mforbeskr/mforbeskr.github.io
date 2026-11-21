@@ -300,21 +300,34 @@
         if (btn.dataset.filter === "all") url.searchParams.delete("filter");
         else url.searchParams.set("filter", btn.dataset.filter);
         history.replaceState(null, "", url);
-        var apply = function () {
-          applyFilter(btn);
-        };
-        if (!document.startViewTransition || reduceMotion) return apply();
-        var projects = allProjects();
-        projects.forEach(function (p, i) {
-          p.style.viewTransitionName = "project-" + i;
+        if (reduceMotion) return applyFilter(btn);
+        // FLIP on the real cards (not a view transition): they stay live, so they can be hovered while
+        // they glide, and nothing is lifted above the rail or the top bar.
+        var before = new Map();
+        allProjects().forEach(function (p) {
+          if (p.offsetParent) before.set(p, p.getBoundingClientRect());
         });
-        document.startViewTransition(apply).finished.finally(function () {
-          projects.forEach(function (p) {
-            p.style.viewTransitionName = "";
-          });
+        flights.forEach(function (a) {
+          a.cancel();
+        });
+        flights = [];
+        applyFilter(btn);
+        allProjects().forEach(function (p) {
+          if (!p.offsetParent) return;
+          p.classList.add("in"); // shown straight away, not left waiting for the scroll reveal
+          var from = before.get(p);
+          var to = p.getBoundingClientRect();
+          if (!from) {
+            flights.push(p.animate([{ opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1 }], { duration: 320, easing: "ease-out" }));
+            return;
+          }
+          var dx = from.left - to.left, dy = from.top - to.top;
+          if (!dx && !dy) return;
+          flights.push(p.animate([{ translate: dx + "px " + dy + "px" }, { translate: "0 0" }], { duration: 450, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" }));
         });
       });
     });
+    var flights = [];
 
     document.querySelectorAll("[data-year]").forEach(function (el) {
       el.textContent = new Date().getFullYear();

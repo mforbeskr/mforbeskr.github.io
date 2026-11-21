@@ -887,7 +887,7 @@ main {
 .stat {
   display: block;
   height: 100%;
-  padding: 1.35rem 1.4rem;
+  padding: 1rem 1.15rem 1.05rem;
   color: inherit;
   text-decoration: none;
   transition: transform 0.3s var(--ease-out), border-color 0.25s, box-shadow 0.3s;
@@ -901,16 +901,16 @@ main {
   display: block;
   font-variant-numeric: lining-nums;
   font-family: var(--font-display);
-  font-size: 1.55rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   color: var(--text);
   margin-bottom: 0.3rem;
 }
 
 .stat-label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   color: var(--muted);
   line-height: 1.4;
 }
@@ -927,7 +927,7 @@ main {
   }
 
   .stat-value {
-    font-size: 1.6rem;
+    font-size: 1.15rem;
   }
 }
 
@@ -1142,6 +1142,15 @@ main {
   padding-left: 2.6rem;
 }
 
+/* No empty space under the end of the About text */
+.prose > :last-child {
+  margin-bottom: 0;
+}
+
+#about {
+  padding-bottom: 0;
+}
+
 .pull-quote::before {
   content: "\201C";
   position: absolute;
@@ -1221,25 +1230,6 @@ main {
 /* Keeps the cards closer to the section after them */
 .facts + .scene-break {
   min-height: 5svh;
-}
-
-.stat-line {
-  display: flex;
-  margin-bottom: 0.7rem;
-}
-
-.stat-line::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--neon) 60%, transparent), transparent);
-  transform: scaleX(0.35);
-  transform-origin: left;
-  transition: transform 0.5s var(--ease-out);
-}
-
-.stat:hover .stat-line::after {
-  transform: scaleX(1);
 }
 
 .word {
@@ -1483,8 +1473,27 @@ main {
 }
 
 /* The portfolio opens with the featured projects; "Show all" or a filter reveals the rest */
-.work-lead {
-  margin-bottom: 1.5rem;
+.work-eyebrow {
+  margin-bottom: 1.25rem;
+}
+
+/* Once a card has faded in, hovering it reacts at once (the reveal's slow, delayed transition
+   would otherwise also slow down the hover lift) */
+.reveal-ready #work .project.in {
+  transition: opacity 0.7s var(--ease-out), transform 0.35s var(--ease-out), box-shadow 0.35s, border-color 0.2s;
+  transition-delay: var(--delay), 0s, 0s, 0s;
+}
+
+/* The portfolio runs wider than the rest of the page, but never under the side rail */
+#work.container {
+  max-width: max(var(--container), min(calc(var(--container) + 10rem), calc(100vw - 380px)));
+}
+
+/* Below 1380px the rail shows only its ticks, so it needs far less room */
+@media (max-width: 1379px) {
+  #work.container {
+    max-width: max(var(--container), min(calc(var(--container) + 10rem), calc(100vw - 120px)));
+  }
 }
 
 #work .filters {
@@ -1531,42 +1540,6 @@ main {
 
 .project[hidden] {
   display: none;
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 1.25rem;
-}
-
-.feature {
-  padding: 1.6rem;
-}
-
-.feature-icon {
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  margin-bottom: 1.1rem;
-}
-
-.feature-icon svg {
-  width: 22px;
-  height: 22px;
-}
-
-.feature h3 {
-  font-size: 1.08rem;
-}
-
-.feature p {
-  font-size: 0.975rem;
-  color: var(--muted);
-  margin-bottom: 0;
 }
 
 @media (min-width: 700px) {
@@ -3062,20 +3035,14 @@ img.cloth-hidden {
 /* Clear glass: a light fill that lifts the cards, the scenery shows through, and a crisp outline */
 #work .project-grid {
   background: linear-gradient(160deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.05));
-  border: 1px solid rgb(28 26 23 / 0.16);
-  box-shadow:
-    inset 0 0 0 1px rgb(255 255 255 / 0.65),
-    inset 0 1px 0 1px rgb(255 255 255 / 0.5),
-    0 24px 50px -34px rgb(40 30 15 / 0.3);
+  /* the same hairline as the top bar's bottom edge */
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  box-shadow: 0 24px 50px -34px rgb(40 30 15 / 0.3);
 }
 
 :root[data-theme="dark"] #work .project-grid {
   background: linear-gradient(160deg, rgb(255 255 255 / 0.03), rgb(255 255 255 / 0.008));
-  border-color: rgb(225 215 255 / 0.26);
-  box-shadow:
-    inset 0 0 0 1px rgb(0 0 0 / 0.35),
-    inset 0 1px 0 1px rgb(255 255 255 / 0.07),
-    0 24px 50px -30px rgb(0 0 0 / 0.8);
+  box-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.8);
 }
 
 /* Slim glass edge on each card: a 1px ring, bright where the light hits (top left), fading out,
@@ -3380,15 +3347,25 @@ img.cloth-hidden {
 
 .peek-store {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.85rem 0.9rem 0.9rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px; /* clear space above the badge */
+  padding: 0.85rem 0.9rem 1rem;
 }
 
-.peek-store svg {
-  flex: none;
-  width: 40px;
+/* Official store badge, unaltered (Apple's and Google's badge rules): the App Store badge at its
+   minimum 40px height, the Google Play badge at the same visible size. Google's PNG carries its own
+   transparent clear space (41 of its 250px on each side), so it is shown at 60px with that pulled in. */
+.peek-badge {
+  display: block;
+  width: auto;
   height: 40px;
+  max-width: none;
+}
+
+.peek-badge-google {
+  height: 60px;
+  margin: -10px;
 }
 
 .peek-store .peek-text {

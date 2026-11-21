@@ -81,12 +81,11 @@
     "home.readCv": "Læs mit CV",
     "home.badge": "Softwareingeniør",
     "facts.aria": "Hurtige fakta",
-    "facts.po": "elskede at være Product Owner på LearnHub, en rolle, jeg gerne vil udforske mere",
-    "facts.freelance": "en hjemmeside til en rigtig kunde og Tackly, live i App Store og på Google Play",
-    "facts.balance": "familieliv i Hedehusene, gaming, basketball og klaver derhjemme",
+    "facts.fullstack": "Database, API og brugerflade, fra plan til release",
+    "facts.po": "Styrede krav og leverancer på LearnHub",
+    "facts.freelance": "Hjemmesider til kunder og Tackly, live i begge app-butikker",
 
-    "about.eyebrow": "Om mig",
-    "about.title": "Nysgerrig, praktisk og rolig under pres.",
+    "about.title": "Nysgerrig og praktisk.",
     "about.p1":
       "Jeg har altid villet vide, <em>hvorfor</em> ting virker, og bagefter, om de kunne virke bedre. " +
       "Software er stedet, hvor den nysgerrighed får lov at bygge noget.",
@@ -99,8 +98,8 @@
       '<a class="brand-word brand-qilej" href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>, ' +
       'til <a class="brand-word brand-tackly" href="https://tackly.dk/" target="_blank" rel="noopener">Tackly</a>, ' +
       "en komplet markedspladsapp til rideudstyr, live i " +
-      '<a href="https://apps.apple.com/dk/app/id6827721554" target="_blank" rel="noopener">App Store</a> og på ' +
-      '<a href="https://play.google.com/store/apps/developer?id=4bestudio" target="_blank" rel="noopener">Google Play</a> ' +
+      '<a href="https://apps.apple.com/dk/app/tackly-k%C3%B8b-s%C3%A6lg-rideudstyr/id6827721554?l=da" target="_blank" rel="noopener">App Store</a> og på ' +
+      '<a href="https://play.google.com/store/apps/details?id=dk.equilo.app" target="_blank" rel="noopener">Google Play</a> ' +
       "under mit eget firma.",
     "about.cta":
       '<p class="about-cta-brand">4bestudio</p>' +
@@ -113,41 +112,13 @@
       "var jeg Product Owner og holdt styr på kravene og fremdriften. Jeg elskede det, og det er en retning, " +
       "jeg gerne vil blive ved med at udvikle mig i.",
     "about.quote": "Jeg bygger bro mellem kode og mennesker.",
-    "about.calm":
-      "Uddannelsen som redningsspecialist og international teknisk support har lært mig at bevare roen, " +
-      "tage ejerskab og forklare komplekse ting, så alle kan følge med. Jeg arbejder lige så godt på engelsk " +
-      'som på dansk, hvilket gør <strong class="callout">et internationalt team</strong> til et naturligt match.',
 
-    "work.title": "Ting, jeg har bygget",
-    "work.lead":
-      "Fra en markedspladsapp live i App Store og på Google Play til semesterprojekter i Java, C# og React.",
     "filter.aria": "Filtrér projekter",
     "filter.all": "Alle",
     "filter.personal": "Freelance &amp; personlige",
     "filter.school": "Skole",
 
-    "approach.eyebrow": "Sådan arbejder jeg",
-    "approach.title": "Jeg lærer ved at bygge",
-    "approach.lead":
-      "Hvert projekt har lært mig noget nyt, og jeg vender jævnligt tilbage for at forfine de ældre.",
-    "approach.f1Title": "Fra idé til færdigt produkt",
-    "approach.f1":
-      "Jeg kan godt lide små, fokuserede projekter, hvor jeg kan tage en idé hele vejen: planlægge " +
-      "strukturen, designe enkle brugerflader og forfine funktionaliteten gennem test og iteration.",
-    "approach.f2Title": "Front-end og meget mere",
-    "approach.f2":
-      "Fra responsive layouts i HTML, CSS og JavaScript til applikationslogik i Java og JavaFX. Selv i små " +
-      "projekter lægger jeg vægt på læsbarhed, struktur og vedligeholdelse.",
-    "approach.f3Title": "Full-stack i praksis",
-    "approach.f3":
-      "Jeg kan godt lide at eje en feature fra ende til anden: database, sikkerhedsregler, API og " +
-      "brugerflade. Jeg er åben for små opgaver, prototyper og proof-of-concepts for startups, mindre " +
-      "virksomheder og privatkunder.",
-
     "hobbies.eyebrow": "Hobbyer",
-    "hobbies.title": "Livet uden for koden",
-    "hobbies.lead":
-      "Det, der holder mig kreativ og jordbunden, når jeg ikke koder.",
     "hobby.musicTitle": "Musik",
     "hobby.musicTag": "At lytte og at skabe",
     "hobby.music":
