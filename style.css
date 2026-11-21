@@ -2999,7 +2999,9 @@ img.cloth-hidden {
   pointer-events: none;
 }
 
-/* ---------- Portfolio: mixed card sizes (data-span / data-tall / data-fill come from script.js layoutProjects) ---------- */
+/* ---------- Portfolio: mixed card sizes (--span / data-span / data-fill come from script.js layoutProjects) ---------- */
+/* Spans are in 24ths of the row. Cards are compact so 5-7 fit on a desktop screen, and never taller/thinner
+   than the old standard card: a picture on top that grows to fill the row, a short text below. */
 #work .project-grid {
   grid-auto-flow: dense;
 }
@@ -3009,70 +3011,107 @@ img.cloth-hidden {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  #work .project[data-span="8"],
-  #work .project[data-span="12"],
+  #work .project[data-wide],
   #work .project[data-fill] {
     grid-column: span 2;
   }
 
-  #work .project[data-span="8"] .project-media,
-  #work .project[data-span="12"] .project-media,
+  #work .project[data-wide] .project-media,
   #work .project[data-fill] .project-media {
-    aspect-ratio: 16 / 6;
-  }
-
-  #work .project[data-fill]:not([data-span="8"]):not([data-span="12"]) .project-media {
-    aspect-ratio: 16 / 4.5;
+    aspect-ratio: 16 / 5;
   }
 }
 
 @media (min-width: 1024px) {
   #work .project-grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+    gap: 1rem;
   }
 
-  #work .project { grid-column: span 4; }
-  #work .project[data-span="3"] { grid-column: span 3; }
-  #work .project[data-span="5"] { grid-column: span 5; }
-  #work .project[data-span="6"] { grid-column: span 6; }
-  #work .project[data-span="8"] { grid-column: span 8; }
-  #work .project[data-span="12"] { grid-column: span 12; }
-
-  #work .project[data-span="8"] .project-media,
-  #work .project[data-span="12"] .project-media {
-    aspect-ratio: 16 / 5;
+  #work .project {
+    grid-column: span var(--span, 8);
   }
 
-  #work .project[data-span="6"] .project-media {
-    aspect-ratio: 16 / 5.5;
-  }
-
-  #work .project[data-span="5"] .project-media {
-    aspect-ratio: 16 / 9;
-  }
-
-  /* The tall card (2nd priority) spans two rows: its picture grows to fill the height */
-  #work .project[data-tall] {
-    grid-row: span 2;
-  }
-
-  #work .project[data-tall] .project-media {
-    flex: 1 1 auto;
+  /* Fixed picture heights keep each row low and every card at least as wide as the old card shape */
+  #work .project-media {
+    flex: 1 0 auto;
     aspect-ratio: auto;
-    min-height: 14rem;
+    height: 7.5rem;
   }
 
-  #work .project[data-tall] .project-body {
+  #work .project[data-span="10"] .project-media,
+  #work .project[data-span="12"] .project-media,
+  #work .project[data-wide] .project-media {
+    height: 11rem;
+  }
+
+  #work .project[data-span="24"] .project-media {
+    height: 10rem;
+  }
+
+  #work .code-tile .tile-sub {
+    white-space: nowrap;
+    font-size: 0.66rem;
+  }
+
+  #work .project-body {
     flex: 0 0 auto;
+    padding: 0.85rem 1rem 0.95rem;
   }
 
-  #work .project[data-tall] .project-media img {
-    object-position: 21% 50%;
+  #work .project-body .project-badge {
+    font-size: 0.66rem;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  #work .project[data-span="3"] .project-body {
-    padding: 1.1rem 1.1rem 1.2rem;
+  #work .project-body h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #work .project-body p:not(.project-badge) {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    margin-bottom: 0.7rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  #work .project .chips {
+    flex-wrap: nowrap;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  /* Small cards show fewer tags so none gets cut off */
+  #work .project[data-span="5"] .chip:nth-child(n + 2),
+  #work .project[data-span="6"] .chip:nth-child(n + 3),
+  #work .project[data-span="7"] .chip:nth-child(n + 3) {
+    display: none;
+  }
+
+  #work .project .chip {
+    flex: none;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  #work .project-body::before {
+    font-size: 2.6rem;
+    right: 0.75rem;
+  }
+
+  #work .project-badge {
+    max-width: calc(100% - 3.4rem);
   }
 }
 

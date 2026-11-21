@@ -208,44 +208,49 @@
         : t("showAll", "Show all {n} projects").replace("{n}", grid.children.length);
       layoutProjects(filtering);
     }
-    // Mixed card sizes on a 12-column grid (style.css maps data-span to columns per screen width).
-    // With "All", the featured cards keep fixed slots in priority order: 1st biggest, 2nd tall on the
-    // right, 3rd and 4th under the 1st, 5th and 6th as an equal pair. Everything else gets mixed rows.
-    var FEATURED_SLOTS = [8, 4, 5, 3, 6, 6];
-    var ROWS = [[4, 4, 4], [3, 3, 6], [6, 3, 3], [3, 3, 3, 3], [3, 6, 3], [4, 8], [8, 4]];
+    // Mixed card sizes on a 24-column grid (style.css: --span on wide screens, data-wide/data-fill on
+    // two-column screens). With "All", the featured cards keep fixed slots in priority order: 1st biggest
+    // with the 2nd beside it, then 3rd (bottom left), 4th, and the 5th and 6th as an equal pair.
+    // Everything else gets mixed rows of 3 or 4. No card is narrower than 5/24 of the row.
+    var FEATURED_SLOTS = [14, 10, 8, 6, 5, 5];
+    var ROWS = [[6, 6, 6, 6], [8, 5, 5, 6], [10, 7, 7], [5, 7, 6, 6], [8, 8, 8], [6, 5, 5, 8], [7, 7, 10]];
+    var EVEN = [[24], [12, 12], [8, 8, 8], [6, 6, 6, 6]];
     function layoutProjects(filtering) {
       if (!grid) return;
       var collapsed = grid.classList.contains("is-collapsed");
       var cards = Array.prototype.filter.call(grid.children, function (p) {
         p.removeAttribute("data-span");
-        p.removeAttribute("data-tall");
+        p.removeAttribute("data-wide");
         p.removeAttribute("data-fill");
+        p.style.removeProperty("--span");
         return !p.hidden && (!collapsed || p.hasAttribute("data-featured"));
       });
+      var spans = [];
       var i = 0;
       if (!filtering) {
-        for (; i < cards.length && i < FEATURED_SLOTS.length && cards[i].hasAttribute("data-featured"); i++) {
-          cards[i].dataset.span = FEATURED_SLOTS[i];
-          if (i === 1) cards[i].dataset.tall = "";
-        }
-        // Fewer featured cards than slots (e.g. one was unfeatured): fall back to mixed rows for all
+        while (i < cards.length && i < FEATURED_SLOTS.length && cards[i].hasAttribute("data-featured")) spans.push(FEATURED_SLOTS[i++]);
+        // Fewer featured cards than slots (e.g. one was unfeatured): mixed rows for all of them instead
         if (i < FEATURED_SLOTS.length && i < cards.length) {
-          if (cards[1]) cards[1].removeAttribute("data-tall");
+          spans = [];
           i = 0;
         }
       }
       for (var row = 0; i < cards.length; row++) {
         var left = cards.length - i;
-        var pattern = ROWS[row % ROWS.length];
-        if (left < pattern.length) pattern = [[12], [6, 6], [4, 4, 4]][left - 1];
-        pattern.forEach(function (span, k) {
-          cards[i + k].dataset.span = span;
-        });
+        var pattern = left <= 4 ? EVEN[left - 1] : ROWS[row % ROWS.length];
+        if (left - pattern.length === 1) pattern = EVEN[2]; // never leave one card alone on the last row
+        spans = spans.concat(pattern);
         i += pattern.length;
       }
-      // Two-column screens: a lone card at the end of the grid takes the whole row
+      spans.forEach(function (span, k) {
+        var p = cards[k];
+        p.dataset.span = span;
+        p.style.setProperty("--span", span);
+        if (span >= 14) p.dataset.wide = "";
+      });
+      // Two-column screens: a lone half-width card at the end of the grid takes the whole row
       var halves = cards.filter(function (p) {
-        return Number(p.dataset.span) < 8;
+        return !p.hasAttribute("data-wide");
       });
       if (halves.length % 2) halves[halves.length - 1].dataset.fill = "";
     }
