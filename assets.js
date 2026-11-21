@@ -5,7 +5,7 @@
   var VERSIONS = {
     "style.css": 92,
     "lang.js": 17,
-    "content.js": 26,
+    "content.js": 27,
     "script.js": 27,
     "scene.js": 16,
     "rail.js": 12,

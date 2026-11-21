@@ -137,17 +137,11 @@ window.SITE = {
       desc: "An event platform where people find, create and sign up for events. A Blazor frontend talks to an ASP.NET Core user service with JWT login, which reaches a Spring Boot event service over gRPC, each with its own PostgreSQL database. Built as a team.",
       chips: ["Blazor", "gRPC", "Spring Boot"],
       link: "GitHub",
-      media: {
-        type: "tile",
-        name: "KIN",
-        sub: "3rd semester project",
-        colors: ["#0f9488", "#134e4a"],
-        icon: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
-      },
+      media: { type: "image", src: "assets/img/kin.webp", alt: "KIN's front page with tonight's events and small group activities", width: 973, height: 608 },
       da: {
         badge: "3. semester · I gang",
         desc: "En eventplatform, hvor man finder, opretter og tilmelder sig begivenheder. En Blazor-frontend taler med en brugerservice i ASP.NET Core med JWT-login, som når en eventservice i Spring Boot over gRPC, hver med sin egen PostgreSQL-database. Bygget i et team.",
-        media: { sub: "Projekt på 3. semester" },
+        media: { alt: "KINs forside med aftenens begivenheder og aktiviteter i små grupper" },
       },
     },
     {
