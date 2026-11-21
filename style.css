@@ -2918,18 +2918,13 @@ img.cloth-hidden {
   }
 }
 
-/* ---------- Portfolio: aurora panel behind the project cards ---------- */
+/* ---------- Portfolio: glass panel behind the project cards ---------- */
 /* All static (no animation on the panel or cards, only the cards' own hover), the scenery shows through. */
 #work .project-grid {
   --pad: clamp(12px, 2.6vw, 30px);
   position: relative;
   padding: var(--pad);
   border-radius: calc(var(--radius) + 12px);
-  counter-reset: proj;
-}
-
-#work .project {
-  counter-increment: proj;
 }
 
 /* Wide screens: the panel grows outwards so the cards keep their width */
@@ -2956,47 +2951,6 @@ img.cloth-hidden {
     inset 0 0 0 1px rgb(0 0 0 / 0.35),
     inset 0 1px 0 1px rgb(255 255 255 / 0.07),
     0 24px 50px -30px rgb(0 0 0 / 0.8);
-}
-
-/* Gradient edge: a masked ring on top of the card's own border */
-#work .project::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1.5px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, var(--neon), transparent 35%, transparent 65%, var(--plant));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-#work .project-body {
-  position: relative;
-  z-index: 0;
-}
-
-#work .project-badge {
-  max-width: calc(100% - 4.4rem);
-}
-
-#work .project-body::before {
-  content: counter(proj, decimal-leading-zero);
-  position: absolute;
-  right: 0.9rem;
-  top: -0.2rem;
-  z-index: -1;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
-  font-variant-numeric: lining-nums;
-  font-size: 3.6rem;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 32%, transparent);
-  pointer-events: none;
 }
 
 /* ---------- Portfolio: mixed card sizes (--span / data-span / data-fill come from script.js layoutProjects) ---------- */
@@ -3062,6 +3016,7 @@ img.cloth-hidden {
   #work .project-body .project-badge {
     font-size: 0.66rem;
     margin-bottom: 0.25rem;
+    max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3105,14 +3060,6 @@ img.cloth-hidden {
     padding: 0.15rem 0.5rem;
   }
 
-  #work .project-body::before {
-    font-size: 2.6rem;
-    right: 0.75rem;
-  }
-
-  #work .project-badge {
-    max-width: calc(100% - 3.4rem);
-  }
 }
 
 /* ---------- Brand-word hover: a small dark "website" preview (render.js) ---------- */
