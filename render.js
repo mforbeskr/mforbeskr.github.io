@@ -47,6 +47,15 @@
         ' src="' + esc(m.src) + '" alt="' + esc(m.alt) + '" width="' + (m.width || 640) + '" height="' + (m.height || 400) + '" loading="lazy" decoding="async" /></div>'
       );
     }
+    // Video: the card keeps its cropped poster; the play button opens the full 16:9 film in a dialog,
+    // so nothing is downloaded until someone asks for it.
+    if (m.type === "video") {
+      return (
+        '<div class="project-media has-video"><img src="' + esc(m.poster) + '" alt="' + esc(m.alt) + '" width="' + (m.width || 1280) + '" height="' + (m.height || 720) + '" loading="lazy" decoding="async" />' +
+        '<button type="button" class="play-btn" data-video="' + esc(m.src) + '" data-poster="' + esc(m.poster) + '" data-label="' + esc(m.alt) + '" aria-label="' + esc(t("video.play", "Play video")) + '">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg></button></div>'
+      );
+    }
     if (m.type === "logo") {
       return (
         '<div class="project-media logo-tile ' + esc(m.className || "") + '">' +
@@ -94,6 +103,41 @@
     grid.innerHTML = site.projects.map(function (p, i) {
       return card(localized(p), i, true);
     }).join("");
+  });
+
+  var videoDialog = null;
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest(".play-btn[data-video]");
+    if (!btn) return;
+    if (!videoDialog) {
+      videoDialog = document.createElement("dialog");
+      videoDialog.className = "video-dialog";
+      videoDialog.innerHTML =
+        '<button type="button" class="video-close" aria-label="' + esc(t("video.close", "Close")) + '">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button>' +
+        '<video controls controlslist="nodownload" playsinline preload="none"></video>';
+      document.body.appendChild(videoDialog);
+      videoDialog.querySelector(".video-close").addEventListener("click", function () {
+        videoDialog.close();
+      });
+      // A click on the dim backdrop (the dialog itself, outside the video) closes it too.
+      videoDialog.addEventListener("click", function (ev) {
+        if (ev.target === videoDialog) videoDialog.close();
+      });
+      videoDialog.addEventListener("close", function () {
+        videoDialog.querySelector("video").pause();
+      });
+    }
+    var video = videoDialog.querySelector("video");
+    if (video.getAttribute("src") !== btn.dataset.video) {
+      video.poster = btn.dataset.poster;
+      video.src = btn.dataset.video;
+    }
+    video.setAttribute("aria-label", btn.dataset.label);
+    video.currentTime = 0;
+    videoDialog.showModal();
+    var playing = video.play();
+    if (playing && playing.catch) playing.catch(function () {});
   });
 
   var LANGUAGE_COLORS = {

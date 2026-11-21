@@ -1377,6 +1377,104 @@ main {
   transform: scale(1.05);
 }
 
+/* Video card: a round play button over the poster; the film itself opens in .video-dialog */
+.play-btn {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 50%;
+  background: rgb(10 8 14 / 0.5);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s var(--ease-out), background-color 0.3s, box-shadow 0.3s;
+}
+
+.play-btn::before {
+  /* the whole picture is the click target, not just the circle */
+  content: "";
+  position: absolute;
+  inset: -100vmax;
+}
+
+.play-btn svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-left: 0.15rem;
+}
+
+.project:hover .play-btn,
+.play-btn:focus-visible {
+  background: color-mix(in srgb, var(--neon) 70%, rgb(10 8 14));
+  box-shadow: var(--glow);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.play-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.video-dialog {
+  width: min(92vw, 1280px);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: #000;
+  overflow: visible;
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
+}
+
+.video-dialog::backdrop {
+  background: rgb(5 4 7 / 0.82);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.video-dialog video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 86vh;
+  aspect-ratio: 16 / 9;
+  border-radius: inherit;
+  background: #000;
+}
+
+.video-close {
+  position: absolute;
+  top: -2.75rem;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+  cursor: pointer;
+}
+
+.video-close:hover,
+.video-close:focus-visible {
+  background: rgb(255 255 255 / 0.24);
+}
+
+.video-close svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .project-media.placeholder {
   display: grid;
   place-items: center;

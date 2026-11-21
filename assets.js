@@ -3,15 +3,15 @@
 // This file itself has no version: GitHub Pages lets browsers keep it for 10 minutes at most.
 (function () {
   var VERSIONS = {
-    "style.css": 96,
-    "lang.js": 19,
-    "content.js": 27,
+    "style.css": 97,
+    "lang.js": 20,
+    "content.js": 28,
     "script.js": 27,
     "scene.js": 17,
     "rail.js": 13,
     "cloth.js": 8,
     "story.js": 8,
-    "render.js": 19,
+    "render.js": 20,
   };
 
   function url(file) {

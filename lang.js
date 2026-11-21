@@ -59,6 +59,8 @@
     "link.Visit": "Besøg",
     "link.Play": "Spil",
     "link.Private repo": "Privat repo",
+    "video.play": "Afspil video",
+    "video.close": "Luk",
     "github.noDesc": "Ingen beskrivelse endnu.",
     "github.updated": "Opdateret",
     "showAll": "Vis alle {n} projekter",
