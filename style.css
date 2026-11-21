@@ -577,9 +577,9 @@ main {
 /* ---------- Home: hero ---------- */
 .hero {
   display: grid;
-  grid-template-columns: 1.25fr 0.9fr;
+  grid-template-columns: minmax(0, 1fr) 270px;
   align-items: center;
-  gap: clamp(2rem, 6vw, 5rem);
+  gap: clamp(2rem, 4vw, 3rem);
   padding-block: clamp(2.5rem, 6vw, 4.75rem) clamp(2rem, 4.5vw, 3.5rem);
 }
 
@@ -587,13 +587,14 @@ main {
   font-family: "Instrument Serif", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
-  line-height: 1.25;
+  font-size: clamp(1.6rem, 3.9vw, 3rem);
+  line-height: 1.15;
   margin: 1.4rem 0 1.25rem;
   text-wrap: balance;
 }
 
 .hero .lead {
+  max-width: none;
   margin-bottom: 2rem;
 }
 
@@ -601,7 +602,7 @@ main {
   position: relative;
   margin: 0;
   justify-self: center;
-  width: min(100%, 310px);
+  width: min(100%, 270px);
 }
 
 .portrait-mark {
@@ -1110,7 +1111,12 @@ main {
 .facts {
   position: relative;
   z-index: 1;
-  margin-top: calc(-1 * clamp(3rem, 9vw, 7rem));
+  margin-top: calc(-1 * clamp(3rem, 9vw, 7rem) - 8svh);
+}
+
+/* Keeps the cards closer to the section after them */
+.facts + .scene-break {
+  min-height: 5svh;
 }
 
 .stat-line {
