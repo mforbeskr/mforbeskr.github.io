@@ -156,11 +156,11 @@
     "hobby.family":
       "Jeg bor med min kæreste og vores lille søn, som har givet hverdagen en ny og meningsfuld dimension. " +
       "At balancere familie, hobbyer og faglig udvikling er noget, jeg går meget op i.",
-    "hobby.gamingTag": "Strategi, teamwork og lederskab",
+    "hobby.gamingTag": "Strategi og teamwork",
     "hobby.gaming":
       "En hobby gennem mange år, som har formet min måde at tænke strategi og teamwork på. I tre år drev jeg " +
-      "en World of Warcraft-guild og ledte dens raidhold på 25 spillere på den højeste sværhedsgrad, en " +
-      "rolle, jeg voksede ind i, fordi jeg nød at få en stor gruppe til at fungere godt sammen for at nå et fælles mål.",
+      "en World of Warcraft-guild og koordinerede dens raidhold på 25 spillere, hvilket gav mig meget øvelse " +
+      "i at få en stor gruppe til at arbejde mod det samme mål.",
     "hobby.ballTag": "Fokus, energi og balance",
     "hobby.ball":
       "Basketball og træning holder mig sund og rydder hovedet, især i travle perioder med studier eller arbejde.",
@@ -201,8 +201,8 @@
     "rail.before": "Før tech",
     "cv.profile": "Profil",
     "cv.profile1":
-      "Ved siden af studiet udvikler jeg software gennem mit eget lille firma, 4bestudio: en markedspladsapp, " +
-      "der er live i App Store og på Google Play, et mobilspil i Unity og en hjemmeside for en kunde. " +
+      "Ved siden af studiet udvikler jeg forskellig software gennem mit eget lille firma og har indtil videre bygget " +
+      "en marketplace-app der er live i App Store og på Google Play, et mobilspil i Unity og en hjemmeside for en kunde. " +
       "Jeg arbejder full-stack, fra databasedesign og REST API'er i Spring Boot og .NET til " +
       "React-frontends, og jeg er bedst, hvor tekniske beslutninger møder det brugerne faktisk har brug for.",
     "cv.profile2":
@@ -225,7 +225,7 @@
     "cv.s2Title": "Organisator &amp; holdspiller",
     "cv.s2":
       "Jeg kan godt lide at hjælpe en gruppe med at fungere godt sammen: en klar plan, klare roller og en " +
-      "god stemning. Meget af det lærte jeg ved at organisere raid-aftener for 25 personer, og det er det, " +
+      "god stemning. Det øvede jeg først ved at koordinere et hold på 25 personer i et onlinespil, og det er det, " +
       "der gjorde Product Owner-rollen naturlig for mig. Jeg slipper ikke noget, der har mit navn på, før " +
       "jeg er tilfreds, heller ikke selvom det er mig, der skal bære det tunge læs. En perfektionist, vil " +
       "nogle måske sige!",
@@ -251,6 +251,13 @@
     "cv.qilej1":
       '<a href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>: en kundehjemmeside til en barbershop i Roskilde ' +
       "med ydelser, priser, åbningstider og integreret onlinebooking.",
+    "cv.kinRole": "Udvikler",
+    "cv.kinOrg": '<a href="https://github.com/emilTejnRasmussen/TS-SEP3-A26-Projekt" target="_blank" rel="noopener">KIN</a> · VIA University College, 3. semester',
+    "cv.kinWhen": "Efterår 2026, i gang",
+    "cv.kin1":
+      "Bygger en eventplatform i et team på fire: en Blazor-frontend, en brugerservice i ASP.NET Core med JWT-login " +
+      "og en eventservice i Spring Boot over gRPC, hver med sin egen PostgreSQL-database.",
+    "cv.kin2": "Satte Blazor-frontenden op.",
     "cv.learnhubOrg":
       '<a href="https://github.com/mforbeskr/SEP2-Project-LearnHub" target="_blank" rel="noopener">LearnHub</a> ' +
       "· VIA University College, 2. semester",
@@ -294,35 +301,21 @@
     "cv.supportWhen": "nov. 2019 til feb. 2020",
     "cv.jobMoverRole": "Flyttemand, deltid",
     "cv.jobMoverWhen": "apr. 2025 til sep. 2025",
-    "cv.jobHomehelpRole": "Hjemmehjælper, fuldtid",
-    "cv.jobHomehelpOrg": "Roskilde Kommune Hjemmepleje",
-    "cv.jobHomehelpWhen": "apr. 2025 til aug. 2025",
+    "cv.jobHomecareRole": "Plejehjælper, tilkaldevikar &amp; hjemmehjælper",
+    "cv.jobHomecareOrg": "Roskilde Kommune Hjemmepleje",
+    "cv.jobHomecareWhen": "2021, 2023 og 2025",
     "cv.jobForkliftRole": "Truckfører, pluk &amp; pak",
     "cv.jobForkliftWhen": "nov. 2024 til mar. 2025",
-    "cv.jobDataentryRole": "Dataregistrant, deltid",
-    "cv.jobDataentryOrg": "Roskilde Sygehus · Hæmatologisk afdeling",
-    "cv.jobDataentryWhen": "aug. 2023 til feb. 2024",
-    "cv.jobOncallRole": "Tilkaldevikar, deltid",
-    "cv.jobOncallOrg": "Roskilde Kommune Hjemmepleje",
-    "cv.jobOncallWhen": "aug. 2023 til dec. 2023",
-    "cv.jobCareasstRole": "Plejeassistent, deltid",
-    "cv.jobCareasstOrg": "Roskilde Sygehus · Neurologisk afdeling",
-    "cv.jobCareasstWhen": "mar. 2023 til jun. 2024",
-    "cv.jobServiceRole": "Serviceassistent, fuldtid",
-    "cv.jobServiceOrg": "Roskilde Sygehus · Driftsafdelingen",
-    "cv.jobServiceWhen": "aug. 2022 til feb. 2023",
+    "cv.jobHospitalRole": "Serviceassistent, plejeassistent &amp; dataregistrant",
+    "cv.jobHospitalOrg": "Roskilde Sygehus · tre afdelinger",
+    "cv.jobHospitalWhen": "aug. 2022 til jun. 2024",
     "cv.jobLifeguardRole": "Livredder, sommervikar",
     "cv.jobLifeguardWhen": "apr. 2022 til maj 2022",
-    "cv.jobCarehelpRole": "Ufaglært plejehjælper, fuldtid",
-    "cv.jobCarehelpOrg": "Roskilde Kommune Hjemmepleje",
-    "cv.jobCarehelpWhen": "jun. 2021 til mar. 2022",
     "cv.jobPaRole": "Handicaphjælper, fastansat",
     "cv.jobPaOrg": "DUOS · brugerstyret personlig assistance",
     "cv.jobPaWhen": "mar. 2021 til maj 2021",
-    "cv.jobClean2Role": "Rengøringsassistent &amp; chauffør",
-    "cv.jobClean2When": "mar. 2020 til feb. 2021",
-    "cv.jobClean1Role": "Rengøringsassistent &amp; chauffør",
-    "cv.jobClean1When": "jul. 2018 til okt. 2019",
+    "cv.jobLimacasaRole": "Rengøringsassistent &amp; chauffør",
+    "cv.jobLimacasaWhen": "jul. 2018 til feb. 2021",
     "cv.jobTentsRole": "Teltopsætning &amp; pakning",
     "cv.jobTentsOrg": "Pleje &amp; Lejevikar · Sjælland",
     "cv.jobTentsWhen": "jan. 2018 til jun. 2018",

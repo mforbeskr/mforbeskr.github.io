@@ -1793,10 +1793,17 @@ main {
   background: var(--border);
 }
 
+/* Columns rather than a grid: each group sits right under the one above it, so a short
+   group never leaves a gap the height of its tallest neighbour */
 .skill-groups {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
-  gap: 1.5rem 2rem;
+  columns: 3 180px;
+  column-gap: 2rem;
+  margin-bottom: -1.5rem;
+}
+
+.skill-group {
+  break-inside: avoid;
+  padding-bottom: 1.5rem;
 }
 
 .skill-group h3,
@@ -1827,9 +1834,14 @@ main {
 }
 
 .strengths {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 1.75rem 2.25rem;
+  columns: 2 260px;
+  column-gap: 2.25rem;
+  margin-bottom: -1.75rem;
+}
+
+.strength {
+  break-inside: avoid;
+  padding-bottom: 1.75rem;
 }
 
 .strength p {
@@ -2091,6 +2103,41 @@ main {
     justify-self: start;
     margin-top: 0.25rem;
   }
+}
+
+/* "Before tech" is a long list of short rows, so it runs in two columns (and keeps the printed CV
+   to two pages). Line and dots are dropped here: across columns they can't light up in date order. */
+@media screen and (min-width: 640px), print {
+  .timeline-cols {
+    columns: 2;
+    column-gap: 2.5rem;
+    padding-left: 0;
+  }
+
+  .timeline-cols::before,
+  .timeline-cols::after {
+    display: none;
+  }
+
+  .timeline-cols > li.brief,
+  .timeline-cols > li.brief:last-child {
+    display: block;
+    padding: 0 0 0.85rem;
+    break-inside: avoid;
+  }
+
+  .timeline-cols > li.brief::before {
+    display: none;
+  }
+
+  .timeline-cols .brief .when {
+    margin-top: 0.3rem;
+  }
+}
+
+/* Availability above the CV sheet: for the screen only, the printed CV leaves it out */
+.cv-status {
+  margin-bottom: 1.25rem;
 }
 
 /* Narrow screens: one column, with the title first, then the sidebar, then the sections
@@ -2708,7 +2755,8 @@ img.cloth-hidden {
   .rail,
   .rail-spacer,
   .cta,
-  .cv-print {
+  .cv-print,
+  .cv-status {
     display: none !important;
   }
 
@@ -2721,13 +2769,13 @@ img.cloth-hidden {
     -webkit-print-color-adjust: exact;
   }
 
-  /* 1000px of screen layout across the printable A4 width (186mm, about 703px) */
+  /* 1080px of screen layout across the printable A4 width (186mm, about 703px) */
   .cv-wrap {
-    width: 1000px;
+    width: 1080px;
     max-width: none;
     margin: 0;
     padding: 0;
-    zoom: 0.703;
+    zoom: 0.651;
   }
 
   .cv,
@@ -2741,6 +2789,84 @@ img.cloth-hidden {
 
   .details .print-only {
     display: grid;
+  }
+
+  /* On paper the sidebar only sits beside the top part (title, profile, skills).
+     Everything from strengths down uses the full page width below it. */
+  .cv-main,
+  .resume-main {
+    display: contents;
+  }
+
+  .cv {
+    padding-bottom: 3rem;
+  }
+
+  .cv-side {
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+
+  .cv-header,
+  .resume-main > section {
+    grid-column: 2;
+    padding-inline: 3.5rem;
+  }
+
+  .cv-header {
+    padding-top: 3rem;
+  }
+
+  #skills {
+    padding-bottom: 2.5rem;
+    margin-bottom: 0;
+  }
+
+  #strengths,
+  #experience,
+  #education,
+  #before {
+    grid-column: 1 / -1;
+  }
+
+  #strengths {
+    border-top: 1px solid var(--border);
+    padding-top: 2.5rem;
+  }
+
+  .timeline-cols {
+    columns: 3;
+  }
+
+  /* On paper the dates sit under the place as plain text instead of pills */
+  .timeline-cols .brief .when {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .timeline-cols > li.brief,
+  .timeline-cols > li.brief:last-child {
+    padding-bottom: 0.7rem;
+  }
+
+  /* The degree keeps the full width; the short older rows sit two per line */
+  #education .timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+  }
+
+  #education .timeline > li:first-child {
+    grid-column: 1 / -1;
+  }
+
+  #education .timeline::before {
+    display: none;
   }
 
   /* Nothing waits for a scroll animation on paper */

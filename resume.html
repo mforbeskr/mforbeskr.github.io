@@ -34,9 +34,9 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=74"/>
+    <link rel="stylesheet" href="style.css?v=77"/>
     <link rel="expect" href="#page-end" blocking="render"/>
-    <script src="lang.js?v=11"></script>
+    <script src="lang.js?v=14"></script>
     <script src="content.js?v=22"></script>
     <script src="script.js?v=23"></script>
     <script src="rail.js?v=9" defer></script>
@@ -89,6 +89,9 @@
 <div class="page">
     <main id="main">
         <div class="container cv-wrap">
+            <p class="status cv-status reveal" data-i18n="home.status"><span class="status-dot" aria-hidden="true"></span>Open
+                to trainee positions ·
+                ~2 days a week</p>
             <article class="cv">
                 <aside class="cv-side reveal" aria-label="Personal details" data-i18n-attr="aria-label:cv.sideAria">
                     <div class="cv-side-inner">
@@ -163,8 +166,8 @@
                         <section class="reveal" id="profile" data-rail="Profile" data-i18n-attr="data-rail:rail.profile" aria-labelledby="profile-heading">
                             <h2 id="profile-heading" data-i18n="cv.profile">Profile</h2>
                             <p data-i18n="cv.profile1">
-                                Alongside my studies, I build software through my own small company, 4bestudio:
-                                a marketplace app that's live on the App Store and Google Play, a mobile game in Unity,
+                                Alongside my studies, I build different kinds of software through my own small company, and so far
+                                I've built a marketplace-app that's live on the App Store and Google Play, a mobile game in Unity
                                 and a website for a client. I work full-stack, from database design and REST APIs in
                                 Spring Boot and .NET to React front-ends, and I'm at my best where technical decisions
                                 meet what users actually need.
@@ -199,6 +202,8 @@
                                         <li>Spring Boot</li>
                                         <li>.NET</li>
                                         <li>ASP.NET Core</li>
+                                        <li>Blazor</li>
+                                        <li>Unity</li>
                                         <li>JavaFX</li>
                                         <li>Node.js</li>
                                         <li>Vite</li>
@@ -216,6 +221,7 @@
                                         <li>gRPC</li>
                                         <li>Git</li>
                                         <li>Figma</li>
+                                        <li>Microsoft Office</li>
                                     </ul>
                                 </div>
                                 <div class="skill-group">
@@ -243,6 +249,7 @@
                                         <li>Rider</li>
                                         <li>VS Code</li>
                                         <li>DataGrip</li>
+                                        <li>Blender</li>
                                     </ul>
                                 </div>
                             </div>
@@ -259,7 +266,7 @@
                                 <div class="strength">
                                     <h3 data-i18n="cv.s2Title">Organiser &amp; team player</h3>
                                     <p data-i18n="cv.s2">I like helping a group work well together: A clear plan, clear roles and a good
-                                        atmosphere. I learned a lot of that organizing raid nights for 25 people, and it's
+                                        atmosphere. I first practised that coordinating a team of 25 people in an online game, and it's
                                         what made the Product Owner role feel natural to me.
                                         I do not stop working on something with
                                         my name-print on, before I'm satisfied, even if I'm the one who has to shoulder the
@@ -300,6 +307,17 @@
                                         <li data-i18n="cv.qilej1"><a href="https://www.hosqilej.dk/" target="_blank" rel="noopener">Hos Qilej</a>: a client website
                                             for a barbershop in Roskilde, with services, prices, opening hours and integrated online booking.
                                         </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h3 data-i18n="cv.kinRole">Developer</h3>
+                                    <p class="org" data-i18n="cv.kinOrg"><a href="https://github.com/emilTejnRasmussen/TS-SEP3-A26-Projekt" target="_blank" rel="noopener">KIN</a> · VIA University College, 3rd semester</p>
+                                    <span class="when" data-i18n="cv.kinWhen">Autumn 2026, in progress</span>
+                                    <ul class="check-list">
+                                        <li data-i18n="cv.kin1">Building an event platform in a team of four: a Blazor frontend, an ASP.NET Core
+                                            user service with JWT login and a Spring Boot event service over gRPC, each with its own PostgreSQL database.
+                                        </li>
+                                        <li data-i18n="cv.kin2">Set up the Blazor frontend.</li>
                                     </ul>
                                 </li>
                                 <li>
@@ -375,16 +393,16 @@
 
                         <section class="reveal" id="before" data-rail="Before tech" data-i18n-attr="data-rail:rail.before" aria-labelledby="before-heading">
                             <h2 id="before-heading" data-i18n="cv.before">Before tech</h2>
-                            <ol class="timeline">
+                            <ol class="timeline timeline-cols">
                                 <li class="brief">
                                     <h3 data-i18n="cv.jobMoverRole">Mover, part-time</h3>
                                     <p class="org">VIKA Flyt</p>
                                     <span class="when" data-i18n="cv.jobMoverWhen">Apr 2025 to Sep 2025</span>
                                 </li>
                                 <li class="brief">
-                                    <h3 data-i18n="cv.jobHomehelpRole">Home help, full-time</h3>
-                                    <p class="org" data-i18n="cv.jobHomehelpOrg">Roskilde Municipality Home Care</p>
-                                    <span class="when" data-i18n="cv.jobHomehelpWhen">Apr 2025 to Aug 2025</span>
+                                    <h3 data-i18n="cv.jobHomecareRole">Care helper, on-call substitute &amp; home help</h3>
+                                    <p class="org" data-i18n="cv.jobHomecareOrg">Roskilde Municipality Home Care</p>
+                                    <span class="when" data-i18n="cv.jobHomecareWhen">2021, 2023 and 2025</span>
                                 </li>
                                 <li class="brief">
                                     <h3 data-i18n="cv.jobForkliftRole">Forklift driver, picking &amp; packing</h3>
@@ -397,24 +415,9 @@
                                     <span class="when" data-i18n="cv.rescueWhen">Feb 2024 to Oct 2024</span>
                                 </li>
                                 <li class="brief">
-                                    <h3 data-i18n="cv.jobDataentryRole">Data entry clerk, part-time</h3>
-                                    <p class="org" data-i18n="cv.jobDataentryOrg">Roskilde Hospital · Haematology</p>
-                                    <span class="when" data-i18n="cv.jobDataentryWhen">Aug 2023 to Feb 2024</span>
-                                </li>
-                                <li class="brief">
-                                    <h3 data-i18n="cv.jobOncallRole">On-call care substitute, part-time</h3>
-                                    <p class="org" data-i18n="cv.jobOncallOrg">Roskilde Municipality Home Care</p>
-                                    <span class="when" data-i18n="cv.jobOncallWhen">Aug 2023 to Dec 2023</span>
-                                </li>
-                                <li class="brief">
-                                    <h3 data-i18n="cv.jobCareasstRole">Care assistant, part-time</h3>
-                                    <p class="org" data-i18n="cv.jobCareasstOrg">Roskilde Hospital · Neurology</p>
-                                    <span class="when" data-i18n="cv.jobCareasstWhen">Mar 2023 to Jun 2024</span>
-                                </li>
-                                <li class="brief">
-                                    <h3 data-i18n="cv.jobServiceRole">Service assistant, full-time</h3>
-                                    <p class="org" data-i18n="cv.jobServiceOrg">Roskilde Hospital · Facilities</p>
-                                    <span class="when" data-i18n="cv.jobServiceWhen">Aug 2022 to Feb 2023</span>
+                                    <h3 data-i18n="cv.jobHospitalRole">Service assistant, care assistant &amp; data entry clerk</h3>
+                                    <p class="org" data-i18n="cv.jobHospitalOrg">Roskilde Hospital · three departments</p>
+                                    <span class="when" data-i18n="cv.jobHospitalWhen">Aug 2022 to Jun 2024</span>
                                 </li>
                                 <li class="brief">
                                     <h3 data-i18n="cv.jobLifeguardRole">Lifeguard, summer temp</h3>
@@ -422,29 +425,19 @@
                                     <span class="when" data-i18n="cv.jobLifeguardWhen">Apr 2022 to May 2022</span>
                                 </li>
                                 <li class="brief">
-                                    <h3 data-i18n="cv.jobCarehelpRole">Care helper, full-time</h3>
-                                    <p class="org" data-i18n="cv.jobCarehelpOrg">Roskilde Municipality Home Care</p>
-                                    <span class="when" data-i18n="cv.jobCarehelpWhen">Jun 2021 to Mar 2022</span>
-                                </li>
-                                <li class="brief">
                                     <h3 data-i18n="cv.jobPaRole">Personal assistant, permanent</h3>
                                     <p class="org" data-i18n="cv.jobPaOrg">DUOS · user-directed personal assistance</p>
                                     <span class="when" data-i18n="cv.jobPaWhen">Mar 2021 to May 2021</span>
                                 </li>
                                 <li class="brief">
-                                    <h3 data-i18n="cv.jobClean2Role">Cleaning assistant &amp; driver</h3>
+                                    <h3 data-i18n="cv.jobLimacasaRole">Cleaning assistant &amp; driver</h3>
                                     <p class="org">Limacasa</p>
-                                    <span class="when" data-i18n="cv.jobClean2When">Mar 2020 to Feb 2021</span>
+                                    <span class="when" data-i18n="cv.jobLimacasaWhen">Jul 2018 to Feb 2021</span>
                                 </li>
                                 <li class="brief">
                                     <h3 data-i18n="cv.supportRole">Technical Customer Service Agent</h3>
                                     <p class="org">PayPal (Concentrix) · Belfast</p>
                                     <span class="when" data-i18n="cv.supportWhen">Nov 2019 to Feb 2020</span>
-                                </li>
-                                <li class="brief">
-                                    <h3 data-i18n="cv.jobClean1Role">Cleaning assistant &amp; driver</h3>
-                                    <p class="org">Limacasa</p>
-                                    <span class="when" data-i18n="cv.jobClean1When">Jul 2018 to Oct 2019</span>
                                 </li>
                                 <li class="brief">
                                     <h3 data-i18n="cv.jobTentsRole">Tent setup &amp; packing</h3>
