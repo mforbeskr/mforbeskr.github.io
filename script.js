@@ -269,8 +269,14 @@
     setCollapsed(false);
     if (showAll) {
       showAll.addEventListener("click", function () {
+        var before = showAll.getBoundingClientRect().top;
         expanded = !expanded;
         setCollapsed(false);
+        // "Show fewer": the page shrinks above the button, so scroll with it. The button stays under
+        // the pointer, right below the closed-up grid, instead of leaving you far down the page.
+        if (!expanded) {
+          window.scrollBy({ top: showAll.getBoundingClientRect().top - before, behavior: "instant" });
+        }
       });
     }
     // Links elsewhere on the page (like the quick-facts cards) can jump to the portfolio pre-filtered.
