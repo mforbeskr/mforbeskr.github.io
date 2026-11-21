@@ -191,9 +191,6 @@
     "cv.good": "Godt",
     "cv.basic": "Grundlæggende forståelse",
     "cv.h1": "Softwareingeniørstuderende",
-    "cv.lead":
-      "Læser til softwareingeniør på VIA University College, og har allerede en markedspladsapp, " +
-      "hjemmesider for kunder og teamprojekter ude ved siden af.",
     "cv.pdf": "Download CV som PDF",
     "cv.pdfHref": "assets/Magnus-Forbes-Kjaer-Rasmussen-CV-da.pdf",
     "rail.profile": "Profil",
@@ -204,9 +201,10 @@
     "rail.before": "Før tech",
     "cv.profile": "Profil",
     "cv.profile1":
-      "Full-stack-udvikler og stifter af 4bestudio, studiet bag Tackly, en markedspladsapp bygget i React Native på Supabase. Jeg " +
-      "har arbejdet i hele stakken, fra databasedesign og REST API'er i Spring Boot og .NET til " +
-      "React-frontends, og jeg er bedst, hvor tekniske beslutninger møder det, brugerne faktisk har brug for.",
+      "Ved siden af studiet udvikler jeg software gennem mit eget lille firma, 4bestudio: en markedspladsapp, " +
+      "der er live i App Store og på Google Play, et mobilspil i Unity og en hjemmeside for en kunde. " +
+      "Jeg arbejder full-stack, fra databasedesign og REST API'er i Spring Boot og .NET til " +
+      "React-frontends, og jeg er bedst, hvor tekniske beslutninger møder det brugerne faktisk har brug for.",
     "cv.profile2":
       "Jeg nyder den menneskelige side af software lige så meget: at omsætte ønsker til klare krav og " +
       "holde et team på vej i samme retning, som jeg gjorde som Product Owner på LearnHub.",

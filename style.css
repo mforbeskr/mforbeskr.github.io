@@ -1731,15 +1731,12 @@ main {
 
 /* No divider under the intro: the first section heading (Profile) draws its own line */
 .cv-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .cv-header h1 {
   font-size: clamp(1.85rem, 3.6vw, 2.5rem);
   font-weight: 800;
-}
-
-.cv-header .lead {
   margin-bottom: 0;
 }
 
