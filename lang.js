@@ -275,9 +275,6 @@
     "cv.degree3":
       "Traineemodel: Online undervisning gør, at jeg kan arbejde omkring to dage om ugen i en virksomhed og " +
       "skrive mine semester- og bachelorprojekter i dens teknologier.",
-    "cv.eduRucRole": "Humanistisk-teknologisk bachelor (HumTek)",
-    "cv.eduRucOrg": "Roskilde Universitet",
-    "cv.eduRucWhen": "aug. 2024 til dec. 2024",
     "cv.eduDtuRole": "Fysik B",
     "cv.eduDtuOrg": "DTU Adgangskursus · Ballerup Campus",
     "cv.eduDtuWhen": "aug. 2024 til dec. 2024",
