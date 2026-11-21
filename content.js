@@ -6,8 +6,9 @@
  * If a semester has no entry yet, a neutral fallback is shown.
  *
  * Projects: add a new object to the list. Order here = order on the site.
- *   featured: true      -> shown before "Show all" in the Portfolio section (five fill the grid
- *                          neatly, since Tackly is wide; personal work first, then school)
+ *   featured: true      -> shown before "Show all" in the Portfolio section, in this order of priority:
+ *                          1st biggest, 2nd tall on the right, 3rd and 4th under the 1st, 5th and 6th as a pair
+ *                          (script.js layoutProjects); the rest get mixed sizes under "Show all"
  *   wide: true          -> takes two columns
  *   tags                -> used by the filters: personal, school, web, java, csharp, app
  *   url                 -> leave out for a card that isn't a link (e.g. a private repo)
@@ -81,6 +82,22 @@ window.SITE = {
       },
     },
     {
+      title: "4bestudio Intro Cinematic",
+      tags: ["personal"],
+      featured: true,
+      badge: "3D animation · Blender",
+      desc: "A 10-second studio intro built entirely in Blender with Python: you get snatched by a vine in a dark jungle and swung up to a chrome 4bestudio wordmark on a cliff above the clouds. The sound design is mine too.",
+      chips: ["Blender", "Python", "Sound design"],
+      link: "Private repo",
+      media: { type: "image", src: "assets/img/4bestudio-intro.webp", alt: "Chrome 4bestudio wordmark on a jungle cliff above the clouds at sunrise", width: 1280, height: 720 },
+      da: {
+        badge: "3D-animation · Blender",
+        desc: "En 10 sekunders studieintro bygget helt i Blender med Python: en lian snupper dig i en mørk jungle og svinger dig op til et krom-logo for 4bestudio på en klippe over skyerne. Lyddesignet har jeg også lavet.",
+        chips: ["Blender", "Python", "Lyddesign"],
+        media: { alt: "Krom-logo for 4bestudio på en junglefyldt klippe over skyerne i solopgang" },
+      },
+    },
+    {
       title: "Hos Qilej",
       url: "https://www.hosqilej.dk/",
       tags: ["personal", "web"],
@@ -137,22 +154,6 @@ window.SITE = {
         badge: "3. semester · I gang",
         desc: "En eventplatform, hvor man finder, opretter og tilmelder sig begivenheder. En Blazor-frontend taler med en brugerservice i ASP.NET Core med JWT-login, som når en eventservice i Spring Boot over gRPC, hver med sin egen PostgreSQL-database. Bygget i et team.",
         media: { sub: "Projekt på 3. semester" },
-      },
-    },
-    {
-      title: "4bestudio Intro",
-      tags: ["personal"],
-      badge: "3D animation · Blender",
-      desc: "A 10-second studio intro built entirely in Blender with Python: you get snatched by a vine in a dark jungle and swung up to a chrome 4bestudio wordmark on a cliff above the clouds. The sound design is mine too.",
-      chips: ["Blender", "Python", "Sound design"],
-      link: "Private repo",
-      media: { type: "image", src: "assets/img/4bestudio-intro.webp", alt: "Chrome 4bestudio wordmark on a jungle cliff above the clouds at sunrise", width: 1280, height: 720 },
-      da: {
-        title: "4bestudio-intro",
-        badge: "3D-animation · Blender",
-        desc: "En 10 sekunders studieintro bygget helt i Blender med Python: en lian snupper dig i en mørk jungle og svinger dig op til et krom-logo for 4bestudio på en klippe over skyerne. Lyddesignet har jeg også lavet.",
-        chips: ["Blender", "Python", "Lyddesign"],
-        media: { alt: "Krom-logo for 4bestudio på en junglefyldt klippe over skyerne i solopgang" },
       },
     },
     {

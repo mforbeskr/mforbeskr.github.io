@@ -210,4 +210,83 @@
   document.querySelectorAll("[data-studying]").forEach(function (el) {
     el.textContent = studying[el.dataset.studying];
   });
+
+  // Hovering a brand word (Hos Qilej, Tackly, LearnHub) "loads" a small dark preview of that site
+  // for 0.44-0.74 s, then shows its picture, name and tagline. Mouse/trackpad and keyboard focus only.
+  if (window.matchMedia && window.matchMedia("(hover: hover)").matches) {
+    var peek = null;
+    var peekLink = null;
+    var peekTimer = 0;
+
+    var findProject = function (href) {
+      var key = normalizeUrl(href);
+      for (var i = 0; i < site.projects.length; i++) {
+        if (site.projects[i].url && normalizeUrl(site.projects[i].url) === key) return localized(site.projects[i]);
+      }
+      return null;
+    };
+
+    var hidePeek = function () {
+      clearTimeout(peekTimer);
+      peekLink = null;
+      if (peek) peek.classList.remove("is-open", "is-loaded");
+    };
+
+    var placePeek = function (link) {
+      var r = link.getBoundingClientRect();
+      var w = peek.offsetWidth;
+      var h = peek.offsetHeight;
+      var x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), window.innerWidth - w - 8);
+      var y = r.top - h - 12;
+      if (y < 8) y = r.bottom + 12;
+      peek.style.left = Math.round(x) + "px";
+      peek.style.top = Math.round(y) + "px";
+    };
+
+    var showPeek = function (link) {
+      var p = findProject(link.href);
+      if (!p || link === peekLink) return;
+      hidePeek();
+      peekLink = link;
+      if (!peek) {
+        peek = document.createElement("div");
+        peek.className = "peek";
+        peek.setAttribute("aria-hidden", "true");
+        document.body.appendChild(peek);
+      }
+      var host = link.hostname.replace(/^www\./, "") + (link.pathname.length > 1 ? link.pathname : "");
+      peek.innerHTML =
+        '<div class="peek-bar"><span class="peek-dots"><i></i><i></i><i></i></span><span class="peek-url">' + esc(host) + "</span></div>" +
+        '<div class="peek-progress"></div>' +
+        '<div class="peek-view">' + media(p.media) +
+        '<div class="peek-text"><strong>' + esc(p.title) + "</strong>" + (p.badge ? "<p>" + esc(p.badge) + "</p>" : "") + "</div>" +
+        '<div class="peek-skeleton"><span></span><span></span><span></span></div></div>';
+      var ms = Math.round(440 + Math.random() * 300);
+      peek.style.setProperty("--load", ms + "ms");
+      placePeek(link);
+      void peek.offsetWidth; // start the loading line from empty
+      peek.classList.add("is-open");
+      peekTimer = setTimeout(function () {
+        peek.classList.add("is-loaded");
+      }, ms);
+    };
+
+    var brandLink = function (e) {
+      return e.target && e.target.closest ? e.target.closest("a.brand-word[href]") : null;
+    };
+    document.addEventListener("mouseover", function (e) {
+      var link = brandLink(e);
+      if (link) showPeek(link);
+    });
+    document.addEventListener("mouseout", function (e) {
+      var link = brandLink(e);
+      if (link && !link.contains(e.relatedTarget)) hidePeek();
+    });
+    document.addEventListener("focusin", function (e) {
+      var link = brandLink(e);
+      if (link) showPeek(link);
+    });
+    document.addEventListener("focusout", hidePeek);
+    window.addEventListener("scroll", hidePeek, { passive: true });
+  }
 })();
