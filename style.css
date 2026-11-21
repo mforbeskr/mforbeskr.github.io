@@ -1048,9 +1048,9 @@ main {
 
 .pull-quote p {
   margin: 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-family: "DM Serif Display", var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0;
   line-height: 1.15;
   color: var(--text);
   text-wrap: balance;
@@ -1159,7 +1159,28 @@ main {
 }
 
 .pull-quote p {
-  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  font-size: clamp(2.2rem, 4.8vw, 3.5rem);
+}
+
+/* Hollow letters drawn with two very thin lines (filter in index.html): black in light mode,
+   the usual text colour with a soft violet glow in dark mode */
+.pull-quote p {
+  filter: url(#double-outline);
+}
+
+:root[data-theme="light"] .pull-quote p {
+  color: #111;
+}
+
+:root[data-theme="dark"] .pull-quote p {
+  filter: url(#double-outline) drop-shadow(0 0 8px color-mix(in srgb, var(--neon) 45%, transparent));
+}
+
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 @media (max-width: 480px) {
@@ -1177,8 +1198,19 @@ main {
   opacity: 1;
 }
 
-:root[data-theme="dark"].story-ready .qw.is-lit > span {
-  text-shadow: 0 0 18px color-mix(in srgb, var(--neon) 45%, transparent);
+/* The hollow quote dims unlit words with a colour: see-through letters would fill in under the outline filter */
+.story-ready .pull-quote .qw > span {
+  opacity: 1;
+  color: #bdb6aa;
+  transition: color 0.35s ease;
+}
+
+:root[data-theme="dark"].story-ready .pull-quote .qw > span {
+  color: #5f5672;
+}
+
+.story-ready .pull-quote .qw.is-lit > span {
+  color: inherit;
 }
 
 /* ---------- Projects ---------- */

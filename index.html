@@ -37,7 +37,11 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Fredoka:wght@600&family=Caveat:wght@700&text=HOSQILEJTacklyreachoutskivlmg!&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=79"/>
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&text=IJabcdegiklmnoprstuwy.%20&display=swap"
+    />
+    <link rel="stylesheet" href="style.css?v=80"/>
     <link rel="expect" href="#page-end" blocking="render"/>
     <script src="lang.js?v=15"></script>
     <script src="content.js?v=24"></script>
@@ -48,6 +52,18 @@
     <script src="story.js?v=8" defer></script>
 </head>
 <body>
+<!-- Double hairline outline for the pull quote (style.css: .pull-quote p) -->
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+    <filter id="double-outline" x="-5%" y="-15%" width="110%" height="130%" color-interpolation-filters="sRGB">
+        <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="far"/>
+        <feMorphology in="SourceAlpha" operator="dilate" radius="4" result="near"/>
+        <feComposite in="far" in2="near" operator="out" result="outer"/>
+        <feMorphology in="SourceAlpha" operator="erode" radius="1" result="core"/>
+        <feComposite in="SourceAlpha" in2="core" operator="out" result="inner"/>
+        <feMerge result="lines"><feMergeNode in="outer"/><feMergeNode in="inner"/></feMerge>
+        <feComposite in="SourceGraphic" in2="lines" operator="in"/>
+    </filter>
+</svg>
 <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
 <header class="site-nav">
