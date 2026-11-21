@@ -26,10 +26,10 @@
         var far = Math.abs(section.getBoundingClientRect().top) > window.innerHeight * 1.5;
         if (!section.hasAttribute("tabindex")) section.setAttribute("tabindex", "-1");
         if (smooth && far) {
-          veilJump(section);
+          veilJump(section, i);
           return;
         }
-        section.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
+        window.scrollTo({ top: landing(section, i), behavior: smooth ? "smooth" : "instant" });
         section.focus({ preventScroll: true });
       });
       li.appendChild(a);
@@ -43,18 +43,31 @@
     // on the way). The page fades to its background for a moment, jumps while hidden with all
     // transitions off so everything lands in its final state unseen, then fades back in.
     var root = document.documentElement;
+
+    // Every section lands the same way: its first line of content sits a little below the top bar.
+    // Measured from the layout (offsetTop), so a section that has not faded in yet, still shifted
+    // down by its reveal animation, lands in the same spot as one that has.
+    var GAP = 28;
+    function landing(section, i) {
+      if (i === 0) return 0;
+      var y = 0;
+      for (var el = section; el; el = el.offsetParent) y += el.offsetTop;
+      y += parseFloat(getComputedStyle(section).paddingTop) || 0;
+      var bar = document.querySelector(".site-nav");
+      return Math.max(0, y - (bar ? bar.offsetHeight : 0) - GAP);
+    }
     var veil = document.createElement("div");
     veil.className = "jump-veil";
     veil.setAttribute("aria-hidden", "true");
     document.body.appendChild(veil);
     var jumping = false;
-    function veilJump(section) {
+    function veilJump(section, i) {
       if (jumping) return;
       jumping = true;
       root.classList.add("veil-on");
       setTimeout(function () {
         root.classList.add("is-jumping");
-        section.scrollIntoView({ behavior: "instant" });
+        window.scrollTo({ top: landing(section, i), behavior: "instant" });
         section.focus({ preventScroll: true });
         // Give the scroll-driven scripts (scenery, reveals, quote, rail) time to settle before showing it
         setTimeout(function () {
@@ -80,6 +93,8 @@
       var last = sections[sections.length - 1].getBoundingClientRect();
       var vh = window.innerHeight;
       var reach = Math.max(last.top - vh * 0.3, last.bottom - vh * 0.45) + window.scrollY;
+      // ...and enough to land the last section like the others (see landing)
+      reach = Math.max(reach, landing(sections[sections.length - 1], sections.length - 1));
       var maxScroll = document.documentElement.scrollHeight - vh;
       spacer.style.height = Math.max(0, Math.ceil(reach - maxScroll)) + "px";
     }

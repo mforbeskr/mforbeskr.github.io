@@ -968,10 +968,9 @@ main {
   color: var(--accent);
 }
 
-/* "Need a website or a small app built?": its own small card after the projects paragraph */
+/* "Need a website or a small app built?": its own block after the projects paragraph, type only */
 .about-cta {
-  margin: 0.25rem 0 1.75rem;
-  padding: 1.35rem 1.6rem 1.4rem;
+  margin: 1.9rem 0 2.1rem;
 }
 
 .about-cta p {
@@ -1033,12 +1032,69 @@ main {
   font-weight: 500;
 }
 
+/* Links in the About text: no underlines. Each one is its own word mark instead, set a little
+   larger than the text around it (the brand words have theirs further down: Hos Qilej, Tackly,
+   LearnHub). Hovering lifts it a touch. */
 .prose a {
   text-decoration: none;
 }
 
+.prose a:not(.reach-out) {
+  transition: translate 0.2s var(--ease-out), color 0.2s;
+}
+
 .prose a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+.prose a.brand-word:hover,
+.prose a[href*="apps.apple.com"]:hover,
+.prose a[href*="play.google.com"]:hover {
+  translate: 0 -1px;
+}
+
+.prose a[href*="apps.apple.com"],
+.prose a[href*="play.google.com"] {
+  display: inline-block;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.prose a[href*="apps.apple.com"] {
+  font-family: "Outfit", var(--font-body);
+  font-size: 1.16em;
+  letter-spacing: -0.01em;
+}
+
+.prose a[href*="play.google.com"] {
+  font-family: "Space Grotesk", var(--font-body);
+  font-size: 1.14em;
+  letter-spacing: -0.02em;
+}
+
+.prose a[href*="apps.apple.com"]:hover,
+.prose a[href*="play.google.com"]:hover {
+  color: var(--accent-deep);
+}
+
+:root[data-theme="dark"] .prose a[href*="apps.apple.com"]:hover,
+:root[data-theme="dark"] .prose a[href*="play.google.com"]:hover {
+  color: var(--accent);
+}
+
+/* About title: the last word swaps to the hero's italic serif, in the accent colour */
+.split-aside .section-title .word:last-child > span {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.12em;
+  line-height: 1;
+  color: var(--accent-deep);
+}
+
+:root[data-theme="dark"] .split-aside .section-title .word:last-child > span {
+  color: var(--accent);
 }
 
 .brand-word {
@@ -1145,10 +1201,6 @@ main {
   background-position: 100% 0;
 }
 
-.prose a.brand-learnhub:hover {
-  text-decoration-color: rgb(87 199 133);
-}
-
 @media (max-width: 900px) {
   .split {
     grid-template-columns: 1fr;
@@ -1215,7 +1267,8 @@ main {
 }
 
 /* Hollow letters drawn with two very thin lines (filter in index.html): black in light mode,
-   the usual text colour with a soft violet glow in dark mode */
+   the usual text colour with a soft violet glow in dark mode. In dark mode with the scroll effect
+   on, each word stays hollow until the quote scrolls past it, then fills in with a neon glow. */
 .pull-quote p {
   filter: url(#double-outline);
 }
@@ -1263,6 +1316,26 @@ main {
 
 .story-ready .pull-quote .qw.is-lit > span {
   color: inherit;
+}
+
+/* Dark: the outline moves from the whole quote to each word, so a lit word can drop it and fill in.
+   The padding (cancelled by the negative margin) gives the outline room around the word. */
+:root[data-theme="dark"].story-ready .pull-quote p {
+  filter: none;
+}
+
+:root[data-theme="dark"].story-ready .pull-quote .qw > span {
+  display: inline-block;
+  padding: 0.15em 0.12em;
+  margin: -0.15em -0.12em;
+  filter: url(#double-outline);
+  transition: color 0.45s ease, text-shadow 0.45s ease;
+}
+
+:root[data-theme="dark"].story-ready .pull-quote .qw.is-lit > span {
+  filter: none;
+  color: var(--text);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--neon) 55%, transparent), 0 0 3px color-mix(in srgb, var(--neon) 40%, transparent);
 }
 
 /* ---------- Projects ---------- */
@@ -3298,6 +3371,37 @@ img.cloth-hidden {
 
 .peek.is-loaded .peek-skeleton {
   opacity: 0;
+}
+
+/* The smaller store card (App Store / Google Play links) */
+.peek.peek-small {
+  width: 236px;
+}
+
+.peek-store {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0.9rem 0.9rem;
+}
+
+.peek-store svg {
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+
+.peek-store .peek-text {
+  padding: 0;
+}
+
+.peek-small .peek-skeleton {
+  grid-template-rows: auto auto;
+  align-content: center;
+}
+
+.peek-small .peek-skeleton span:first-child {
+  display: none;
 }
 
 @media (hover: none) {

@@ -243,9 +243,36 @@
       peek.style.top = Math.round(y) + "px";
     };
 
+    // App Store / Google Play links get a smaller card: the store's icon, what it opens, and where.
+    var STORE_ICONS = {
+      apple:
+        '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="peek-as" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1ec0ff"/><stop offset="1" stop-color="#0a6cf0"/></linearGradient></defs>' +
+        '<rect width="40" height="40" rx="9" fill="url(#peek-as)"/><g stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M17.6 10.5 9.8 27M22.4 10.5 30.2 27M12.5 21.5h15"/><path d="M9 30.5h5M26 30.5h5" stroke-width="2.2"/></g></svg>',
+      google:
+        '<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="9" fill="#14121c"/>' +
+        '<path d="M12 9.5v21l11-10.5z" fill="#34a853"/><path d="M12 9.5l14.5 8.2L23 20.5z" fill="#4285f4"/>' +
+        '<path d="M12 30.5l14.5-8.2L23 20.5z" fill="#ea4335"/><path d="M26.5 17.7l4 2.3-0.1.1-3.9 2.2-3.5-1.8z" fill="#fbbc04"/></svg>',
+    };
+    var storeOf = function (link) {
+      if (/(^|\.)apps\.apple\.com$/.test(link.hostname)) return "apple";
+      if (/(^|\.)play\.google\.com$/.test(link.hostname)) return "google";
+      return null;
+    };
+    var storeCard = function (link) {
+      var da = i18n.lang === "da";
+      var store = storeOf(link);
+      var title = store === "apple" ? "Tackly" : "4bestudio";
+      var sub = store === "apple"
+        ? (da ? "Hent den i App Store" : "Get it on the App Store")
+        : (da ? "Udvikler på Google Play" : "Developer on Google Play");
+      return '<div class="peek-store">' + STORE_ICONS[store] +
+        '<div class="peek-text"><strong>' + esc(title) + "</strong><p>" + esc(sub) + "</p></div></div>";
+    };
+
     var showPeek = function (link) {
-      var p = findProject(link.href);
-      if (!p || link === peekLink) return;
+      var store = storeOf(link);
+      var p = store ? null : findProject(link.href);
+      if ((!p && !store) || link === peekLink) return;
       hidePeek();
       peekLink = link;
       if (!peek) {
@@ -254,12 +281,15 @@
         peek.setAttribute("aria-hidden", "true");
         document.body.appendChild(peek);
       }
-      var host = link.hostname.replace(/^www\./, "") + (link.pathname.length > 1 ? link.pathname : "");
+      var host = link.hostname.replace(/^www\./, "") + (store ? "" : link.pathname.length > 1 ? link.pathname : "");
+      peek.classList.toggle("peek-small", !!store);
       peek.innerHTML =
         '<div class="peek-bar"><span class="peek-dots"><i></i><i></i><i></i></span><span class="peek-url">' + esc(host) + "</span></div>" +
         '<div class="peek-progress"></div>' +
-        '<div class="peek-view">' + media(p.media) +
-        '<div class="peek-text"><strong>' + esc(p.title) + "</strong>" + (p.badge ? "<p>" + esc(p.badge) + "</p>" : "") + "</div>" +
+        '<div class="peek-view">' +
+        (store
+          ? storeCard(link)
+          : media(p.media) + '<div class="peek-text"><strong>' + esc(p.title) + "</strong>" + (p.badge ? "<p>" + esc(p.badge) + "</p>" : "") + "</div>") +
         '<div class="peek-skeleton"><span></span><span></span><span></span></div></div>';
       var ms = Math.round(440 + Math.random() * 300);
       peek.style.setProperty("--load", ms + "ms");
@@ -272,7 +302,9 @@
     };
 
     var brandLink = function (e) {
-      return e.target && e.target.closest ? e.target.closest("a.brand-word[href]") : null;
+      return e.target && e.target.closest
+        ? e.target.closest('a.brand-word[href], .prose a[href*="apps.apple.com"], .prose a[href*="play.google.com"]')
+        : null;
     };
     document.addEventListener("mouseover", function (e) {
       var link = brandLink(e);
