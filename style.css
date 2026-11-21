@@ -1211,6 +1211,17 @@ main {
   margin-top: 2.5rem;
 }
 
+/* The portfolio rises into the bottom of the hero stage, so no empty scenery sits above it */
+.hero-stage + .scene-break {
+  min-height: 0;
+}
+
+#work {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(-1 * clamp(3rem, 9vw, 7rem) - 8svh - clamp(2.5rem, 5.5vw, 4.25rem));
+}
+
 .word {
   display: inline-block;
   vertical-align: top;
@@ -1621,122 +1632,54 @@ main {
 }
 
 /* ---------- Call to action ---------- */
+/* Kept quiet on purpose: one line of text and two plain links between hairlines */
 .cta {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 1.75rem 3rem;
-  padding: clamp(2rem, 5vw, 3.25rem) clamp(1.5rem, 5vw, 3.5rem);
-  border-radius: 28px;
-  background:
-    radial-gradient(110% 150% at 100% 0%, rgb(255 122 38 / 0.5), transparent 55%),
-    linear-gradient(135deg, #431407 0%, #7c2d12 55%, #b8420a 100%);
-  color: #fff;
-  box-shadow: var(--shadow-lg);
-}
-
-.cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image: radial-gradient(rgb(255 255 255 / 0.16) 1px, transparent 1.5px);
-  background-size: 18px 18px;
-  -webkit-mask-image: linear-gradient(to left, #000, transparent 65%);
-  mask-image: linear-gradient(to left, #000, transparent 65%);
-  pointer-events: none;
-}
-
-.cta-eyebrow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 0.75rem;
-  font-size: 0.8rem;
+  justify-content: space-between;
+  gap: 1rem 2.5rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.cta p {
+  max-width: 54ch;
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+}
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #d9c6ff;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.cta-eyebrow::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #6ee7a0;
-  box-shadow: 0 0 0 4px rgb(110 231 160 / 0.2);
+.cta-link svg {
+  width: 15px;
+  height: 15px;
+  color: var(--accent);
+  transition: transform 0.25s var(--ease-out);
 }
 
-.cta h2 {
-  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
-  color: #fff;
-  margin-bottom: 0.6rem;
+.cta-link:hover {
+  color: var(--accent);
 }
 
-.cta p:not(.cta-eyebrow) {
-  max-width: 52ch;
-  margin-bottom: 0;
-  color: rgb(255 255 255 / 0.78);
-}
-
-.cta .btn-row {
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.cta .btn {
-  justify-content: center;
-}
-
-:root[data-theme="light"] .cta {
-  --cta-ink: #431407;
-}
-
-:root .cta .btn-primary {
-  background: #fff;
-  border-color: #fff;
-  color: var(--cta-ink, #230a47);
-  box-shadow: none;
-}
-
-:root .cta .btn-primary:hover {
-  background: #fff;
-  color: var(--cta-ink, #230a47);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px -10px rgb(0 0 0 / 0.6);
-}
-
-:root .cta .btn-ghost {
-  background: transparent;
-  border-color: rgb(255 255 255 / 0.35);
-  color: #fff;
-}
-
-:root .cta .btn-ghost:hover {
-  background: rgb(255 255 255 / 0.1);
-  border-color: rgb(255 255 255 / 0.7);
-}
-
-:root[data-theme="dark"] .cta {
-  background:
-    radial-gradient(110% 150% at 100% 0%, rgb(181 102 255 / 0.32), transparent 55%),
-    linear-gradient(135deg, #12052a 0%, #250b4d 60%, #36126f 100%);
-  border: 1px solid rgb(225 215 255 / 0.18);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), var(--shadow);
-}
-
-@media (max-width: 720px) {
-  .cta {
-    grid-template-columns: 1fr;
-  }
-
-  .cta .btn-row {
-    flex-direction: row;
-  }
+.cta-link:hover svg {
+  transform: translateX(3px);
 }
 
 /* ---------- Resume: one CV sheet ---------- */

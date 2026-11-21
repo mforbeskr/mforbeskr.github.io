@@ -137,8 +137,6 @@
     "hobby.ball":
       "Basketball og træning holder mig sund og rydder hovedet, især i travle perioder med studier eller arbejde.",
 
-    "contact.eyebrow": "Kontakt mig",
-    "contact.title": "Lad os bygge noget sammen",
     "contact.text":
       "Er du interesseret i et samarbejde, feedback, eller vil du bare vende en idé? Jeg er altid ivrig " +
       "efter at lære, bidrage og vokse gennem praktiske udfordringer fra den virkelige verden.",
