@@ -948,14 +948,66 @@ main {
   max-width: 68ch;
 }
 
-.prose > p:first-child::first-letter {
-  float: left;
-  font-family: var(--font-display);
-  font-size: 3.1em;
-  line-height: 0.85;
-  padding: 0.08em 0.12em 0 0;
+/* The opening line reads as a slightly larger intro; "why" gets the hero's italic serif */
+.prose > p:first-child {
+  font-size: clamp(1.12rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.prose > p:first-child em {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: 1.2em;
+  line-height: 1;
   color: var(--accent-deep);
+}
+
+:root[data-theme="dark"] .prose > p:first-child em {
+  color: var(--accent);
+}
+
+/* "Need a website or a small app built?": its own small card after the projects paragraph */
+.about-cta {
+  margin: 0.25rem 0 1.75rem;
+  padding: 1.35rem 1.6rem 1.4rem;
+}
+
+.about-cta p {
+  margin: 0;
+}
+
+.about-cta-brand {
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+:root[data-theme="dark"] .about-cta-brand {
+  color: var(--accent);
+}
+
+.prose .about-cta-ask {
+  margin-top: 0.35rem;
+  font-family: "DM Serif Display", var(--font-display);
+  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  line-height: 1.2;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.prose .about-cta-go {
+  margin-top: 0.55rem;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+.about-cta-go .reach-out {
+  font-size: 1.85em;
+  margin-left: 0.1em;
 }
 
 .personal-note {

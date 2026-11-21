@@ -101,9 +101,12 @@
       "en komplet markedspladsapp til rideudstyr, live i " +
       '<a href="https://apps.apple.com/dk/app/id6827721554" target="_blank" rel="noopener">App Store</a> og på ' +
       '<a href="https://play.google.com/store/apps/developer?id=4bestudio" target="_blank" rel="noopener">Google Play</a> ' +
-      "under mit eget firma, 4bestudio. " +
-      '<mark class="callout">Har du brug for en hjemmeside eller en lille app? Du er velkommen til at ' +
-      '<a class="reach-out" href="mailto:mforbeskr@outlook.dk">skrive til mig!</a></mark>',
+      "under mit eget firma.",
+    "about.cta":
+      '<p class="about-cta-brand">4bestudio</p>' +
+      '<p class="about-cta-ask">Har du brug for en hjemmeside eller en lille app?</p>' +
+      '<p class="about-cta-go">Jeg hjælper gerne, så bare ' +
+      '<a class="reach-out" href="mailto:mforbeskr@outlook.dk">skriv til mig!</a></p>',
     "about.po":
       "På vores projekt på 2. semester, " +
       '<a class="brand-word brand-learnhub" href="https://github.com/mforbeskr/SEP2-Project-LearnHub" target="_blank" rel="noopener">LearnHub</a>, ' +
