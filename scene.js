@@ -30,6 +30,9 @@
   });
   var markers = Array.prototype.slice.call(document.querySelectorAll("[data-scene]"));
   var content = Array.prototype.slice.call(document.querySelectorAll("main > section:not(.hero), .site-footer"));
+  // The portfolio rises into the bottom of the hero stage; that overlap doesn't count as text on
+  // screen, so the scene stays clear at the very top.
+  var stage = document.querySelector(".hero-stage");
   var canvas = scene.querySelector(".scene-fx");
   var ctx = canvas && canvas.getContext("2d");
 
@@ -84,9 +87,10 @@
       return m.getBoundingClientRect().top;
     });
     var covered = 0;
+    var floor = stage ? Math.max(0, stage.getBoundingClientRect().bottom) : 0;
     content.forEach(function (el) {
       var r = el.getBoundingClientRect();
-      covered += Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+      covered += Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, floor));
     });
     var markerTop = function (i) {
       return tops[i] + y;
